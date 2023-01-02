@@ -24,6 +24,7 @@
 #include "nsContentUtils.h"
 #include "mozilla/RelativeLuminanceUtils.h"
 #include "mozilla/StaticPrefs_browser.h"
+#include "mozilla/StaticPrefs_privacy.h"
 #include "mozilla/StyleSheet.h"
 #include "mozilla/StyleSheetInlines.h"
 #include "mozilla/GeckoBindings.h"
@@ -61,8 +62,10 @@ static nsSize GetSize(const Document& aDocument) {
 }
 
 // A helper for three features below.
+// See also dom/base/nsScreen.cpp > nsScreen::GetRect
 static nsSize GetDeviceSize(const Document& aDocument) {
-  if (aDocument.ShouldResistFingerprinting(RFPTarget::CSSDeviceSize)) {
+  if (aDocument.ShouldResistFingerprinting(RFPTarget::CSSDeviceSize) &&
+      StaticPrefs::privacy_resistFingerprinting_letterboxing()) {
     return GetSize(aDocument);
   }
 
