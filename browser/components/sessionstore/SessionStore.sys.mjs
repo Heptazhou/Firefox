@@ -1350,10 +1350,11 @@ var SessionStoreInternal = {
     );
     this._prefBranch.addObserver("sessionstore.restore_on_demand", this, true);
 
-    gResistFingerprintingEnabled = Services.prefs.getBoolPref(
-      "privacy.resistFingerprinting"
-    );
+    gResistFingerprintingEnabled =
+      Services.prefs.getBoolPref("privacy.resistFingerprinting") ||
+      Services.prefs.getBoolPref("privacy.fingerprintingProtection");
     Services.prefs.addObserver("privacy.resistFingerprinting", this);
+    Services.prefs.addObserver("privacy.fingerprintingProtection", this);
 
     this._shistoryInParent = Services.appinfo.sessionHistoryInParent;
   },
@@ -2877,10 +2878,11 @@ var SessionStoreInternal = {
         );
         this._capClosedWindows();
         break;
+      case "privacy.fingerprintingProtection":
       case "privacy.resistFingerprinting":
-        gResistFingerprintingEnabled = Services.prefs.getBoolPref(
-          "privacy.resistFingerprinting"
-        );
+        gResistFingerprintingEnabled =
+          Services.prefs.getBoolPref("privacy.resistFingerprinting") ||
+          Services.prefs.getBoolPref("privacy.fingerprintingProtection");
         break;
       case "sessionstore.restore_on_demand":
         this._restore_on_demand = this._prefBranch.getBoolPref(
