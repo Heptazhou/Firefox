@@ -208,6 +208,11 @@ already_AddRefed<nsHttpHandler> nsHttpHandler::GetInstance() {
 static nsCString ImageAcceptHeader() {
   nsCString mimeTypes;
 
+  if (mozilla::StaticPrefs::privacy_resistFingerprinting_DoNotUseDirectly()) {
+    mimeTypes.Append("image/avif,image/webp,*/*");
+    return mimeTypes;
+  }
+
   if (mozilla::StaticPrefs::image_avif_enabled()) {
     mimeTypes.Append("image/avif,");
   }
@@ -371,7 +376,15 @@ nsresult nsHttpHandler::Init() {
   Telemetry::ScalarSet(Telemetry::ScalarID::NETWORKING_HTTP3_ENABLED,
                        StaticPrefs::network_http_http3_enable());
 
-  mCompatFirefox.AssignLiteral("Firefox/" MOZILLA_UAVERSION);
+  nsAutoCString uaVersion;
+  uint32_t forceVersion = StaticPrefs::network_http_useragent_forceVersion();
+  if (+0 < forceVersion && forceVersion < 1000)  // See `GetSpoofedVersion`
+    uaVersion.Assign(nsPrintfCString("%u.0", forceVersion));
+  else
+    uaVersion.AssignLiteral(MOZILLA_UAVERSION);
+
+  mCompatFirefox.AssignLiteral("Firefox/");
+  mCompatFirefox.Append(uaVersion);
 
   nsCOMPtr<nsIXULAppInfo> appInfo =
       do_GetService("@mozilla.org/xre/app-info;1");
@@ -383,21 +396,17 @@ nsresult nsHttpHandler::Init() {
     if (mAppName.Length() == 0) {
       appInfo->GetName(mAppName);
     }
-    appInfo->GetVersion(mAppVersion);
+    if (mAppName.EqualsLiteral("Snowfox")) mAppName.AssignLiteral("Firefox");
     mAppName.StripChars(R"( ()<>@,;:\"/[]?={})");
+    mAppVersion.Assign(uaVersion);
   } else {
     mAppVersion.AssignLiteral(MOZ_APP_UA_VERSION);
   }
 
+  if (!mCompatFirefoxEnabled && !mAppName.EqualsLiteral("Firefox"))
+    uaVersion.AssignLiteral(MOZILLA_UAVERSION);
   mMisc.AssignLiteral("rv:");
-  bool isFirefox = mAppName.EqualsLiteral("Firefox");
-  uint32_t forceVersion =
-      mozilla::StaticPrefs::network_http_useragent_forceRVOnly();
-  if (forceVersion && (isFirefox || mCompatFirefoxEnabled)) {
-    mMisc.Append(nsPrintfCString("%u.0", forceVersion));
-  } else {
-    mMisc.AppendLiteral(MOZILLA_UAVERSION);
-  }
+  mMisc.Append(uaVersion);
 
   // Generate the spoofed User Agent for fingerprinting resistance.
   nsRFPService::GetSpoofedUserAgent(mSpoofedUserAgent, true);
@@ -413,7 +422,7 @@ nsresult nsHttpHandler::Init() {
   mRequestContextService = RequestContextService::GetOrCreate();
 
 #if defined(ANDROID)
-  mProductSub.AssignLiteral(MOZILLA_UAVERSION);
+  mProductSub.Assign(uaVersion);
 #else
   mProductSub.AssignLiteral(LEGACY_UA_GECKO_TRAIL);
 #endif

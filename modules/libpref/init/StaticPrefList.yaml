@@ -11497,12 +11497,11 @@
   mirror: always
 
 # Set this pref to an integer like 99 to override the User-Agent string's
-# 'rv' bit. The value 0 means use the default Firefox version. We introduced
-# this for Firefox 110 because it turned out websites used user agent parsing
-# for "rv:11" to detect IE11.
-- name: network.http.useragent.forceRVOnly
+# Firefox version. The value 0 means use the default Firefox version.
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1837343
+- name: network.http.useragent.forceVersion
   type: uint32_t
-  value: 109
+  value: 108
   mirror: always
 
 # Whether or not we use Windows for SSO to Microsoft sites.
@@ -13102,6 +13101,19 @@
   value: false
   mirror: always
   do_not_use_directly: true
+
+# Letterboxing applies margins around windows, in order to return a limited
+# set of rounded resolutions.
+- name: privacy.resistFingerprinting.letterboxing
+  type: RelaxedAtomicBool
+  value: false
+  mirror: always
+
+# Allow overriding RFP for only the "dark/light" pref
+- name: privacy.resistFingerprinting.override-color-scheme
+  type: bool
+  value: false
+  mirror: always
 
 # We automatically decline canvas permission requests if they are not initiated
 # from user input. Just in case that breaks something, we allow the user to

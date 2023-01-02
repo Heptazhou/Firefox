@@ -40,7 +40,7 @@ void MediaError::GetMessage(nsAString& aResult) const {
       // TODO
   };
 
-  const bool shouldBlank = whitelist.find(mMessage.get()) == whitelist.end();
+  const bool shouldBlank = false;
 
   if (shouldBlank) {
     // Print a warning message to JavaScript console to alert developers of
