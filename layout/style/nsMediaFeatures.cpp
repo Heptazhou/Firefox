@@ -27,6 +27,7 @@
 #include "mozilla/StyleSheet.h"
 #include "mozilla/StyleSheetInlines.h"
 #include "mozilla/GeckoBindings.h"
+#include "mozilla/Preferences.h"
 #include "PreferenceSheet.h"
 #include "nsGlobalWindowOuter.h"
 #ifdef XP_WIN
@@ -61,8 +62,11 @@ static nsSize GetSize(const Document& aDocument) {
 }
 
 // A helper for three features below.
+// See also dom/base/nsScreen.cpp > nsScreen::GetRect
 static nsSize GetDeviceSize(const Document& aDocument) {
-  if (aDocument.ShouldResistFingerprinting()) {
+  if (aDocument.ShouldResistFingerprinting() &&
+      Preferences::GetBool("privacy.resistFingerprinting.letterboxing",
+                           false)) {
     return GetSize(aDocument);
   }
 
