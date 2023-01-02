@@ -34,6 +34,7 @@
 #include "mozilla/RefPtr.h"
 #include "mozilla/Services.h"
 #include "mozilla/StaticPrefs_javascript.h"
+#include "mozilla/StaticPrefs_network.h"
 #include "mozilla/StaticPrefs_privacy.h"
 #include "mozilla/StaticPtr.h"
 #include "mozilla/TextEvents.h"
@@ -911,6 +912,12 @@ uint32_t nsRFPService::GetSpoofedPresentedFrames(double aTime, uint32_t aWidth,
 // User-Agent/Version Stuff
 
 static const char* GetSpoofedVersion() {
+  uint32_t forceVersion = StaticPrefs::network_http_useragent_forceVersion();
+  // "forceVersion" must be within 3 digits here (due to preallocatedLength).
+  if (+0 < forceVersion && forceVersion < 1000) {
+    return nsPrintfCString("%u.0", forceVersion).get();
+  }
+
 #ifdef ANDROID
   // Return Desktop's ESR version.
   return "102.0";
@@ -922,6 +929,9 @@ static const char* GetSpoofedVersion() {
 /* static */
 void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
                                        bool isForHTTPHeader) {
+  // Be consistent.
+  isForHTTPHeader = false;
+
   // This function generates the spoofed value of User Agent.
   // We spoof the values of the platform and Firefox version, which could be
   // used as fingerprinting sources to identify individuals.
