@@ -16,6 +16,7 @@
 #include "nsLayoutUtils.h"
 #include "nsJSUtils.h"
 #include "nsDeviceContext.h"
+#include "mozilla/StaticPrefs_privacy.h"
 #include "mozilla/widget/ScreenManager.h"
 
 using namespace mozilla;
@@ -81,8 +82,10 @@ nsDeviceContext* nsScreen::GetDeviceContext() const {
 }
 
 nsresult nsScreen::GetRect(CSSIntRect& aRect) {
-  // Return window inner rect to prevent fingerprinting.
-  if (ShouldResistFingerprinting(RFPTarget::ScreenRect)) {
+  // Return window inner rect to prevent fingerprinting if letterboxing is on.
+  // Note that this does more harm than good while full screen API is enabled.
+  if (ShouldResistFingerprinting(RFPTarget::ScreenRect) &&
+      StaticPrefs::privacy_resistFingerprinting_letterboxing()) {
     return GetWindowInnerRect(aRect);
   }
 
@@ -113,9 +116,9 @@ nsresult nsScreen::GetRect(CSSIntRect& aRect) {
 }
 
 nsresult nsScreen::GetAvailRect(CSSIntRect& aRect) {
-  // Return window inner rect to prevent fingerprinting.
+  // Be consistent.
   if (ShouldResistFingerprinting(RFPTarget::ScreenAvailRect)) {
-    return GetWindowInnerRect(aRect);
+    return GetRect(aRect);
   }
 
   // Here we manipulate the value of aRect to represent the screen size,

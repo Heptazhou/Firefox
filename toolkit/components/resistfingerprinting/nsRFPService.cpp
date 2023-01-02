@@ -816,6 +816,11 @@ uint32_t nsRFPService::GetSpoofedPresentedFrames(double aTime, uint32_t aWidth,
 // User-Agent/Version Stuff
 
 static const char* GetSpoofedVersion() {
+  uint32_t forceVersion = StaticPrefs::network_http_useragent_forceVersion();
+  // "forceVersion" must be within 3 digits here (due to preallocatedLength).
+  if (+0 < forceVersion && forceVersion < 1000)
+    return nsPrintfCString("%u.0", forceVersion).get();
+
 #ifdef ANDROID
   // Return Desktop's ESR version.
   // When Android RFP returns an ESR version >= 120, we can remove the "rv:109"
@@ -830,6 +835,9 @@ static const char* GetSpoofedVersion() {
 /* static */
 void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
                                        bool isForHTTPHeader) {
+  // Be consistent.
+  isForHTTPHeader = false;
+
   // This function generates the spoofed value of User Agent.
   // We spoof the values of the platform and Firefox version, which could be
   // used as fingerprinting sources to identify individuals.
@@ -860,10 +868,7 @@ void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
 
   userAgent.AppendLiteral("; rv:");
 
-  // Desktop Firefox (regular and RFP) won't need to spoof "rv:109" in versions
-  // >= 120 (bug 1806690), but Android RFP will need to continue spoofing 109
-  // as long as Android's GetSpoofedVersion() returns a version < 120 above.
-  uint32_t forceRV = mozilla::StaticPrefs::network_http_useragent_forceRVOnly();
+  uint32_t forceRV = 0;
   if (forceRV) {
     userAgent.Append(nsPrintfCString("%u.0", forceRV));
   } else {
