@@ -576,6 +576,9 @@ static const char* GetSpoofedVersion() {
 /* static */
 void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
                                        bool isForHTTPHeader) {
+  // Be consistent.
+  isForHTTPHeader = false;
+
   // This function generates the spoofed value of User Agent.
   // We spoof the values of the platform and Firefox version, which could be
   // used as fingerprinting sources to identify individuals.

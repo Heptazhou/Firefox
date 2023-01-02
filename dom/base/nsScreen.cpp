@@ -79,10 +79,10 @@ nsDeviceContext* nsScreen::GetDeviceContext() {
 }
 
 nsresult nsScreen::GetRect(CSSIntRect& aRect) {
-  // Return window inner rect to prevent fingerprinting.
-  if (ShouldResistFingerprinting()) {
-    return GetWindowInnerRect(aRect);
-  }
+  // Return window inner rect to prevent fingerprinting is pointless.
+  // if (ShouldResistFingerprinting()) {
+  //   return GetWindowInnerRect(aRect);
+  // }
 
   // Here we manipulate the value of aRect to represent the screen size,
   // if in RDM.
@@ -111,10 +111,10 @@ nsresult nsScreen::GetRect(CSSIntRect& aRect) {
 }
 
 nsresult nsScreen::GetAvailRect(CSSIntRect& aRect) {
-  // Return window inner rect to prevent fingerprinting.
-  if (ShouldResistFingerprinting()) {
-    return GetWindowInnerRect(aRect);
-  }
+  // Return window inner rect to prevent fingerprinting is pointless.
+  // if (ShouldResistFingerprinting()) {
+  //   return GetWindowInnerRect(aRect);
+  // }
 
   // Here we manipulate the value of aRect to represent the screen size,
   // if in RDM.
@@ -206,6 +206,7 @@ JSObject* nsScreen::WrapObject(JSContext* aCx,
   return Screen_Binding::Wrap(aCx, this, aGivenProto);
 }
 
+/*
 nsresult nsScreen::GetWindowInnerRect(CSSIntRect& aRect) {
   aRect.x = 0;
   aRect.y = 0;
@@ -222,6 +223,7 @@ nsresult nsScreen::GetWindowInnerRect(CSSIntRect& aRect) {
   aRect.SizeTo(std::round(width), std::round(height));
   return NS_OK;
 }
+ */
 
 bool nsScreen::ShouldResistFingerprinting() const {
   bool resist = false;

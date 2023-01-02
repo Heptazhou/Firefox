@@ -127,7 +127,7 @@ class nsScreen : public mozilla::DOMEventTargetHelper {
   nsDeviceContext* GetDeviceContext();
   nsresult GetRect(mozilla::CSSIntRect& aRect);
   nsresult GetAvailRect(mozilla::CSSIntRect& aRect);
-  nsresult GetWindowInnerRect(mozilla::CSSIntRect& aRect);
+  // nsresult GetWindowInnerRect(mozilla::CSSIntRect& aRect);
 
  private:
   explicit nsScreen(nsPIDOMWindowInner* aWindow);

@@ -17853,7 +17853,7 @@ ColorScheme Document::DefaultColorScheme() const {
 
 ColorScheme Document::PreferredColorScheme(IgnoreRFP aIgnoreRFP) const {
   if (ShouldResistFingerprinting() && aIgnoreRFP == IgnoreRFP::No) {
-    return ColorScheme::Light;
+    return ColorScheme::Dark;
   }
 
   if (nsPresContext* pc = GetPresContext()) {
