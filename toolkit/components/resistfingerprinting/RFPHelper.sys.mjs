@@ -5,6 +5,7 @@
 
 import { XPCOMUtils } from "resource://gre/modules/XPCOMUtils.sys.mjs";
 
+const kPrefFppOverrides = "privacy.fingerprintingProtection.overrides";
 const kPrefResistFingerprinting = "privacy.resistFingerprinting";
 const kPrefSpoofEnglish = "privacy.spoof_english";
 const kTopicHttpOnModifyRequest = "http-on-modify-request";
@@ -61,6 +62,7 @@ class _RFPHelper {
     );
 
     // Add RFP and Letterboxing observers if prefs are enabled
+    this._handleSpoofEnglishChanged();
     this._handleResistFingerprintingChanged();
     this._handleLetterboxingPrefChanged();
   }
@@ -280,14 +282,29 @@ class _RFPHelper {
     this._addOrClearContentMargin(aBrowser);
   }
 
+  _handlePrefFppOverrides(LetterboxingEnabled) {
+    let FppOverrides = String(Services.prefs.getStringPref(kPrefFppOverrides));
+    if (FppOverrides.match(/^[+-]AllTargets\b/) == null) {
+      FppOverrides = "+AllTargets";
+    }
+    const pm = LetterboxingEnabled ? "+" : "-";
+    for (const s of ["ScreenRect", "CSSDeviceSize"]) {
+      const r = RegExp(`,?[+-]${s}(?=,|$)`, "g");
+      FppOverrides = FppOverrides.replace(r, "") + `,${pm}${s}`;
+    }
+    Services.prefs.setStringPref(kPrefFppOverrides, FppOverrides);
+  }
+
   _handleLetterboxingPrefChanged() {
     if (Services.prefs.getBoolPref(kPrefLetterboxing, false)) {
       Services.ww.registerNotification(this);
+      this._handlePrefFppOverrides(true);
       this._registerActor();
       this._attachAllWindows();
     } else {
       this._unregisterActor();
       this._detachAllWindows();
+      this._handlePrefFppOverrides(false);
       Services.ww.unregisterNotification(this);
     }
   }
