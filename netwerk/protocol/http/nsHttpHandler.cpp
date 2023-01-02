@@ -382,11 +382,9 @@ nsresult nsHttpHandler::Init() {
     if (mAppName.Length() == 0) {
       appInfo->GetName(mAppName);
     }
-    appInfo->GetVersion(mAppVersion);
     mAppName.StripChars(R"( ()<>@,;:\"/[]?={})");
-  } else {
-    mAppVersion.AssignLiteral(MOZ_APP_UA_VERSION);
   }
+  mAppVersion.AssignLiteral(MOZILLA_UAVERSION);
 
   mMisc.AssignLiteral("rv:" MOZILLA_UAVERSION);
 
@@ -1709,7 +1707,7 @@ void nsHttpHandler::PrefsChanged(const char* pref) {
   if (imageAcceptPrefChanged) {
     nsAutoCString userSetImageAcceptHeader;
 
-    if (Preferences::HasUserValue("image.http.accept")) {
+    if (Preferences::HasDefaultValue("image.http.accept")) {
       rv = Preferences::GetCString("image.http.accept",
                                    userSetImageAcceptHeader);
       if (NS_FAILED(rv)) {
@@ -1727,7 +1725,7 @@ void nsHttpHandler::PrefsChanged(const char* pref) {
   if (PREF_CHANGED("network.http.accept") || imageAcceptPrefChanged) {
     nsAutoCString userSetDocumentAcceptHeader;
 
-    if (Preferences::HasUserValue("network.http.accept")) {
+    if (Preferences::HasDefaultValue("network.http.accept")) {
       rv = Preferences::GetCString("network.http.accept",
                                    userSetDocumentAcceptHeader);
       if (NS_FAILED(rv)) {
