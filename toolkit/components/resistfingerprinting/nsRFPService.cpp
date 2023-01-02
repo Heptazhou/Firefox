@@ -32,6 +32,7 @@
 #include "mozilla/RefPtr.h"
 #include "mozilla/Services.h"
 #include "mozilla/StaticPrefs_javascript.h"
+#include "mozilla/StaticPrefs_network.h"
 #include "mozilla/StaticPrefs_privacy.h"
 #include "mozilla/StaticPtr.h"
 #include "mozilla/TextEvents.h"
@@ -579,9 +580,33 @@ static const char* GetSpoofedVersion() {
 #endif
 }
 
+// netwerk/protocol/http/nsHttpHandler.cpp > mozilla::net
+static void GetFirefoxVersionForUserAgent(nsACString& userAgent) {
+  // If the "network.http.useragent.forceVersion" pref has a non-zero value,
+  // then override the User-Agent string's Firefox version. The value 0 means
+  // use the default Firefox version. If enterprise users rely on sites that
+  // aren't compatible with Firefox version 100's three-digit version number,
+  // enterprise admins can set this pref to a known-good version (like 99) in an
+  // enterprise policy file.
+  uint32_t forceVersion = StaticPrefs::network_http_useragent_forceVersion();
+  // "forceVersion" must be within 3 digits here (due to preallocatedLength).
+  if (forceVersion <= 0 || 1000 <= forceVersion) {
+    // Use the default Firefox version.
+    const char* spoofedVersion = GetSpoofedVersion();
+    userAgent.Append(spoofedVersion);
+  } else {
+    // Use the pref's version.
+    userAgent.AppendInt(forceVersion);
+    userAgent.AppendLiteral(".0");
+  }
+}
+
 /* static */
 void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
                                        bool isForHTTPHeader) {
+  // Be consistent.
+  isForHTTPHeader = false;
+
   // This function generates the spoofed value of User Agent.
   // We spoof the values of the platform and Firefox version, which could be
   // used as fingerprinting sources to identify individuals.
@@ -599,8 +624,6 @@ void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
       2;
   userAgent.SetCapacity(preallocatedLength);
 
-  const char* spoofedVersion = GetSpoofedVersion();
-
   // "Mozilla/5.0 (%s; rv:%d.0) Gecko/%d Firefox/%d.0"
   userAgent.AssignLiteral("Mozilla/5.0 (");
 
@@ -611,17 +634,17 @@ void nsRFPService::GetSpoofedUserAgent(nsACString& userAgent,
   }
 
   userAgent.AppendLiteral("; rv:");
-  userAgent.Append(spoofedVersion);
+  GetFirefoxVersionForUserAgent(userAgent);
   userAgent.AppendLiteral(") Gecko/");
 
 #if defined(ANDROID)
-  userAgent.Append(spoofedVersion);
+  GetFirefoxVersionForUserAgent(userAgent);
 #else
   userAgent.AppendLiteral(LEGACY_UA_GECKO_TRAIL);
 #endif
 
   userAgent.AppendLiteral(" Firefox/");
-  userAgent.Append(spoofedVersion);
+  GetFirefoxVersionForUserAgent(userAgent);
 
   MOZ_ASSERT(userAgent.Length() <= preallocatedLength);
 }

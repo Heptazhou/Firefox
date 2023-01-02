@@ -208,6 +208,11 @@ already_AddRefed<nsHttpHandler> nsHttpHandler::GetInstance() {
 static nsCString ImageAcceptHeader() {
   nsCString mimeTypes;
 
+  if (mozilla::StaticPrefs::privacy_resistFingerprinting()) {
+    mimeTypes.Append("image/avif,image/webp,*/*");
+    return mimeTypes;
+  }
+
   if (mozilla::StaticPrefs::image_avif_enabled()) {
     mimeTypes.Append("image/avif,");
   }
