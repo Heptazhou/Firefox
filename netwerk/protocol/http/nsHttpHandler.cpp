@@ -206,6 +206,11 @@ already_AddRefed<nsHttpHandler> nsHttpHandler::GetInstance() {
 /// for non-universal image types. This may be overridden in its entirety by
 /// the image.http.accept pref.
 static nsCString ImageAcceptHeader() {
+  // > modules/libpref/init/all.js
+  // > image.http.accept
+  // > image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5
+  // https://developer.mozilla.org/docs/Web/HTTP/Content_negotiation/List_of_default_Accept_values#values_for_an_image
+
   nsCString mimeTypes;
 
   if (mozilla::StaticPrefs::image_avif_enabled()) {
@@ -226,6 +231,11 @@ static nsCString ImageAcceptHeader() {
 }
 
 static nsCString DocumentAcceptHeader() {
+  // > modules/libpref/init/all.js
+  // > network.http.accept
+  // > text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8
+  // https://developer.mozilla.org/docs/Web/HTTP/Content_negotiation/List_of_default_Accept_values#default_values
+
   // https://fetch.spec.whatwg.org/#document-accept-header-value
   // The value specified by the fetch standard is
   // `text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8`
@@ -402,11 +412,9 @@ nsresult nsHttpHandler::Init() {
     if (mAppName.Length() == 0) {
       appInfo->GetName(mAppName);
     }
-    appInfo->GetVersion(mAppVersion);
     mAppName.StripChars(R"( ()<>@,;:\"/[]?={})");
-  } else {
-    mAppVersion.AssignLiteral(MOZ_APP_UA_VERSION);
   }
+  mAppVersion.AssignLiteral(MOZILLA_UAVERSION);
 
   mMisc.AssignLiteral("rv:" MOZILLA_UAVERSION);
 
@@ -1801,7 +1809,7 @@ void nsHttpHandler::PrefsChanged(const char* pref) {
   if (imageAcceptPrefChanged) {
     nsAutoCString userSetImageAcceptHeader;
 
-    if (Preferences::HasUserValue("image.http.accept")) {
+    if (Preferences::HasDefaultValue("image.http.accept")) {
       rv = Preferences::GetCString("image.http.accept",
                                    userSetImageAcceptHeader);
       if (NS_FAILED(rv)) {
@@ -1819,7 +1827,7 @@ void nsHttpHandler::PrefsChanged(const char* pref) {
   if (PREF_CHANGED("network.http.accept") || imageAcceptPrefChanged) {
     nsAutoCString userSetDocumentAcceptHeader;
 
-    if (Preferences::HasUserValue("network.http.accept")) {
+    if (Preferences::HasDefaultValue("network.http.accept")) {
       rv = Preferences::GetCString("network.http.accept",
                                    userSetDocumentAcceptHeader);
       if (NS_FAILED(rv)) {
