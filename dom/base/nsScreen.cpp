@@ -113,9 +113,9 @@ nsresult nsScreen::GetRect(CSSIntRect& aRect) {
 }
 
 nsresult nsScreen::GetAvailRect(CSSIntRect& aRect) {
-  // Return window inner rect to prevent fingerprinting.
+  // Return screen rect to prevent fingerprinting.
   if (ShouldResistFingerprinting(RFPTarget::ScreenAvailRect)) {
-    return GetWindowInnerRect(aRect);
+    return GetRect(aRect);
   }
 
   // Here we manipulate the value of aRect to represent the screen size,
