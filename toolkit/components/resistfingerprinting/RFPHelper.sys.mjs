@@ -6,6 +6,7 @@
 import { XPCOMUtils } from "resource://gre/modules/XPCOMUtils.sys.mjs";
 import * as constants from "resource://gre/modules/RFPTargetConstants.sys.mjs";
 
+const kPrefFppOverrides = "privacy.fingerprintingProtection.overrides";
 const kPrefResistFingerprinting = "privacy.resistFingerprinting";
 const kPrefSpoofEnglish = "privacy.spoof_english";
 const kTopicHttpOnModifyRequest = "http-on-modify-request";
@@ -62,6 +63,7 @@ class _RFPHelper {
     );
 
     // Add RFP and Letterboxing observers if prefs are enabled
+    this._handleSpoofEnglishChanged();
     this._handleResistFingerprintingChanged();
     this._handleLetterboxingPrefChanged();
   }
@@ -281,16 +283,34 @@ class _RFPHelper {
     this._addOrClearContentMargin(aBrowser);
   }
 
+  _updatePrefFppOverrides(overrides = "", letterboxing = false) {
+    if (overrides.match(/^[+-]AllTargets\b/) == null) {
+      overrides = "+AllTargets";
+    }
+    const dlm = ",";
+    const pm = letterboxing ? "+" : "-";
+    for (const x of ["CSSDeviceSize", "ScreenRect"]) {
+      const r = RegExp(`${dlm}?[+-]${x}(?=${dlm}|$)`, "g");
+      const s = dlm + pm + x;
+      overrides = overrides.replace(r, s) + s;
+    }
+    return overrides.split(dlm).filter((v, i, a) => a.indexOf(v) == i).join(dlm); // prettier-ignore
+  }
+
   _handleLetterboxingPrefChanged() {
+    let FppOverrides = String(Services.prefs.getStringPref(kPrefFppOverrides));
     if (Services.prefs.getBoolPref(kPrefLetterboxing, false)) {
       Services.ww.registerNotification(this);
       this._registerLetterboxingActor();
       this._attachAllWindows();
+      FppOverrides = this._updatePrefFppOverrides(FppOverrides, 1);
     } else {
+      FppOverrides = this._updatePrefFppOverrides(FppOverrides, 0);
       this._unregisterLetterboxingActor();
       this._detachAllWindows();
       Services.ww.unregisterNotification(this);
     }
+    Services.prefs.setStringPref(kPrefFppOverrides, FppOverrides);
   }
 
   _registerLetterboxingActor() {
