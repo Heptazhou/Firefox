@@ -58,6 +58,7 @@ body {
 
 .tab table {
   width: 100%;
+  table-layout: fixed;
 }
 
 tbody tr {
@@ -82,6 +83,13 @@ th {
 
 td {
   padding: 1rem;
+  word-break: break-all;
+
+  &.data_urls {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 /*
