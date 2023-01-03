@@ -624,6 +624,9 @@ async function ensureScrollPadding() {
 }
 
 function maybeDisplayPoliciesNotice() {
+  if (!Services.prefs.getBoolPref("browser.preferences.policiesNotice", false))
+    return;
+
   if (Services.policies.status == Services.policies.ACTIVE) {
     document.getElementById("policies-container").removeAttribute("hidden");
     ensureScrollPadding();
