@@ -97,6 +97,10 @@ tbody:nth-child(4n + 1) {
   background-color: var(--in-content-box-background-odd);
 }
 
+.arr_sep td:last-child {
+  word-break: break-all;
+}
+
 .arr_sep.odd:not(:last-child) td:not(:first-child) {
   border-bottom: 2px solid #f9f9fa;
 }
