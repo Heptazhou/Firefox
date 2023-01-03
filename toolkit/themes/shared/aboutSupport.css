@@ -50,6 +50,14 @@ td.integer {
   }
 }
 
+#media-output-devices-tbody,
+#media-input-devices-tbody {
+  tr > td:nth-child(2) {
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+}
+
 #codec-table {
   text-align: center;
   white-space: nowrap;

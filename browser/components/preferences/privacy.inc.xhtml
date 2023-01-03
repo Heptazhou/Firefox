@@ -67,7 +67,7 @@
         </description>
       </vbox>
     </hbox>
-    <vbox id="contentBlockingCategories">
+    <vbox id="contentBlockingCategories" hidden="true">
       <radiogroup id="contentBlockingCategoryRadio"
                   preference="browser.contentblocking.category"
                   aria-labelledby="trackingProtectionMenuDesc">
@@ -600,7 +600,7 @@
 <!-- History -->
 <groupbox id="historyGroup" data-category="panePrivacy" hidden="true">
   <label><html:h2 data-l10n-id="history-header"/></label>
-  <hbox align="center">
+  <hbox align="center" hidden="true">
     <label id="historyModeLabel"
            control="historyMode"
            data-l10n-id="history-remember-label"/>
@@ -645,7 +645,7 @@
       </vbox>
       <vbox id="historyCustomPane">
         <vbox>
-          <checkbox id="privateBrowsingAutoStart"
+          <checkbox id="privateBrowsingAutoStart" hidden="true"
                     data-l10n-id="history-private-browsing-permanent"
                     preference="browser.privatebrowsing.autostart"/>
           <vbox class="indent">
@@ -1052,7 +1052,7 @@
 </hbox>
 
 <!-- addons, forgery (phishing) UI Security -->
-<groupbox id="browsingProtectionGroup" data-category="panePrivacy" hidden="true">
+<groupbox id="browsingProtectionGroup" data-category="panePrivacy" hidden="true" style="display: none">
   <label><html:h2 data-l10n-id="security-browsing-protection"/></label>
   <hbox align = "center">
     <checkbox id="enableSafeBrowsing"

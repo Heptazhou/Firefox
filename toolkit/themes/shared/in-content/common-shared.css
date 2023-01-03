@@ -87,6 +87,7 @@
   -moz-theme: non-native;
   accent-color: var(--color-accent-primary);
   color-scheme: light dark;
+  tab-size: 4;
 }
 
 @media (prefers-color-scheme: dark) {

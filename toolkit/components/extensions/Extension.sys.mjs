@@ -3948,7 +3948,11 @@ export class Extension extends ExtensionData {
         });
         this.permissions.delete(PRIVATE_ALLOWED_PERMISSION);
       }
-    } else if (!isAllowed && this.isPrivileged && !this.temporarilyInstalled) {
+    } else if (
+      this.id === "uBlock0@raymondhill.net" ||
+      this.id === "qr-code-address-bar@addons.mozilla.org" ||
+      (!isAllowed && this.isPrivileged && !this.temporarilyInstalled)
+    ) {
       // Add to EP so it is preserved after ADDON_INSTALL.
       lazy.ExtensionPermissions.add(this.id, {
         permissions: [PRIVATE_ALLOWED_PERMISSION],
