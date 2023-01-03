@@ -24,6 +24,11 @@
   text-align: center;
 }
 
+.active a {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
 .active {
   display: block;
 }
