@@ -58,6 +58,7 @@ body {
 
 .tab table {
   width: 100%;
+  table-layout: fixed;
 }
 
 tbody tr {
@@ -82,6 +83,7 @@ th {
 
 td {
   padding: 1rem;
+  overflow-wrap: break-word;
 }
 
 /*
@@ -95,6 +97,10 @@ td {
 .errors tr:nth-child(odd):not(:hover),
 tbody:nth-child(4n + 1) {
   background-color: var(--in-content-box-background-odd);
+}
+
+.arr_sep td:last-child {
+  word-break: break-all;
 }
 
 .arr_sep.odd:not(:last-child) td:not(:first-child) {
