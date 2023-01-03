@@ -1737,7 +1737,7 @@ var gMainPane = {
       let alwaysCheckPref = Preferences.get(
         "browser.shell.checkDefaultBrowser"
       );
-      alwaysCheck.disabled = alwaysCheckPref.locked || isDefault;
+      alwaysCheck.disabled = alwaysCheckPref.locked;
     }
   },
 
