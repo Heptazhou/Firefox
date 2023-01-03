@@ -38,7 +38,7 @@
               data-l10n-id="always-check-default"/>
     <stack id="setDefaultPane">
       <hbox id="isNotDefaultPane" align="center" class="indent">
-        <label class="face-sad" id="isNotDefaultLabel" flex="1" data-l10n-id="is-not-default"/>
+        <label id="isNotDefaultLabel" flex="1" data-l10n-id="is-not-default"/>
         <button id="setDefaultButton"
                 is="highlightable-button"
                 class="accessory-button"
@@ -46,7 +46,7 @@
                 preference="pref.general.disable_button.default_browser"/>
       </hbox>
       <hbox id="isDefaultPane" align="center" class="indent">
-        <label class="face-smile" id="isDefaultLabel" flex="1" data-l10n-id="is-default"/>
+        <label id="isDefaultLabel" flex="1" data-l10n-id="is-default"/>
       </hbox>
     </stack>
   </vbox>
@@ -751,7 +751,7 @@
           support-page="media-keyboard-control"
     />
   </hbox>
-  <hbox align="center" data-subcategory="cfraddons">
+  <hbox align="center" data-subcategory="cfraddons" hidden="true">
     <checkbox id="cfrRecommendations"
             class="tail-with-learn-more"
             data-l10n-id="browsing-cfr-recommendations"
@@ -761,7 +761,7 @@
           support-page="extensionrecommendations"
     />
   </hbox>
-  <hbox align="center" data-subcategory="cfrfeatures">
+  <hbox align="center" data-subcategory="cfrfeatures" hidden="true">
     <checkbox id="cfrRecommendations-features"
             class="tail-with-learn-more"
             data-l10n-id="browsing-cfr-features"

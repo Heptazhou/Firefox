@@ -6,6 +6,6 @@
 # and kept in English.
 -fxaccount-brand-name =
     { $capitalization ->
-        [sentence] Firefox account
-       *[title] Firefox Account
+        [sentence] Snowfox account
+       *[title] Snowfox Account
     }
