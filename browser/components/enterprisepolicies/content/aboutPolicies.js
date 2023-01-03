@@ -43,18 +43,16 @@ function addMissingColumns() {
       maxColumns = table.rows[i].cells.length;
     }
   }
+  if (maxColumns > 1 && maxColumns < 6) {
+    maxColumns++;
+  }
 
   // add the missing columns
   for (let i = 0, length = table.rows.length; i < length; i++) {
     const rowLength = table.rows[i].cells.length;
 
-    if (rowLength < maxColumns) {
-      let missingColumns = maxColumns - rowLength;
-
-      while (missingColumns > 0) {
-        table.rows[i].insertCell();
-        missingColumns--;
-      }
+    if (0 < rowLength && rowLength < maxColumns) {
+      table.rows[i].cells[rowLength - 1].colSpan = maxColumns - rowLength + 1;
     }
   }
 }
@@ -138,6 +136,9 @@ function generatePolicy(data, row, depth, new_cont, islast, arr_sep = false) {
   const color_class = row.classList.contains("odd") ? "odd" : "even";
 
   if (Array.isArray(data)) {
+    if (!data.length) {
+      data.push(undefined);
+    }
     for (let count in data) {
       if (count == 0) {
         if (count == data.length - 1) {
@@ -154,7 +155,9 @@ function generatePolicy(data, row, depth, new_cont, islast, arr_sep = false) {
         }
       } else if (count == data.length - 1) {
         let last_row = document.createElement("tr");
-        last_row.classList.add(color_class, "arr_sep");
+        if (typeof data[count] != "object") {
+          last_row.classList.add(color_class, "arr_sep");
+        }
 
         for (let i = 0; i < depth; i++) {
           last_row.appendChild(col(""));
@@ -231,7 +234,7 @@ function generatePolicy(data, row, depth, new_cont, islast, arr_sep = false) {
       count++;
     }
   } else {
-    row.appendChild(col(JSON.stringify(data)));
+    row.appendChild(col(JSON.stringify(data) ?? ""));
 
     if (arr_sep) {
       row.classList.add("arr_sep");
