@@ -3284,7 +3284,7 @@ var gPrivacyPane = {
     var preference = Preferences.get("security.OCSP.enabled");
     // This is the case if the preference is the default value.
     if (preference.value === undefined) {
-      return true;
+      return false;
     }
     return preference.value != 0;
   },
@@ -3305,7 +3305,7 @@ var gPrivacyPane = {
   writeEnableOCSP() {
     var checkbox = document.getElementById("enableOCSP");
     var defaults = Services.prefs.getDefaultBranch(null);
-    var defaultValue = defaults.getIntPref("security.OCSP.enabled");
+    var defaultValue = defaults.getIntPref("security.OCSP.enabled") || 1;
     return checkbox.checked ? defaultValue : 0;
   },
 

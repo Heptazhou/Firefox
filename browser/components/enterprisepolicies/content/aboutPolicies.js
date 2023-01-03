@@ -51,9 +51,8 @@ function addMissingColumns() {
     if (rowLength < maxColumns) {
       let missingColumns = maxColumns - rowLength;
 
-      while (missingColumns > 0) {
-        table.rows[i].insertCell();
-        missingColumns--;
+      if (missingColumns > 0 && rowLength > 0) {
+        table.rows[i].cells[rowLength - 1].colSpan = 1 + missingColumns;
       }
     }
   }
