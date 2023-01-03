@@ -1468,7 +1468,7 @@ var gUnifiedExtensions = {
         // The button should directly open `about:addons` when the user does not
         // have any active extensions listed in the unified extensions panel.
         if (!(await this.hasExtensionsInPanel())) {
-          await BrowserOpenAddonsMgr("addons://discover/");
+          await BrowserOpenAddonsMgr("addons://list/extension");
           return;
         }
       }

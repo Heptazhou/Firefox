@@ -128,6 +128,8 @@ search-results-help-link = Need help? Visit <a data-l10n-name="url">{ -brand-sho
 
 startup-header = Startup
 
+session-restore-learn-more = What if it does not work?
+
 always-check-default =
     .label = Always check if { -brand-short-name } is your default browser
     .accesskey = y
