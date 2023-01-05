@@ -14576,7 +14576,10 @@ class _Search extends (external_React_default()).PureComponent {
     return /*#__PURE__*/external_React_default().createElement("div", {
       className: wrapperClassName
     }, this.props.showLogo && /*#__PURE__*/external_React_default().createElement("div", {
-      className: "logo-and-wordmark"
+      className: "logo-and-wordmark",
+      style: {
+        display: "none"
+      }
     }, /*#__PURE__*/external_React_default().createElement("div", {
       className: "logo"
     }), /*#__PURE__*/external_React_default().createElement("div", {
