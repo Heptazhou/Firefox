@@ -14,7 +14,7 @@
 
 .tab-preview-title {
   overflow: hidden;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 6;
   font-weight: var(--font-weight-bold);
 }
 

@@ -10403,13 +10403,13 @@ function Logo() {
   return /*#__PURE__*/external_React_default().createElement("h1", {
     className: "logo-and-wordmark-wrapper"
   }, /*#__PURE__*/external_React_default().createElement("div", {
-    className: "logo-and-wordmark",
+    className: "logo-and-wordmark", hidden: true,
     role: "img",
     "data-l10n-id": "newtab-logo-and-wordmark"
   }, /*#__PURE__*/external_React_default().createElement("div", {
     className: "logo"
   }), /*#__PURE__*/external_React_default().createElement("div", {
-    className: "wordmark"
+    className: "wordmark", hidden: true
   })));
 }
 
