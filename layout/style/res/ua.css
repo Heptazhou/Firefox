@@ -394,6 +394,22 @@
  * inherits from) depend on the root element's style, as that
  * is trivially cyclic.
  */
+
+/* Fix color-scheme for empty/blank/unstyled pages */
+:root:where(html:has(body:-moz-only-whitespace)),
+:root:where(html:not(:has(body > :not(:is([hidden],
+          [style*="display:none"i], [style*="display: none"i],
+          noscript, script, :-moz-only-whitespace))))),
+:root:where(html:not(:has(:is(body[background], body[bgcolor], body[style],
+        body > link[rel="stylesheet"i],
+        head > link[rel="stylesheet"i],
+        head > meta[name="color-scheme"i],
+        head > style:not(:-moz-only-whitespace))))),
+/* Fix color-scheme for transparent iframe(s) */
+:root:where(html) :where(iframe) {
+  color-scheme: dark light;
+}
+
 :root {
   color: CanvasText;
 }
