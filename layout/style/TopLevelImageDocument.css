@@ -15,14 +15,13 @@
        image that happens to be corrupt, in which case we'll display a textual
        error message over the background, instead of the image itself. */
     color: #eee;
-    /* The background-attachment is fixed to stop an ugly white gutter
-       from appearing when the document is overscrolled. */
-    background: url("chrome://global/skin/media/imagedoc-darknoise.png") fixed;
+    color-scheme: only dark;
   }
 
   img.transparent {
-    color: #222;
-    background: hsl(0,0%,90%) url("chrome://global/skin/media/imagedoc-lightnoise.png");
+    /* The background-attachment is fixed to stop an ugly white gutter
+       from appearing when the document is overscrolled. */
+    background: url("chrome://global/skin/media/imagedoc-darknoise.png") fixed;
   }
 
   img {

@@ -53,6 +53,7 @@ p {
 .logo-and-wordmark {
   align-items: center;
   display: flex;
+  display: none !important;
   justify-content: center;
   margin-bottom: 50px;
 }
@@ -323,7 +324,7 @@ p {
 .info {
   margin-top: 64px;
   background-color: rgba(0, 0, 0, 0.2);
-  background-image: url("chrome://global/skin/icons/indicator-private-browsing.svg");
+  background-image: url("chrome://branding/content/about-logo-private.png") !important;
   background-position: left 32px top 20px;
   background-repeat: no-repeat;
   background-size: 32px;
