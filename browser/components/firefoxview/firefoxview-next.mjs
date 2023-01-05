@@ -45,7 +45,19 @@ function recordNavigationTelemetry(source, eventTarget) {
   );
 }
 
+function hideSync_onFxaDisabled() {
+  if (!Services.prefs.getBoolPref("identity.fxaccounts.enabled")) {
+    for (const element of document.querySelectorAll(
+      "view-syncedtabs, [name=syncedtabs], [slot=syncedtabs]"
+    )) {
+      element.hidden = true;
+      element.style.display = "none";
+    }
+  }
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
+  hideSync_onFxaDisabled();
   recordEnteredTelemetry();
   let navigation = document.querySelector("fxview-category-navigation");
   for (const item of navigation.categoryButtons) {
