@@ -80,7 +80,19 @@ async function updateSearchKeyboardShortcut() {
   searchKeyboardShortcut = key.toLocaleLowerCase();
 }
 
+function hideSync_onFxaDisabled() {
+  if (!Services.prefs.getBoolPref("identity.fxaccounts.enabled")) {
+    for (const element of document.querySelectorAll(
+      "view-syncedtabs, [name=syncedtabs], [slot=syncedtabs]"
+    )) {
+      element.hidden = true;
+      element.style.display = "none";
+    }
+  }
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
+  hideSync_onFxaDisabled();
   recordEnteredTelemetry();
 
   pageNav = document.querySelector("moz-page-nav");
