@@ -25,7 +25,7 @@
 
 #tree,
 .expandable-children {
-  margin-inline-start: 1em;
+  margin-inline-start: 2em;
 }
 
 .expandable-body {
@@ -52,6 +52,7 @@
   font: initial;
 }
 
+#tree,
 .comment {
   font-family: monospace;
   white-space: pre;

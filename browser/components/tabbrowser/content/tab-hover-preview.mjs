@@ -58,6 +58,12 @@ export default class TabHoverPreviewPanel {
       "_prefCollectWireframes",
       "browser.history.collectWireframes"
     );
+    XPCOMUtils.defineLazyPreferenceGetter(
+      this,
+      "_prefTitleLineClamp",
+      "browser.tabs.hoverPreview.titleLineClamp",
+      0
+    );
 
     this._panelOpener = new TabPreviewPanelTimedFunction(
       () => {
@@ -229,6 +235,10 @@ export default class TabHoverPreviewPanel {
   }
 
   _updatePreview() {
+    // > browser/themes/shared/tabbrowser/tab-hover-preview.css
+    if (this._prefTitleLineClamp)
+    this._panel.querySelector(".tab-preview-title").style["-webkit-line-clamp"] =
+      this._prefTitleLineClamp; // prettier-ignore
     this._panel.querySelector(".tab-preview-title").textContent =
       this._displayTitle;
     this._panel.querySelector(".tab-preview-uri").textContent =
