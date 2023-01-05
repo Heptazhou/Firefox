@@ -1063,6 +1063,7 @@ const MESSAGES = () => {
     "FIREFOX_VIEW",
     messages
   );
+  messages.length = 0;
   return messages;
 };
 
