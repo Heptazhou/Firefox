@@ -165,7 +165,7 @@ export class _Search extends React.PureComponent {
     return (
       <div className={wrapperClassName}>
         {this.props.showLogo && (
-          <div className="logo-and-wordmark">
+          <div className="logo-and-wordmark" style={{ display: "none" }}>
             <div className="logo" />
             <div className="wordmark" />
           </div>
