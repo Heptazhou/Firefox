@@ -6,7 +6,7 @@ import React from "react";
 
 function Logo() {
   return (
-    <div className="logo-and-wordmark">
+    <div className="logo-and-wordmark" style={{ display: "none" }}>
       <div className="logo" />
       <div className="wordmark" />
     </div>

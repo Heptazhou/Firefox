@@ -30,16 +30,16 @@
 }
 
 #rightBox {
-  background-image: url("chrome://branding/content/about-wordmark.svg");
+  /* background-image: url("chrome://branding/content/about-wordmark.svg"); */
   background-repeat: no-repeat;
-  background-size: 288px auto;
+  background-size: 200px auto;
   /* padding-top creates room for the wordmark */
-  padding-top: 38px;
+  padding-top: 20px;
   margin-top: 20px;
   /* We don't want this box to contribute arbitrarily to the intrinsic size of
    * the dialog, so set the width to a reasonable size, but let it flex to take
    * all available space. */
-  width: 430px;
+  width: 200px;
   flex: 1 auto;
 
   &:-moz-locale-dir(rtl) {
@@ -49,7 +49,7 @@
 
 #clientBox {
   flex: 1 0 auto;
-  padding: 10px 0 15px;
+  /* padding: 10px 0 15px; */
 }
 
 #bottomBox {
@@ -60,6 +60,13 @@
 #release {
   font-weight: bold;
   font-size: 125%;
+  margin-top: 10px;
+  margin-inline-start: 0;
+}
+
+#snowfox {
+  font-weight: bold;
+  font-size: 300%;
   margin-top: 10px;
   margin-inline-start: 0;
 }
