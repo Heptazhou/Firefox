@@ -11620,13 +11620,13 @@ function Logo({
   return /*#__PURE__*/external_React_default().createElement("h1", {
     className: "logo-and-wordmark-wrapper"
   }, /*#__PURE__*/external_React_default().createElement("div", {
-    className: `logo-and-wordmark ${isAprilFoolsLogo ? "april-fools" : ""}`,
+    className: `logo-and-wordmark ${isAprilFoolsLogo ? "april-fools" : ""}`, hidden: true,
     role: "img",
     "data-l10n-id": "newtab-logo-and-wordmark"
   }, /*#__PURE__*/external_React_default().createElement("div", {
     className: `logo ${isAprilFoolsLogo ? "april-fools" : ""}`
   }), /*#__PURE__*/external_React_default().createElement("div", {
-    className: "wordmark"
+    className: "wordmark", hidden: true
   })));
 }
 

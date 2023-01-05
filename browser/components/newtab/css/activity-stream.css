@@ -729,6 +729,7 @@ main section {
 .logo-and-wordmark {
   align-items: center;
   display: flex;
+  display: none !important;
   justify-content: center;
   margin-block-end: 48px;
 }
@@ -750,6 +751,7 @@ main section {
   background-size: 105px;
   -moz-context-properties: fill;
   display: inline-block;
+  display: none !important;
   fill: var(--newtab-wordmark-color);
   height: 64px;
   margin-inline-start: 16px;

@@ -8,12 +8,12 @@ function Logo({ isAprilFoolsLogo }) {
   return (
     <h1 className="logo-and-wordmark-wrapper">
       <div
-        className={`logo-and-wordmark ${isAprilFoolsLogo ? "april-fools" : ""}`}
+        className={`logo-and-wordmark ${isAprilFoolsLogo ? "april-fools" : ""}`} hidden={true}
         role="img"
         data-l10n-id="newtab-logo-and-wordmark"
       >
         <div className={`logo ${isAprilFoolsLogo ? "april-fools" : ""}`} />
-        <div className="wordmark" />
+        <div className="wordmark" hidden={true} />
       </div>
     </h1>
   );

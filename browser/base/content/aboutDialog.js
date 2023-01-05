@@ -52,28 +52,27 @@ function init() {
   ]);
   let versionIdKey = "base";
   let versionAttributes = {
-    version: AppConstants.MOZ_APP_VERSION_DISPLAY,
+    version: "v" + AppConstants.MOZ_APP_VERSION_DISPLAY,
   };
 
   let arch = Services.sysinfo.get("arch");
   if (["x86", "x86-64"].includes(arch)) {
     versionAttributes.bits = Services.appinfo.is64Bit ? 64 : 32;
   } else {
-    versionIdKey += "-arch";
     versionAttributes.arch = arch;
   }
 
   let version = Services.appinfo.version;
-  if (/a\d+$/.test(version)) {
-    versionIdKey += "-nightly";
+  if (version) {
     let buildID = Services.appinfo.appBuildID;
     let year = buildID.slice(0, 4);
     let month = buildID.slice(4, 6);
     let day = buildID.slice(6, 8);
     versionAttributes.isodate = `${year}-${month}-${day}`;
 
-    document.getElementById("experimental").hidden = false;
+    document.getElementById("experimental").hidden = true;
     document.getElementById("communityDesc").hidden = true;
+    document.getElementById("contributeDesc").hidden = true;
   }
 
   // Use Fluent arguments for append version and the architecture of the build

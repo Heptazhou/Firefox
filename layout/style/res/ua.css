@@ -387,6 +387,22 @@
   user-select: text;
 }
 
+/* Fix color-scheme for empty/blank/unstyled pages */
+:root:where(html:has(body:-moz-only-whitespace)),
+:root:where(html:not(:has(body > :not(:is([hidden],
+          [style*="display:none"i], [style*="display: none"i],
+          noscript, script, :-moz-only-whitespace))))),
+:root:where(html:not(:has(:is(body:is([style],
+          [alink], [background], [bgcolor], [link], [text], [vlink]),
+        body > link[rel="stylesheet"i],
+        head > link[rel="stylesheet"i],
+        head > meta[name="color-scheme"i],
+        head > style:not(:-moz-only-whitespace))))),
+/* Fix color-scheme for transparent iframe(s) */
+:root:where(html) :where(iframe) {
+  color-scheme: dark light;
+}
+
 :root {
   /**
    * Ensure we recompute the default color for the root based on its
