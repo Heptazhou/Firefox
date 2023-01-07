@@ -261,7 +261,7 @@ VIAddVersionKey "OriginalFilename" "setup-stub.exe"
 
 Name "$BrandFullName"
 OutFile "setup-stub.exe"
-Icon "firefox64.ico"
+Icon "snowfox64.ico"
 XPStyle on
 BrandingText " "
 ChangeUI IDD_INST "nsisui.exe"
