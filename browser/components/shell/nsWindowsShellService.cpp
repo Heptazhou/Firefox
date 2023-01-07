@@ -331,9 +331,9 @@ nsWindowsShellService::CheckAllProgIDsExist(bool* aResult) {
     *aResult = result;
   } else {
     *aResult =
-        CheckProgIDExists(FormatProgID(L"FirefoxURL", aumid.get()).get()) &&
-        CheckProgIDExists(FormatProgID(L"FirefoxHTML", aumid.get()).get()) &&
-        CheckProgIDExists(FormatProgID(L"FirefoxPDF", aumid.get()).get());
+        CheckProgIDExists(FormatProgID(L"SnowfoxURL", aumid.get()).get()) &&
+        CheckProgIDExists(FormatProgID(L"SnowfoxHTML", aumid.get()).get()) &&
+        CheckProgIDExists(FormatProgID(L"SnowfoxPDF", aumid.get()).get());
   }
 
   return NS_OK;

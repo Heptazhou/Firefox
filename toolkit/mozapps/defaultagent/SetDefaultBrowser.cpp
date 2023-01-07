@@ -399,8 +399,8 @@ nsresult SetDefaultBrowserUserChoice(
   }
 
   nsTArray<nsString> browserDefaults = {
-      u"https"_ns, u"FirefoxURL"_ns,  u"http"_ns, u"FirefoxURL"_ns,
-      u".html"_ns, u"FirefoxHTML"_ns, u".htm"_ns, u"FirefoxHTML"_ns};
+      u"https"_ns, u"SnowfoxURL"_ns,  u"http"_ns, u"SnowfoxURL"_ns,
+      u".html"_ns, u"SnowfoxHTML"_ns, u".htm"_ns, u"SnowfoxHTML"_ns};
 
   browserDefaults.AppendElements(aExtraFileExtensions);
 
