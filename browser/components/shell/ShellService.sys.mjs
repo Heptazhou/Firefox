@@ -214,9 +214,9 @@ let ShellServiceInternal = {
       "Brave", // For "BraveFile".
       "Chrome", // For "ChromeHTML".
       "Firefox", // For "FirefoxHTML-*" or "FirefoxPDF-*".  Need to take from other installations of Firefox!
-      "IE", // Best guess.
       "MSEdge", // For "MSEdgePDF".  Edgium.
       "Opera", // For "OperaStable", presumably varying with channel.
+      "Snowfox", // For "SnowfoxHTML-*" or "SnowfoxPDF-*".
       "Yandex", // For "YandexPDF.IHKFKZEIOKEMR6BGF62QXCRIKM", presumably varying with installation.
     ];
 
@@ -294,10 +294,10 @@ let ShellServiceInternal = {
         lazy.NimbusFeatures.shellService.getVariable("setDefaultPDFHandler")
       ) {
         if (this._shouldSetDefaultPDFHandler()) {
-          lazy.log.info("Setting Firefox as default PDF handler");
-          exeArgs.push(".pdf", "FirefoxPDF");
+          lazy.log.info("Setting Snowfox as default PDF handler");
+          exeArgs.push(".pdf", "SnowfoxPDF");
         } else {
-          lazy.log.info("Not setting Firefox as default PDF handler");
+          lazy.log.info("Not setting Snowfox as default PDF handler");
         }
       }
       const exeProcess = await this._callExternalDefaultBrowserAgent({
@@ -337,7 +337,7 @@ let ShellServiceInternal = {
           "set-default-extension-handlers-user-choice",
           aumi,
           ".pdf",
-          "FirefoxPDF",
+          "SnowfoxPDF",
         ],
       });
       telemetryResult = "ErrOther";
