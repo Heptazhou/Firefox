@@ -44,7 +44,7 @@ nsresult PrintTargetSkPDF::BeginPrinting(const nsAString& aTitle,
 
   SkPDF::Metadata metadata;
   metadata.fTitle = NS_ConvertUTF16toUTF8(aTitle).get();
-  metadata.fCreator = "Firefox";
+  metadata.fCreator = "Snowfox";
   SkPDF::DateTime now = {0};
   SkPDFUtils::GetDateTime(&now);
   metadata.fCreation = now;
