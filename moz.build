@@ -152,6 +152,7 @@ DIRS += [
     "build",
     "config",
     "python",
+    "snowfox",
     "testing",
     "third_party/python",
 ]
