@@ -227,19 +227,19 @@ static bool VerifyUserDefault(const wchar_t* aExt, const wchar_t* aProgID) {
 
 nsresult SetDefaultBrowserUserChoice(
     const wchar_t* aAumi, const nsTArray<nsString>& aExtraFileExtensions) {
-  auto urlProgID = FormatProgID(L"FirefoxURL", aAumi);
+  auto urlProgID = FormatProgID(L"SnowfoxURL", aAumi);
   if (!CheckProgIDExists(urlProgID.get())) {
     LOG_ERROR_MESSAGE(L"ProgID %s not found", urlProgID.get());
     return NS_ERROR_WDBA_NO_PROGID;
   }
 
-  auto htmlProgID = FormatProgID(L"FirefoxHTML", aAumi);
+  auto htmlProgID = FormatProgID(L"SnowfoxHTML", aAumi);
   if (!CheckProgIDExists(htmlProgID.get())) {
     LOG_ERROR_MESSAGE(L"ProgID %s not found", htmlProgID.get());
     return NS_ERROR_WDBA_NO_PROGID;
   }
 
-  auto pdfProgID = FormatProgID(L"FirefoxPDF", aAumi);
+  auto pdfProgID = FormatProgID(L"SnowfoxPDF", aAumi);
   if (!CheckProgIDExists(pdfProgID.get())) {
     LOG_ERROR_MESSAGE(L"ProgID %s not found", pdfProgID.get());
     return NS_ERROR_WDBA_NO_PROGID;

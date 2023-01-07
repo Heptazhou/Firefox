@@ -21,7 +21,7 @@
 !endif
 
 # These defines should match application.ini settings
-!define AppName               "Firefox"
+!define AppName               "@MOZ_TOAST_APP_NAME@"
 !define AppVersion            "@APP_VERSION@"
 !define GREVersion            @MOZILLA_VERSION@
 !define AB_CD                 "@AB_CD@"
@@ -30,11 +30,11 @@
 !define PrivateBrowsingEXE    "private_browsing.exe"
 !define MainWindowClass       "MozillaWindowClass"
 !define DialogWindowClass     "MozillaDialogClass"
-!define DDEApplication        "Firefox"
-!define AppRegName            "Firefox"
+!define DDEApplication        "@MOZ_TOAST_APP_NAME@"
+!define AppRegName            "@MOZ_TOAST_APP_NAME@"
 !define ToastAumidPrefix      "@MOZ_TOAST_APP_NAME@Toast-"
 
-!define BrandProductName      "Firefox"
+!define BrandProductName      "@MOZ_TOAST_APP_NAME@"
 !ifndef DEV_EDITION
 !define BrandShortName        "@MOZ_APP_DISPLAYNAME@"
 !endif
@@ -145,7 +145,7 @@ VIAddVersionKey "ProductVersion"  "${AppVersion}"
 !define APPROXIMATE_REQUIRED_SPACE_MB "145"
 
 # Constants for parts of the telemetry submission URL
-!define TELEMETRY_BASE_URL https://incoming.telemetry.mozilla.org/submit
+!define TELEMETRY_BASE_URL https://incoming.telemetry.mozilla.invalid/submit
 !define TELEMETRY_NAMESPACE firefox-installer
 !define TELEMETRY_INSTALL_PING_VERSION 1
 !define TELEMETRY_INSTALL_PING_DOCTYPE install

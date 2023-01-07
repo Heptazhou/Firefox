@@ -200,10 +200,10 @@ UninstPage custom un.preConfirm
 !insertmacro MUI_UNPAGE_INSTFILES
 
 ; Finish Page
-!define MUI_FINISHPAGE_SHOWREADME
-!define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
-!define MUI_FINISHPAGE_SHOWREADME_TEXT $(UN_SURVEY_CHECKBOX_LABEL)
-!define MUI_FINISHPAGE_SHOWREADME_FUNCTION un.Survey
+; !define MUI_FINISHPAGE_SHOWREADME
+; !define MUI_FINISHPAGE_SHOWREADME_NOTCHECKED
+; !define MUI_FINISHPAGE_SHOWREADME_TEXT $(UN_SURVEY_CHECKBOX_LABEL)
+; !define MUI_FINISHPAGE_SHOWREADME_FUNCTION un.Survey
 !define MUI_PAGE_CUSTOMFUNCTION_PRE un.preFinish
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW un.showFinish
 !insertmacro MUI_UNPAGE_FINISH
@@ -486,26 +486,26 @@ Section "Uninstall"
     ${un.SetAppLSPCategories}
   ${EndIf}
 
-  ${un.RegCleanAppHandler} "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanAppHandler} "FirefoxPDF-$AppUserModelID"
-  ${un.RegCleanAppHandler} "FirefoxURL-$AppUserModelID"
+  ${un.RegCleanAppHandler} "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanAppHandler} "SnowfoxPDF-$AppUserModelID"
+  ${un.RegCleanAppHandler} "SnowfoxURL-$AppUserModelID"
   ${un.RegCleanProtocolHandler} "http"
   ${un.RegCleanProtocolHandler} "https"
   ${un.RegCleanProtocolHandler} "mailto"
-  ${un.RegCleanFileHandler}  ".htm"   "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".html"  "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".shtml" "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".xht"   "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".xhtml" "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".oga"   "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".ogg"   "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".ogv"   "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".webm"  "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".svg"   "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".webp"  "FirefoxHTML-$AppUserModelID"
-  ${un.RegCleanFileHandler}  ".avif"  "FirefoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".htm"   "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".html"  "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".shtml" "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".xht"   "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".xhtml" "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".oga"   "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".ogg"   "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".ogv"   "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".webm"  "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".svg"   "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".webp"  "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".avif"  "SnowfoxHTML-$AppUserModelID"
 
-  ${un.RegCleanFileHandler}  ".pdf"   "FirefoxPDF-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".pdf"   "SnowfoxPDF-$AppUserModelID"
 
   SetShellVarContext all  ; Set SHCTX to HKLM
   ${un.GetSecondInstallPath} "Software\Mozilla" $R9
@@ -522,22 +522,22 @@ Section "Uninstall"
 
   ; Remove old protocol handler and StartMenuInternet keys without install path
   ; hashes, but only if they're for this installation.  We've never supported
-  ; bare FirefoxPDF.
-  ReadRegStr $0 HKLM "Software\Classes\FirefoxHTML\DefaultIcon" ""
+  ; bare SnowfoxPDF.
+  ReadRegStr $0 HKLM "Software\Classes\SnowfoxHTML\DefaultIcon" ""
   StrCpy $0 $0 -2
   ${If} $0 == "$INSTDIR\${FileMainEXE}"
-    DeleteRegKey HKLM "Software\Classes\FirefoxHTML"
-    DeleteRegKey HKLM "Software\Classes\FirefoxURL"
+    DeleteRegKey HKLM "Software\Classes\SnowfoxHTML"
+    DeleteRegKey HKLM "Software\Classes\SnowfoxURL"
     ${StrFilter} "${FileMainEXE}" "+" "" "" $R9
     DeleteRegKey HKLM "Software\Clients\StartMenuInternet\$R9"
     DeleteRegValue HKLM "Software\RegisteredApplications" "$R9"
     DeleteRegValue HKLM "Software\RegisteredApplications" "${AppRegName}"
   ${EndIf}
-  ReadRegStr $0 HKCU "Software\Classes\FirefoxHTML\DefaultIcon" ""
+  ReadRegStr $0 HKCU "Software\Classes\SnowfoxHTML\DefaultIcon" ""
   StrCpy $0 $0 -2
   ${If} $0 == "$INSTDIR\${FileMainEXE}"
-    DeleteRegKey HKCU "Software\Classes\FirefoxHTML"
-    DeleteRegKey HKCU "Software\Classes\FirefoxURL"
+    DeleteRegKey HKCU "Software\Classes\SnowfoxHTML"
+    DeleteRegKey HKCU "Software\Classes\SnowfoxURL"
     ${StrFilter} "${FileMainEXE}" "+" "" "" $R9
     DeleteRegKey HKCU "Software\Clients\StartMenuInternet\$R9"
     DeleteRegValue HKCU "Software\RegisteredApplications" "$R9"

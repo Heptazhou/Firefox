@@ -225,9 +225,9 @@ Page custom preSummary leaveSummary
 
 ; Finish Page
 !define MUI_FINISHPAGE_TITLE_3LINES
-!define MUI_FINISHPAGE_RUN
-!define MUI_FINISHPAGE_RUN_FUNCTION LaunchApp
-!define MUI_FINISHPAGE_RUN_TEXT $(LAUNCH_TEXT)
+; !define MUI_FINISHPAGE_RUN
+; !define MUI_FINISHPAGE_RUN_FUNCTION LaunchApp
+; !define MUI_FINISHPAGE_RUN_TEXT $(LAUNCH_TEXT)
 !define MUI_PAGE_CUSTOMFUNCTION_PRE preFinish
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW showFinish
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE postFinish
@@ -460,19 +460,19 @@ Section "-Application" APP_IDX
   ; it doesn't cause problems always add them.
   ${SetUninstallKeys}
 
-  ; On install always add the FirefoxHTML-, FirefoxPDF-, and FirefoxURL- keys.
-  ; An empty string is used for the 5th param because FirefoxHTML- is not a
+  ; On install always add the SnowfoxHTML-, SnowfoxPDF-, and SnowfoxURL- keys.
+  ; An empty string is used for the 5th param because SnowfoxHTML- is not a
   ; protocol handler.
   ${GetLongPath} "$INSTDIR\${FileMainEXE}" $8
   StrCpy $2 "$\"$8$\" -osint -url $\"%1$\""
 
-  ; In Win8, the delegate execute handler picks up the value in FirefoxURL- and
-  ; FirefoxHTML- to launch the desktop browser when it needs to.
-  ${AddDisabledDDEHandlerValues} "FirefoxHTML-$AppUserModelID" "$2" "$8,${IDI_DOCUMENT_ZERO_BASED}" \
+  ; In Win8, the delegate execute handler picks up the value in SnowfoxURL- and
+  ; SnowfoxHTML- to launch the desktop browser when it needs to.
+  ${AddDisabledDDEHandlerValues} "SnowfoxHTML-$AppUserModelID" "$2" "$8,${IDI_DOCUMENT_ZERO_BASED}" \
                                  "${AppRegName} HTML Document" ""
-  ${AddDisabledDDEHandlerValues} "FirefoxPDF-$AppUserModelID" "$2" "$8,${IDI_DOCUMENT_PDF_ZERO_BASED}" \
+  ${AddDisabledDDEHandlerValues} "SnowfoxPDF-$AppUserModelID" "$2" "$8,${IDI_DOCUMENT_PDF_ZERO_BASED}" \
                                  "${AppRegName} PDF Document" ""
-  ${AddDisabledDDEHandlerValues} "FirefoxURL-$AppUserModelID" "$2" "$8,${IDI_DOCUMENT_ZERO_BASED}" \
+  ${AddDisabledDDEHandlerValues} "SnowfoxURL-$AppUserModelID" "$2" "$8,${IDI_DOCUMENT_ZERO_BASED}" \
                                  "${AppRegName} URL" "true"
 
   ; The keys below can be set in HKCU if needed.
