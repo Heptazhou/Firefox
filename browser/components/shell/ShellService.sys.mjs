@@ -152,7 +152,7 @@ let ShellServiceInternal = {
       // We only get an exception when something went really wrong.  Fail
       // safely: don't set Firefox as default PDF handler.
       lazy.log.warn(
-        "Could not determine default PDF handler: not setting Firefox as " +
+        "Could not determine default PDF handler: not setting Snowfox as " +
           "default PDF handler!"
       );
       return false;
@@ -191,6 +191,7 @@ let ShellServiceInternal = {
       "IE", // Best guess.
       "MSEdge", // For "MSEdgePDF".  Edgium.
       "Opera", // For "OperaStable", presumably varying with channel.
+      "Snowfox", // For "SnowfoxHTML-*" or "SnowfoxPDF-*".
       "Yandex", // For "YandexPDF.IHKFKZEIOKEMR6BGF62QXCRIKM", presumably varying with installation.
     ];
 
@@ -239,7 +240,7 @@ let ShellServiceInternal = {
       throw new Error("Windows-only");
     }
 
-    lazy.log.info("Setting Firefox as default using UserChoice");
+    lazy.log.info("Setting Snowfox as default using UserChoice");
 
     let telemetryResult = "ErrOther";
 
@@ -261,10 +262,10 @@ let ShellServiceInternal = {
         lazy.NimbusFeatures.shellService.getVariable("setDefaultPDFHandler")
       ) {
         if (this._shouldSetDefaultPDFHandler()) {
-          lazy.log.info("Setting Firefox as default PDF handler");
-          extraFileExtensions.push(".pdf", "FirefoxPDF");
+          lazy.log.info("Setting Snowfox as default PDF handler");
+          extraFileExtensions.push(".pdf", "SnowfoxPDF");
         } else {
-          lazy.log.info("Not setting Firefox as default PDF handler");
+          lazy.log.info("Not setting Snowfox as default PDF handler");
         }
       }
       try {
@@ -304,7 +305,7 @@ let ShellServiceInternal = {
       try {
         this.defaultAgent.setDefaultExtensionHandlersUserChoice(aumi, [
           ".pdf",
-          "FirefoxPDF",
+          "SnowfoxPDF",
         ]);
       } catch (err) {
         telemetryResult = "ErrOther";
