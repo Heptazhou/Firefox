@@ -34,7 +34,7 @@ endif
 
 BRANDING_FILES = \
 	branding.nsi \
-	firefox64.ico \
+	snowfox64.ico \
 	stubinstaller/bgstub.jpg \
 	stubinstaller/installing_page.css \
 	stubinstaller/profile_cleanup_page.css \
