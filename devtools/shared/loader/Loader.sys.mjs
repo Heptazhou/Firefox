@@ -208,7 +208,7 @@ export var loader = new DevToolsLoader({
    * loader instance.
    * @see devtools/client/framework/browser-toolbox/Launcher.sys.mjs
    */
-  invisibleToDebugger: Services.appinfo.name !== "Firefox",
+  invisibleToDebugger: !["Firefox", "Snowfox"].includes(Services.appinfo.name),
 });
 
 export var require = loader.require;
