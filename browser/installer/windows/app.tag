@@ -1,4 +1,4 @@
 ;!@Install@!UTF-8!
-Title="Mozilla Firefox"
+Title="Snowfox"
 RunProgram="setup.exe"
 ;!@InstallEnd@!
