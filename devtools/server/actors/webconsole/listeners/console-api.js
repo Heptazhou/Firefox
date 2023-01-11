@@ -97,6 +97,9 @@ class ConsoleAPIListener {
    *        The message object receives from the ConsoleAPIStorage service.
    */
   onConsoleAPILogEvent(message) {
+    if (Services.prefs.getBoolPref("snowfox.console.logging_disabled", false)) {
+      return;
+    }
     if (!this.handler) {
       return;
     }
