@@ -59,6 +59,8 @@ export class ScreenshotsComponentChild extends JSWindowActorChild {
         return this.getFullPageBounds();
       case "Screenshots:getVisibleBounds":
         return this.getVisibleBounds();
+      case "Screenshots:getDocumentOrigin":
+        return this.getDocumentOrigin();
       case "Screenshots:getDocumentTitle":
         return this.getDocumentTitle();
       case "Screenshots:GetMethodsUsed":
@@ -188,6 +190,10 @@ export class ScreenshotsComponentChild extends JSWindowActorChild {
       region,
     });
     this.endScreenshotsOverlay({ doNotResetMethods: true });
+  }
+
+  getDocumentOrigin() {
+    return this.document.location?.origin ?? "";
   }
 
   getDocumentTitle() {
