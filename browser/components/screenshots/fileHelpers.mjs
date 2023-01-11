@@ -29,7 +29,9 @@ export async function getFilename(filenameTitle, browser) {
     );
   }
   const date = new Date();
+  const host = location?.origin?.replace(/[:/]+|$/g, " ") || "";
   /* eslint-disable no-control-regex */
+  filenameTitle = host + filenameTitle;
   filenameTitle = filenameTitle
     .replace(/[\\/]/g, "_")
     .replace(/[\u200e\u200f\u202a-\u202e]/g, "")
@@ -41,8 +43,8 @@ export async function getFilename(filenameTitle, browser) {
     date.getTime() - date.getTimezoneOffset() * 60 * 1000
   ).toISOString();
   const filenameDate = currentDateTime.substring(0, 10);
-  const filenameTime = currentDateTime.substring(11, 19).replace(/:/g, "-");
-  let clipFilename = `Screenshot ${filenameDate} at ${filenameTime} ${filenameTitle}`;
+  const filenameTime = currentDateTime.substring(11, 19).replace(/:/g, ".");
+  let clipFilename = `${filenameDate} ${filenameTime} ${filenameTitle}`;
 
   // Crop the filename size at less than 246 bytes, so as to leave
   // room for the extension and an ellipsis [...]. Note that JS

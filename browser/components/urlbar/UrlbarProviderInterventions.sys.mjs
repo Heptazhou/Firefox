@@ -451,9 +451,11 @@ class ProviderInterventions extends UrlbarProvider {
           ["mozilla", ["mozila"]],
         ]),
       });
+      /*
       for (let [id, phrases] of Object.entries(DOCUMENTS)) {
         queryScorer.addDocument({ id, phrases });
       }
+       */
       return queryScorer;
     });
   }
