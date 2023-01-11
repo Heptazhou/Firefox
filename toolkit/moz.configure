@@ -2977,7 +2977,7 @@ set_config("MOZ_APP_REMOTINGNAME", moz_app_remotingname)
 option(
     env="ANDROID_PACKAGE_NAME",
     nargs=1,
-    help="Name of the Android package (default org.mozilla.$MOZ_APP_NAME)",
+    help="Name of the Android package (default com.0h7z.$MOZ_APP_NAME)",
 )
 
 
@@ -2987,7 +2987,7 @@ def android_package_name(value, moz_app_name):
         return value[0]
     if moz_app_name == "fennec":
         return "org.mozilla.fennec_aurora"
-    return "org.mozilla.%s" % moz_app_name
+    return "com.0h7z.%s" % moz_app_name
 
 
 set_config("ANDROID_PACKAGE_NAME", android_package_name)
