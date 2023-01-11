@@ -387,6 +387,9 @@ class ThreadActor extends Actor {
 
   // Request handlers
   attach(options) {
+    if (Services.prefs.getBoolPref("snowfox.debugger.force_detach", false)) {
+      return;
+    }
     // Note that the client avoids trying to call attach if already attached.
     // But just in case, avoid any possible duplicate call to attach.
     if (this.alreadyAttached) {

@@ -193,8 +193,5 @@ function getFilename(defaultName) {
 
   const timeString = date.toTimeString().replace(/:/g, ".").split(" ")[0];
 
-  return (
-    L10N.getFormatStr("screenshotGeneratedFilename", dateString, timeString) +
-    ".png"
-  );
+  return `${dateString} ${timeString} devtool.png`;
 }
