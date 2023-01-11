@@ -66,9 +66,13 @@ function checkFilenameLength(filename, maxFilenameLength) {
  */
 export async function getFilename(filenameTitle, browser) {
   if (filenameTitle === null) {
+    const _origin = await lazy.ScreenshotsUtils.getActor(browser).sendQuery(
+      "Screenshots:getDocumentOrigin"
+    );
     filenameTitle = await lazy.ScreenshotsUtils.getActor(browser).sendQuery(
       "Screenshots:getDocumentTitle"
     );
+    filenameTitle = _origin.replace(/[:/]+|$/g, " ") + filenameTitle;
   }
   const date = new Date();
   const knownDownloadsDir = await getDownloadDirectory();
@@ -87,8 +91,8 @@ export async function getFilename(filenameTitle, browser) {
     date.getTime() - date.getTimezoneOffset() * 60 * 1000
   ).toISOString();
   const filenameDate = currentDateTime.substring(0, 10);
-  const filenameTime = currentDateTime.substring(11, 19).replace(/:/g, "-");
-  let clipFilename = `Screenshot ${filenameDate} at ${filenameTime} ${filenameTitle}`;
+  const filenameTime = currentDateTime.substring(11, 19).replace(/:/g, ".");
+  let clipFilename = `${filenameDate} ${filenameTime} ${filenameTitle.trim()}`;
 
   // allow space for a potential ellipsis and the extension
   let maxNameStemLength = maxFilenameLength - "[...].png".length;

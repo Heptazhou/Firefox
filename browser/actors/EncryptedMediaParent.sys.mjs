@@ -114,6 +114,9 @@ export class EncryptedMediaParent extends JSWindowActorParent {
 
       case "api-disabled":
       case "cdm-disabled":
+        if (!Services.prefs.getBoolPref("media.eme.showBrowserMessage", true)) {
+          return;
+        }
         this.handledMessages.add(status);
         notificationId = "drmContentDisabled";
         buttonCallback = () => {
