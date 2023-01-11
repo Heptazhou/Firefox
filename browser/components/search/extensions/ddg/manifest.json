@@ -1,6 +1,6 @@
 {
-  "name": "DuckDuckGo",
-  "description": "Search DuckDuckGo",
+  "name": "Duckduckgo",
+  "description": "Search Duckduckgo",
   "manifest_version": 2,
   "version": "1.4",
   "browser_specific_settings": {
@@ -15,11 +15,11 @@
   "web_accessible_resources": ["favicon.ico"],
   "chrome_settings_overrides": {
     "search_provider": {
-      "keyword": ["@duckduckgo", "@ddg"],
-      "name": "DuckDuckGo",
+      "keyword": "@ddg",
+      "name": "Duckduckgo",
       "search_url": "https://duckduckgo.com/",
       "search_form": "https://duckduckgo.com/",
-      "search_url_get_params": "t=ffab&q={searchTerms}",
+      "search_url_get_params": "k1=-1&kaj=m&kak=-1&kao=-1&kaq=-1&kau=-1&kn=1&kp=-2&q={searchTerms}",
       "suggest_url": "https://ac.duckduckgo.com/ac/",
       "suggest_url_get_params": "q={searchTerms}&type=list"
     }
