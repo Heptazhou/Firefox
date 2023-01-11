@@ -42,7 +42,9 @@ export async function getFilename(filenameTitle, browser) {
       : FALLBACK_MAX_LEAFNAME,
     MAX_LEAFNAME
   );
+  const host = location?.origin?.replace(/[:/]+|$/g, " ") || "";
   /* eslint-disable no-control-regex */
+  filenameTitle = host + filenameTitle;
   filenameTitle = filenameTitle
     .replace(/[\\/]/g, "_")
     .replace(/[\u200e\u200f\u202a-\u202e]/g, "")
@@ -54,8 +56,8 @@ export async function getFilename(filenameTitle, browser) {
     date.getTime() - date.getTimezoneOffset() * 60 * 1000
   ).toISOString();
   const filenameDate = currentDateTime.substring(0, 10);
-  const filenameTime = currentDateTime.substring(11, 19).replace(/:/g, "-");
-  let clipFilename = `Screenshot ${filenameDate} at ${filenameTime} ${filenameTitle}`;
+  const filenameTime = currentDateTime.substring(11, 19).replace(/:/g, ".");
+  let clipFilename = `${filenameDate} ${filenameTime} ${filenameTitle}`;
 
   // allow space for a potential ellipsis and the extension
   let maxNameStemLength = maxFilenameLength - "[...].png".length;
