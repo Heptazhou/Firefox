@@ -1210,7 +1210,7 @@
     },
 
     "SearchEngines": {
-      "enterprise_only": true,
+      "enterprise_only": false,
 
       "type": "object",
       "properties": {
