@@ -30,7 +30,7 @@ static const char* introspect_template =
     "     <arg name=\"data\" direction=\"out\" type=\"s\"/>\n"
     "   </method>\n"
     " </interface>\n"
-    " <interface name=\"org.mozilla.%s\">\n"
+    " <interface name=\"com.0h7z.%s\">\n"
     "   <method name=\"OpenURL\">\n"
     "     <arg name=\"url\" direction=\"in\" type=\"ay\"/>\n"
     "   </method>\n"
@@ -63,7 +63,7 @@ DBusHandlerResult nsDBusRemoteServer::OpenURL(DBusMessage* msg) {
                              &commandLine, &length, DBUS_TYPE_INVALID) ||
       length == 0) {
     nsAutoCString errorMsg;
-    errorMsg = nsPrintfCString("org.mozilla.%s.Error", mAppName.get());
+    errorMsg = nsPrintfCString("com.0h7z.%s.Error", mAppName.get());
     reply = dbus_message_new_error(msg, errorMsg.get(), "Wrong argument");
   } else {
     guint32 timestamp = gtk_get_current_event_time();
@@ -93,7 +93,7 @@ DBusHandlerResult nsDBusRemoteServer::HandleDBusMessage(
   }
 
   nsAutoCString ourInterfaceName;
-  ourInterfaceName = nsPrintfCString("org.mozilla.%s", mAppName.get());
+  ourInterfaceName = nsPrintfCString("com.0h7z.%s", mAppName.get());
 
   if ((strcmp("OpenURL", method) == 0) &&
       (strcmp(ourInterfaceName.get(), iface) == 0)) {
@@ -154,7 +154,7 @@ nsresult nsDBusRemoteServer::Startup(const char* aAppName,
 
   mozilla::XREAppData::SanitizeNameForDBus(profileName);
 
-  nsPrintfCString busName("org.mozilla.%s.%s", mAppName.get(),
+  nsPrintfCString busName("com.0h7z.%s.%s", mAppName.get(),
                           profileName.get());
   if (busName.Length() > DBUS_MAXIMUM_NAME_LENGTH)
     busName.Truncate(DBUS_MAXIMUM_NAME_LENGTH);
@@ -167,7 +167,7 @@ nsresult nsDBusRemoteServer::Startup(const char* aAppName,
 
   // We don't have a valid busName yet - try to create a default one.
   if (!sDBusValidateBusName(busName.get(), nullptr)) {
-    busName = nsPrintfCString("org.mozilla.%s.%s", mAppName.get(), "default");
+    busName = nsPrintfCString("com.0h7z.%s.%s", mAppName.get(), "default");
     if (!sDBusValidateBusName(busName.get(), nullptr)) {
       // We failed completelly to get a valid bus name - just quit
       // to prevent crash at dbus_bus_request_name().
@@ -186,7 +186,7 @@ nsresult nsDBusRemoteServer::Startup(const char* aAppName,
     return NS_ERROR_FAILURE;
   }
 
-  mPathName = nsPrintfCString("/org/mozilla/%s/Remote", mAppName.get());
+  mPathName = nsPrintfCString("/com/0h7z/%s/Remote", mAppName.get());
   static auto sDBusValidatePathName = (bool (*)(const char*, DBusError*))dlsym(
       RTLD_DEFAULT, "dbus_validate_path");
   if (!sDBusValidatePathName ||
