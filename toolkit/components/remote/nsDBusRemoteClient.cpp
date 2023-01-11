@@ -97,7 +97,7 @@ bool nsDBusRemoteClient::GetRemoteDestinationName(const char* aProgram,
   mozilla::XREAppData::SanitizeNameForDBus(profileName);
 
   aDestinationName =
-      nsPrintfCString("org.mozilla.%s.%s", aProgram, profileName.get());
+      nsPrintfCString("com.0h7z.%s.%s", aProgram, profileName.get());
   if (aDestinationName.Length() > DBUS_MAXIMUM_NAME_LENGTH)
     aDestinationName.Truncate(DBUS_MAXIMUM_NAME_LENGTH);
 
@@ -111,7 +111,7 @@ bool nsDBusRemoteClient::GetRemoteDestinationName(const char* aProgram,
   if (!sDBusValidateBusName(aDestinationName.get(), nullptr)) {
     // We don't have a valid busName yet - try to create a default one.
     aDestinationName =
-        nsPrintfCString("org.mozilla.%s.%s", aProgram, "default");
+        nsPrintfCString("com.0h7z.%s.%s", aProgram, "default");
     if (!sDBusValidateBusName(aDestinationName.get(), nullptr)) {
       // We failed completelly to get a valid bus name - just quit
       // to prevent crash at dbus_bus_request_name().
@@ -139,7 +139,7 @@ nsresult nsDBusRemoteClient::DoSendDBusCommandLine(const char* aProgram,
   }
 
   nsAutoCString pathName;
-  pathName = nsPrintfCString("/org/mozilla/%s/Remote", appName.get());
+  pathName = nsPrintfCString("/com/0h7z/%s/Remote", appName.get());
 
   static auto sDBusValidatePathName = (bool (*)(const char*, DBusError*))dlsym(
       RTLD_DEFAULT, "dbus_validate_path");
@@ -150,7 +150,7 @@ nsresult nsDBusRemoteClient::DoSendDBusCommandLine(const char* aProgram,
   }
 
   nsAutoCString remoteInterfaceName;
-  remoteInterfaceName = nsPrintfCString("org.mozilla.%s", appName.get());
+  remoteInterfaceName = nsPrintfCString("com.0h7z.%s", appName.get());
 
   LOG("  DBus destination: %s\n", destinationName.get());
   LOG("  DBus path: %s\n", pathName.get());

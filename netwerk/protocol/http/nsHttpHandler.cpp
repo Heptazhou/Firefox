@@ -407,8 +407,11 @@ nsresult nsHttpHandler::Init() {
     if (mAppName.Length() == 0) {
       appInfo->GetName(mAppName);
     }
-    appInfo->GetVersion(mAppVersion);
+    if (mAppName.EqualsLiteral("Snowfox")) {
+      mAppName.AssignLiteral("Firefox");
+    }
     mAppName.StripChars(R"( ()<>@,;:\"/[]?={})");
+    mAppVersion.Assign(uaVersion);
   } else {
     mAppVersion.AssignLiteral(MOZ_APP_UA_VERSION);
   }
