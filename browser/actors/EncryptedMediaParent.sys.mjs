@@ -117,7 +117,7 @@ export class EncryptedMediaParent extends JSWindowActorParent {
           "emeNotifications.drmContentDisabled.message2"
         );
         supportPage = "drm-content";
-        break;
+        return;
 
       case "cdm-not-installed":
         notificationId = "drmContentCDMInstalling";
