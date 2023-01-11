@@ -703,9 +703,10 @@ set_define("MOZ_AV1", av1)
 option("--disable-jxl", help="Disable jxl image support")
 
 
-@depends("--disable-jxl", milestone.is_nightly)
-def jxl(value, is_nightly):
-    if is_nightly and value:
+@depends("--disable-jxl")
+def jxl(value):
+    enabled = bool(value)
+    if enabled:
         return True
 
 
@@ -2329,7 +2330,7 @@ with only_when(compile_environment & target_is_windows):
             return namespace(name=name, path=None)
 
         if windows_sdk_dir:
-            path = os.path.join(windows_sdk_dir.path, "Redist", "D3D", suffix, name)
+            path = os.path.join(windows_sdk_dir.path, "redist", "d3d", suffix, name)
             error_extra = "in Windows SDK at {}".format(windows_sdk_dir.path)
         else:
             path = os.path.join(os.path.dirname(fxc), name)
