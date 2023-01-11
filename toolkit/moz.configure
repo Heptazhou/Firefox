@@ -2321,7 +2321,7 @@ with only_when(compile_environment & target_is_windows):
             return namespace(name=name, path=None)
 
         if windows_sdk_dir:
-            path = os.path.join(windows_sdk_dir.path, "Redist", "D3D", suffix, name)
+            path = os.path.join(windows_sdk_dir.path, "redist", "d3d", suffix, name)
             error_extra = "in Windows SDK at {}".format(windows_sdk_dir.path)
         else:
             path = os.path.join(os.path.dirname(fxc), name)
