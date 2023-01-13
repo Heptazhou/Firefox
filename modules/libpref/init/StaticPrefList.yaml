@@ -1267,7 +1267,7 @@
 
 - name: browser.dom.window.dump.enabled
   type: RelaxedAtomicBool
-  value: @IS_NOT_MOZILLA_OFFICIAL@
+  value: false
   mirror: always
 
 # See bug 1710926
@@ -1373,7 +1373,7 @@
   # this value.
 -   name: browser.low_commit_space_threshold_mb
     type: RelaxedAtomicUint32
-    value: 200
+    value: 4096
     mirror: always
 #endif
 
@@ -1449,7 +1449,7 @@
 - name: browser.theme.toolbar-theme
   type: RelaxedAtomicUint32
 #if defined(XP_WIN) || defined(XP_MACOSX)
-  value: 1
+  value: 0
 #else
   value: 2
 #endif
@@ -2036,7 +2036,7 @@
 
 - name: devtools.console.stdout.chrome
   type: RelaxedAtomicBool
-  value: @IS_NOT_MOZILLA_OFFICIAL@
+  value: false
   mirror: always
 
 - name: devtools.console.stdout.content
@@ -3572,7 +3572,7 @@
 # (some Firefox functionality requests, like OCSP will not be affected)
 - name: dom.security.https_only_mode
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, all content requests in Private Browsing Mode will get
@@ -3580,14 +3580,14 @@
 # to true then this pref has no effect)
 - name: dom.security.https_only_mode_pbm
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, sends http background request for top-level sites to
 # counter long timeouts.
 - name: dom.security.https_only_mode_send_http_background_request
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 # Time limit, in milliseconds, before sending the http background
@@ -3615,14 +3615,14 @@
 # to local IP addresses are also upgraded
 - name: dom.security.https_only_mode.upgrade_local
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true and HTTPS-only mode is enabled, requests
 # to .onion hosts are also upgraded
 - name: dom.security.https_only_mode.upgrade_onion
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # WARNING: Don't ever update that pref manually! It is only used
@@ -3630,7 +3630,7 @@
 # the pref dom.security.https_only_mode from above.
 - name: dom.security.https_only_mode_ever_enabled
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # WARNING: Don't ever update that pref manually! It is only used
@@ -3645,14 +3645,14 @@
 # and gives the user suggestions on the error page
 - name: dom.security.https_only_mode_error_page_user_suggestions
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, top-level request will get upgraded to HTTPS and
 # downgraded again if the request failed.
 - name: dom.security.https_first
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, top-level requests in Private Browsing Mode will get
@@ -6880,7 +6880,7 @@
 # 2 = Strict: reject violations of "should" specification directives
 - name: image.avif.compliance_strictness
   type: RelaxedAtomicInt32
-  value: 1
+  value: 0
   mirror: always
 
 # Whether we apply container-level transforms like mirroring and rotation
@@ -7274,7 +7274,7 @@
 # Use better error message when accessing property of null or undefined.
 - name: javascript.options.property_error_message_fix
   type: bool
-  value: @IS_NIGHTLY_OR_DEV_EDITION@
+  value: true
   mirror: always
 
 # Support for weak references in JavaScript (WeakRef and FinalizationRegistry).
@@ -8282,13 +8282,13 @@
 #   3 - also user-installed fonts
 - name: layout.css.font-visibility.standard
   type: int32_t
-  value: 3
+  value: 1
   mirror: always
 
 # font-visibility setting when Tracking Protection is enabled
 - name: layout.css.font-visibility.trackingprotection
   type: int32_t
-  value: 3
+  value: 1
   mirror: always
 
 # font-visibility setting when Resist Fingerprinting is enabled
@@ -8303,7 +8303,7 @@
 # private-browsing level specified by this pref.)
 - name: layout.css.font-visibility.private
   type: int32_t
-  value: 3
+  value: 1
   mirror: always
 
 # Is support for GeometryUtils.getBoxQuads enabled?
@@ -9108,16 +9108,16 @@
 
 
 # This pref defines what the blocking policy would be used in blocking autoplay.
-# 0 : use sticky activation (default)
+# 0 : use sticky activation
 # https://html.spec.whatwg.org/multipage/interaction.html#sticky-activation
 # 1 : use transient activation (the transient activation duration can be
 #     adjusted by the pref `dom.user_activation.transient.timeout`)
 # https://html.spec.whatwg.org/multipage/interaction.html#transient-activation
 # 2 : user input depth (allow autoplay when the play is trigged by user input
-#     which is determined by the user input depth)
+#     which is determined by the user input depth) (default)
 - name: media.autoplay.blocking_policy
   type: uint32_t
-  value: 0
+  value: 2
   mirror: always
 
 # Whether to allow autoplay on extension background pages.
@@ -9130,13 +9130,13 @@
 # 0=Allowed, 1=Blocked, 5=All Blocked
 - name: media.autoplay.default
   type: int32_t
-  value: 1
+  value: 5
   mirror: always
 
 # Wether to block autoplay for webaudio
 - name: media.autoplay.block-webaudio
   type: bool
-  value: false
+  value: true
   mirror: always
 
 # File-backed MediaCache size.
@@ -10160,7 +10160,7 @@
 
 - name: media.autoplay.block-event.enabled
   type: bool
-  value: false
+  value: true
   mirror: always
 
 - name: media.media-capabilities.enabled
@@ -11294,7 +11294,7 @@
 # Default global TRR provider
 - name: network.trr.default_provider_uri
   type: String
-  value: "https://mozilla.cloudflare-dns.com/dns-query"
+  value: "https://cloudflare-dns.com/dns-query"
   mirror: never
 
 # If true, retry TRR for recoverable errors once.
@@ -12299,13 +12299,13 @@
 # 2 - spoof
 - name: privacy.spoof_english
   type: RelaxedAtomicUint32
-  value: 0
+  value: 2
   mirror: always
 
-# Send "do not track" HTTP header, disabled by default.
+# Send "do not track" HTTP header, enabled by default.
 - name: privacy.donottrackheader.enabled
   type: bool
-  value: false
+  value: true
   mirror: always
 
 # Potentially send "global privacy control" HTTP header and set navigator
@@ -12365,7 +12365,7 @@
 
 - name: privacy.resistFingerprinting
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # We automatically decline canvas permission requests if they are not initiated
@@ -12407,7 +12407,7 @@
 
 - name: privacy.resistFingerprinting.target_video_res
   type: uint32_t
-  value: 480
+  value: 1080
   mirror: always
 
 # Bitfield for selectively disabling RFP
@@ -13150,7 +13150,7 @@
 #ifdef NIGHTLY_BUILD
   value: 50
 #else
-  value: 0
+  value: 50
 #endif
   mirror: always
 
@@ -13860,7 +13860,7 @@
 
 - name: view_source.wrap_long_lines
   type: bool
-  value: @IS_ANDROID@
+  value: true
   mirror: always
 
 - name: view_source.syntax_highlight
@@ -13991,7 +13991,7 @@
 
 - name: webgl.enable-debug-renderer-info
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 - name: webgl.enable-draft-extensions
