@@ -312,8 +312,10 @@ bool nsAvailableMemoryWatcher::IsCommitSpaceLow() {
   }
 
   constexpr size_t kBytesPerMB = 1024 * 1024;
-  return (memStatus.ullAvailPageFile / kBytesPerMB) <
-         StaticPrefs::browser_low_commit_space_threshold_mb();
+  return (100 - memStatus.dwMemoryLoad) <=
+             StaticPrefs::browser_low_commit_space_threshold_percent() ||
+         (memStatus.ullAvailVirtual / kBytesPerMB) <
+             StaticPrefs::browser_low_commit_space_threshold_mb();
 }
 
 void nsAvailableMemoryWatcher::StartPollingIfUserInteracting(
