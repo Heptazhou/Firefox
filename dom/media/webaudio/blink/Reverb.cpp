@@ -40,7 +40,7 @@ namespace WebCore {
 // Empirical gain calibration tested across many impulse responses to ensure
 // perceived volume is same as dry (unprocessed) signal
 const float GainCalibration = 0.00125f;
-const float GainCalibrationSampleRate = 44100;
+const float GainCalibrationSampleRate = 48000;
 
 // A minimum power value to when normalizing a silent (or very quiet) impulse
 // response
