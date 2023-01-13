@@ -1427,7 +1427,7 @@
 
 - name: browser.dom.window.dump.enabled
   type: RelaxedAtomicBool
-  value: @IS_NOT_MOZILLA_OFFICIAL@
+  value: false
   mirror: always
 
 # See bug 1738574
@@ -1503,7 +1503,7 @@
 #
 - name: browser.history.maxUrlLength
   type: uint32_t
-  value: 2000
+  value: 2048
   mirror: always
 
 # Max size of push/replaceState data parameter
@@ -1533,7 +1533,7 @@
   # this value.
 -   name: browser.low_commit_space_threshold_mb
     type: RelaxedAtomicUint32
-    value: 200
+    value: 8192
     mirror: always
 #endif
 
@@ -1544,7 +1544,7 @@
   # On Windows we check available physical memory instead.
 -   name: browser.low_commit_space_threshold_percent
     type: RelaxedAtomicUint32
-    value: 5
+    value: 25
     mirror: always
 #endif
 
@@ -1607,7 +1607,7 @@
 # theming code overrides it if appropriate.
 - name: browser.theme.toolbar-theme
   type: RelaxedAtomicUint32
-  value: 2
+  value: 0
   mirror: always
 
 # Communicates the preferred content theme color to platform (for e.g.,
@@ -2183,7 +2183,7 @@
 
 - name: devtools.console.stdout.chrome
   type: RelaxedAtomicBool
-  value: @IS_NOT_MOZILLA_OFFICIAL@
+  value: false
   mirror: always
 
 - name: devtools.console.stdout.content
@@ -3216,7 +3216,7 @@
 # Whether origin trials are enabled.
 - name: dom.origin-trials.enabled
   type: bool
-  value: true
+  value: false
   mirror: always
 
 # Whether we use the test key to verify tokens.
@@ -3250,7 +3250,7 @@
 # information should be collected / submitted.
 - name: dom.private-attribution.submission.enabled
   type: bool
-  value: true
+  value: false
   mirror: always
 
 # Is support for Window.paintWorklet enabled?
@@ -3615,7 +3615,7 @@
 #      at the same time as the top-level of a file.
 - name: dom.script_loader.delazification.strategy
   type: uint32_t
-  value: 255
+  value: 3
   mirror: always
 
 # Maximum total size after which the delazification strategy, specified by
@@ -3734,7 +3734,7 @@
 # (some Firefox functionality requests, like OCSP will not be affected)
 - name: dom.security.https_only_mode
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, all content requests in Private Browsing Mode will get
@@ -3742,14 +3742,14 @@
 # to true then this pref has no effect)
 - name: dom.security.https_only_mode_pbm
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, sends http background request for top-level sites to
 # counter long timeouts.
 - name: dom.security.https_only_mode_send_http_background_request
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 # Time limit, in milliseconds, before sending the http background
@@ -3770,14 +3770,14 @@
 # to local IP addresses are also upgraded
 - name: dom.security.https_only_mode.upgrade_local
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true and HTTPS-only mode is enabled, requests
 # to .onion hosts are also upgraded
 - name: dom.security.https_only_mode.upgrade_onion
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # WARNING: Don't ever update that pref manually! It is only used
@@ -3785,7 +3785,7 @@
 # the pref dom.security.https_only_mode from above.
 - name: dom.security.https_only_mode_ever_enabled
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # WARNING: Don't ever update that pref manually! It is only used
@@ -3793,21 +3793,21 @@
 # the pref dom.security.https_only_mode_pbm from above.
 - name: dom.security.https_only_mode_ever_enabled_pbm
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true checks for secure www connections when https fails
 # and gives the user suggestions on the error page
 - name: dom.security.https_only_mode_error_page_user_suggestions
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # If true, top-level request will get upgraded to HTTPS and
 # downgraded again if the request failed.
 - name: dom.security.https_first
   type: RelaxedAtomicBool
-  value: @IS_NIGHTLY_BUILD@
+  value: true
   mirror: always
 
 # If true, top-level requests in Private Browsing Mode will get
@@ -3941,7 +3941,7 @@
 
 - name: dom.serviceWorkers.enabled
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 - name: dom.serviceWorkers.navigationPreload.enabled
@@ -5043,11 +5043,7 @@
 # (if feasible). This mimics native behaviour on MacOS.
 - name: editor.word_select.delete_space_after_doubleclick_selection
   type: bool
-#ifdef XP_MACOSX
   value: true
-#else
-  value: false
-#endif
   mirror: always
 
 #---------------------------------------------------------------------------
@@ -6382,10 +6378,10 @@
   mirror: once
   do_not_use_directly: true
 
-# Enable OffscreenCanvas everywhere.
+# Disable OffscreenCanvas everywhere.
 - name: gfx.offscreencanvas.enabled
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 - name: gfx.offscreencanvas.shared-provider
@@ -7393,7 +7389,7 @@
 # 2 = Strict: reject violations of "should" specification directives
 - name: image.avif.compliance_strictness
   type: RelaxedAtomicInt32
-  value: 1
+  value: 0
   mirror: always
 
 # Whether we apply container-level transforms like mirroring and rotation
@@ -7418,7 +7414,7 @@
 # major brand is set to 'avif'.
 - name: image.avif.sequence.animate_avif_major_branded_images
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # Whether to always loop animated AVIF sequences.
@@ -7430,7 +7426,7 @@
 # Whether we attempt to decode JXL images or not.
 - name: image.jxl.enabled
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # 0 = black, 1 = white.
@@ -7813,7 +7809,7 @@
 # Use better error message when accessing property of null or undefined.
 - name: javascript.options.property_error_message_fix
   type: bool
-  value: @IS_NIGHTLY_OR_DEV_EDITION@
+  value: true
   mirror: always
   set_spidermonkey_pref: startup
 
@@ -8947,7 +8943,7 @@
 #   3 - also user-installed fonts
 - name: layout.css.font-visibility
   type: int32_t
-  value: 3
+  value: 1
   mirror: always
 
 # Is support for GeometryUtils.getBoxQuads enabled?
@@ -9808,7 +9804,7 @@
 - name: layout.word_select.eat_space_to_next_word
   type: bool
 #ifdef XP_WIN
-  value: true
+  value: false
 #else
   value: false
 #endif
@@ -9940,16 +9936,16 @@
 
 
 # This pref defines what the blocking policy would be used in blocking autoplay.
-# 0 : use sticky activation (default)
+# 0 : use sticky activation
 # https://html.spec.whatwg.org/multipage/interaction.html#sticky-activation
 # 1 : use transient activation (the transient activation duration can be
 #     adjusted by the pref `dom.user_activation.transient.timeout`)
 # https://html.spec.whatwg.org/multipage/interaction.html#transient-activation
 # 2 : user input depth (allow autoplay when the play is trigged by user input
-#     which is determined by the user input depth)
+#     which is determined by the user input depth) (default)
 - name: media.autoplay.blocking_policy
   type: uint32_t
-  value: 0
+  value: 2
   mirror: always
 
 # Whether to allow autoplay on extension background pages.
@@ -9962,7 +9958,7 @@
 # 0=Allowed, 1=Blocked, 5=All Blocked
 - name: media.autoplay.default
   type: int32_t
-  value: 1
+  value: 5
   mirror: always
 
 # File-backed MediaCache size.
@@ -10781,7 +10777,7 @@
 # 2 : enable for media engine only
 -   name: media.wmf.hevc.enabled
     type: RelaxedAtomicUint32
-#if defined(NIGHTLY_BUILD)
+#if defined(NIGHTLY_BUILD) || defined(XP_WIN)
     value: 1
 #elif defined(MOZ_DEV_EDITION) || defined(EARLY_BETA_OR_EARLIER)
     value: 2
@@ -11136,7 +11132,7 @@
 
 - name: media.autoplay.block-event.enabled
   type: bool
-  value: false
+  value: true
   mirror: always
 
 - name: media.media-capabilities.screen.enabled
@@ -12061,7 +12057,7 @@
 # false=allow onion referer, true=hide onion referer (use empty referer).
 - name: network.http.referer.hideOnionSource
   type: bool
-  value: false
+  value: true
   mirror: always
 
 # Include an origin header on non-GET and non-HEAD requests regardless of CORS.
@@ -14233,13 +14229,13 @@
 # 2 - spoof
 - name: privacy.spoof_english
   type: RelaxedAtomicUint32
-  value: 0
+  value: 2
   mirror: always
 
-# Send "do not track" HTTP header, disabled by default.
+# Send "do not track" HTTP header, enabled by default.
 - name: privacy.donottrackheader.enabled
   type: bool
-  value: false
+  value: true
   mirror: always
 
 # Potentially send "global privacy control" HTTP header and set navigator
@@ -14321,13 +14317,13 @@
 # designed to minimize breakage while maximizing protection.
 - name: privacy.fingerprintingProtection
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
   do_not_use_directly: true
 
 - name: privacy.fingerprintingProtection.pbmode
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
   do_not_use_directly: true
 
@@ -14385,7 +14381,7 @@
 
 - name: privacy.resistFingerprinting.target_video_res
   type: uint32_t
-  value: 480
+  value: 1080
   mirror: always
 
 # Enable resetting the fingerprinting randomization key daily for normal windwos.
@@ -15106,9 +15102,9 @@
 - name: security.OCSP.enabled
   type: RelaxedAtomicUint32
 #ifdef ANDROID
-  value: 2
+  value: 0
 #else
-  value: 1
+  value: 0
 #endif
   mirror: always
 
@@ -15118,7 +15114,7 @@
 # false => soft-fail (if an OCSP request times out, continue the connection)
 - name: security.OCSP.require
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 # How many milliseconds to wait for an OCSP response before assuming it failed
@@ -15136,7 +15132,11 @@
 # (when fetching for hard-fail).
 - name: security.OCSP.timeoutMilliseconds.hard
   type: RelaxedAtomicUint32
+#ifdef RELEASE_OR_BETA
+  value: 20000
+#else
   value: 10000
+#endif
   mirror: always
 
 # Whether or not to enable OCSP must-staple (in other words, TLS-feature with
@@ -15229,7 +15229,7 @@
 # 3: Consult CRLite and enforce "Not Revoked" results, but defer to OCSP for "Revoked".
 - name: security.pki.crlite_mode
   type: RelaxedAtomicUint32
-  value: 3
+  value: 2
   mirror: always
 
 - name: security.tls.version.min
@@ -15304,7 +15304,7 @@
 
 - name: security.tls.enable_0rtt_data
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 - name: security.tls.enable_kyber
@@ -15340,7 +15340,7 @@
 
 - name: security.ssl.treat_unsafe_negotiation_as_broken
   type: RelaxedAtomicBool
-  value: false
+  value: true
   mirror: always
 
 - name: security.ssl.require_safe_negotiation
@@ -16130,7 +16130,7 @@
 
 - name: view_source.wrap_long_lines
   type: bool
-  value: @IS_ANDROID@
+  value: true
   mirror: always
 
 - name: view_source.syntax_highlight
@@ -16265,7 +16265,7 @@
 
 - name: webgl.enable-debug-renderer-info
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 - name: webgl.enable-draft-extensions
@@ -16280,7 +16280,7 @@
 
 - name: webgl.enable-renderer-query
   type: RelaxedAtomicBool
-  value: true
+  value: false
   mirror: always
 
 - name: webgl.enable-surface-texture
@@ -16522,7 +16522,7 @@
 # on GTK.
 - name: widget.non-native-theme.scrollbar.style
   type: uint32_t
-  value: 0
+  value: 4
   mirror: always
 
 # An override that allows to override the default platform size. The size in CSS
@@ -16575,7 +16575,7 @@
 # The minimum size of the scroll thumb, in the scrollbar direction.
 - name: widget.non-native-theme.gtk.scrollbar.thumb-cross-size
   type: uint32_t
-  value: 40
+  value: 42
   mirror: always
 
 # Whether the thumb should be rounded for the non-native scrollbars.
