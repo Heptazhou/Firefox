@@ -1194,7 +1194,7 @@ alsa_get_max_channel_count(cubeb * ctx, uint32_t * max_channels)
   cubeb_stream * stm;
   snd_pcm_hw_params_t * hw_params;
   cubeb_stream_params params;
-  params.rate = 44100;
+  params.rate = 48000;
   params.format = CUBEB_SAMPLE_FLOAT32NE;
   params.channels = 2;
 
@@ -1257,7 +1257,7 @@ alsa_get_preferred_sample_rate(cubeb * ctx, uint32_t * rate)
   }
 
   /* Use a common rate, alsa may adjust it based on hw/etc. capabilities. */
-  *rate = 44100;
+  *rate = 48000;
 
   r = WRAP(snd_pcm_hw_params_set_rate_near)(pcm, hw_params, rate, NULL);
   if (r < 0) {

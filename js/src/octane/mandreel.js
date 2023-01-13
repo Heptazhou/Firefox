@@ -8144,7 +8144,7 @@ function Mandreel_Audio_CreateStream(sp)
 		else
 		{
 			mandreel_audio_stream_func_ptr = heap32[sp>>2];
-			AudioDataDestination(44100,mandreel_Audio_requestSoundData);
+			AudioDataDestination(48000,mandreel_Audio_requestSoundData);
 		}
 		__Mandreel_Audio_CreateStream_created = true;
 	}
