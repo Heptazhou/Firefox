@@ -74,9 +74,9 @@ pref("security.osreauthenticator.password_last_changed_hi", 0);
 pref("security.crash_tracking.js_load_1.prevCrashes", 0);
 pref("security.crash_tracking.js_load_1.maxCrashes", 1);
 
-pref("general.useragent.compatMode.firefox", false);
+pref("general.useragent.compatMode.firefox", true);
 
-pref("general.config.obscure_value", 13); // for MCD .cfg files
+pref("general.config.obscure_value", 0); // for MCD .cfg files
 
 #ifndef MOZ_BUILD_APP_IS_BROWSER
 pref("general.warnOnAboutConfig", true);
@@ -166,7 +166,7 @@ pref("browser.sessionhistory.max_total_viewers", -1);
 // See http://whatwg.org/specs/web-apps/current-work/#ping
 pref("browser.send_pings", false);
 pref("browser.send_pings.max_per_link", 1);           // limit the number of pings that are sent per link click
-pref("browser.send_pings.require_same_host", false);  // only send pings to the same host if this is true
+pref("browser.send_pings.require_same_host", true);   // only send pings to the same host if this is true
 
 pref("browser.helperApps.neverAsk.saveToDisk", "");
 pref("browser.helperApps.neverAsk.openFile", "");
@@ -224,9 +224,9 @@ pref("media.videocontrols.picture-in-picture.enabled", false);
 pref("media.videocontrols.picture-in-picture.display-text-tracks.enabled", true);
 pref("media.videocontrols.picture-in-picture.video-toggle.enabled", false);
 pref("media.videocontrols.picture-in-picture.video-toggle.always-show", false);
-pref("media.videocontrols.picture-in-picture.video-toggle.min-video-secs", 45);
+pref("media.videocontrols.picture-in-picture.video-toggle.min-video-secs", 10);
 pref("media.videocontrols.picture-in-picture.video-toggle.position", "right");
-pref("media.videocontrols.picture-in-picture.video-toggle.has-used", false);
+pref("media.videocontrols.picture-in-picture.video-toggle.has-used", true);
 pref("media.videocontrols.picture-in-picture.display-text-tracks.toggle.enabled", true);
 pref("media.videocontrols.picture-in-picture.display-text-tracks.size", "medium");
 pref("media.videocontrols.picture-in-picture.improved-video-controls.enabled", true);
@@ -235,7 +235,7 @@ pref("media.videocontrols.keyboard-tab-to-all-controls", true);
 
 #ifdef MOZ_WEBRTC
   pref("media.navigator.video.enabled", true);
-  pref("media.navigator.video.default_fps",30);
+  pref("media.navigator.video.default_fps", 60);
   pref("media.navigator.video.use_remb", true);
   pref("media.navigator.video.use_transport_cc", true);
   pref("media.peerconnection.video.use_rtx", true);
@@ -828,7 +828,7 @@ pref("privacy.resistFingerprinting.exemptedDomains", "*.example.invalid");
 
 // If privacy.fingerprintingProtection is enabled, this pref can be used to add
 // or remove features from its effects
-pref("privacy.fingerprintingProtection.overrides", "");
+pref("privacy.fingerprintingProtection.overrides", "+AllTargets,-CSSPrefersColorScheme");
 
 // If privacy.fingerprintingProtection is enabled, this pref can be used to add
 // or remove features on a domain granular level.
@@ -1283,7 +1283,7 @@ pref("network.http.send_window_size", 1024);
 // By default the Accept header sent for documents loaded over HTTP(S) is derived
 // by DocumentAcceptHeader() in nsHttpHandler.cpp. If set, this pref overrides it.
 // There is also image.http.accept which works in scope of image.
-pref("network.http.accept", "");
+pref("network.http.accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8");
 
 // The max time to spend on xpcom events between two polls in ms.
 pref("network.sts.max_time_for_events_between_two_polls", 100);
@@ -1586,7 +1586,7 @@ pref("intl.ellipsis",                       "chrome://global-platform/locale/int
 // OS locale set instead of the app locale set.
 pref("intl.regional_prefs.use_os_locales",  false);
 pref("font.language.group",                 "chrome://global/locale/intl.properties");
-pref("font.cjk_pref_fallback_order",        "zh-cn,zh-hk,zh-tw,ja,ko");
+pref("font.cjk_pref_fallback_order",        "zh-cn,zh-tw,zh-hk,ja,ko");
 
 // This pref controls pseudolocales for testing localization.
 // See https://firefox-source-docs.mozilla.org/l10n/fluent/tutorial.html#manually-testing-ui-with-pseudolocalization
@@ -3183,7 +3183,7 @@ pref("toolkit.zoomManager.zoomValues", ".3,.5,.67,.8,.9,1,1.1,1.2,1.33,1.5,1.7,2
 // By default the Accept header sent for images loaded over HTTP(S) is derived
 // by ImageAcceptHeader() in nsHttpHandler.cpp. If set, this pref overrides it.
 // There is also network.http.accept which works in scope of document.
-pref("image.http.accept", "");
+pref("image.http.accept", "image/avif,image/webp,image/png,image/svg+xml,image/*;q=0.8,*/*;q=0.5");
 
 // sendbuffer of 0 means use OS default, sendbuffer unset means use
 // gecko default which varies depending on windows version and is OS
@@ -3247,9 +3247,9 @@ pref("browser.region.network.url", "https://location.services.mozilla.com/v1/cou
 pref("browser.region.network.scan", false);
 // Timeout for whole region request.
 pref("browser.region.timeout", 5000);
-pref("browser.region.update.enabled", true);
+pref("browser.region.update.enabled", false);
 
-pref("browser.meta_refresh_when_inactive.disabled", false);
+pref("browser.meta_refresh_when_inactive.disabled", true);
 
 // XPInstall prefs
 pref("xpinstall.whitelist.required", true);
@@ -3319,7 +3319,7 @@ pref("network.buffer.cache.size",  32768);
 pref("dom.webnotifications.requireinteraction.count", 3);
 
 // Show favicons in web notifications.
-pref("alerts.showFavicons", false);
+pref("alerts.showFavicons", true);
 
 // DOM full-screen API.
 #ifdef XP_MACOSX
@@ -3328,22 +3328,22 @@ pref("alerts.showFavicons", false);
 #endif
 // transition duration of fade-to-black and fade-from-black, unit: ms
 #ifndef MOZ_WIDGET_GTK
-  pref("full-screen-api.transition-duration.enter", "200 200");
-  pref("full-screen-api.transition-duration.leave", "200 200");
+  pref("full-screen-api.transition-duration.enter", "100 0");
+  pref("full-screen-api.transition-duration.leave", "100 0");
 #else
   pref("full-screen-api.transition-duration.enter", "0 0");
   pref("full-screen-api.transition-duration.leave", "0 0");
 #endif
 // timeout for black screen in fullscreen transition, unit: ms
-pref("full-screen-api.transition.timeout", 1000);
+pref("full-screen-api.transition.timeout", 200);
 // time for the warning box stays on the screen before sliding out, unit: ms
-pref("full-screen-api.warning.timeout", 3000);
+pref("full-screen-api.warning.timeout", -1);
 // delay for the warning box to show when pointer stays on the top, unit: ms
-pref("full-screen-api.warning.delay", 500);
+pref("full-screen-api.warning.delay", -1);
 
 // DOM pointerlock API
 // time for the warning box stays on the screen before sliding out, unit: ms
-pref("pointer-lock-api.warning.timeout", 3000);
+pref("pointer-lock-api.warning.timeout", -1);
 
 // Push
 
@@ -3366,7 +3366,7 @@ pref("dom.push.quotaUpdateDelay", 3000); // 3 seconds
 
 // Is the network connection allowed to be up?
 // This preference should be used in UX to enable/disable push.
-pref("dom.push.connection.enabled", true);
+pref("dom.push.connection.enabled", false);
 
 // Exponential back-off start is 5 seconds like in HTTP/1.1.
 // Maximum back-off is pingInterval.
@@ -3753,7 +3753,7 @@ pref("dom.input.fallbackUploadDir", "");
 #endif
 
 // Default media volume
-pref("media.default_volume", "1.0");
+pref("media.default_volume", "0.5");
 
 pref("dom.storageManager.prompt.testing", false);
 pref("dom.storageManager.prompt.testing.allow", false);
@@ -3788,7 +3788,7 @@ pref("browser.translations.neverTranslateLanguages", "");
 // translation behavior on about:translations. Requires a page refresh.
 pref("browser.translations.useHTML", false);
 // Automatically popup an offer to translate on sites.
-pref("browser.translations.automaticallyPopup", true);
+pref("browser.translations.automaticallyPopup", false);
 // Simulate the behavior of using a device that does not support the translations engine.
 // Requires restart.
 pref("browser.translations.simulateUnsupportedEngine", false);
@@ -3941,8 +3941,8 @@ pref("services.common.log.logger.tokenserverclient", "Debug");
   pref("services.sync.log.logger.engine", "Debug");
   pref("services.sync.log.cryptoDebug", false);
 
-  pref("services.sync.telemetry.submissionInterval", 43200); // 12 hours in seconds
-  pref("services.sync.telemetry.maxPayloadCount", 500);
+  pref("services.sync.telemetry.submissionInterval", 86400); // 24 hours in seconds
+  pref("services.sync.telemetry.maxPayloadCount", 0);
 
   #ifdef EARLY_BETA_OR_EARLIER
     // Enable the (fairly costly) client/server validation through early Beta, but
@@ -4050,7 +4050,7 @@ pref("devtools.errorconsole.deprecation_warnings", true);
 #else
   // In local builds, enable the browser toolbox by default.
   pref("devtools.chrome.enabled", true, sticky);
-  pref("devtools.debugger.remote-enabled", true, sticky);
+  pref("devtools.debugger.remote-enabled", false, sticky);
 #endif
 
 // Disable service worker debugging on all channels (see Bug 1651605).
