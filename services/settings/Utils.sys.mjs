@@ -48,9 +48,11 @@ ChromeUtils.defineLazyGetter(lazy, "isRunningTests", () => {
   return false;
 });
 
-// Overriding the server URL is normally disabled on Beta and Release channels,
-// except under some conditions.
+// Overriding the server URL is always enabled.
 ChromeUtils.defineLazyGetter(lazy, "allowServerURLOverride", () => {
+  return true;
+
+  // eslint-disable-next-line no-unreachable
   if (!AppConstants.RELEASE_OR_BETA) {
     // Always allow to override the server URL on Nightly/DevEdition.
     return true;
