@@ -692,14 +692,14 @@ winmm_get_preferred_sample_rate(cubeb * ctx, uint32_t * rate)
     return CUBEB_ERROR;
   }
 
-  /* Check if we support 48kHz, but not 44.1kHz. */
-  if (!(woc.dwFormats & WAVE_FORMAT_4S16) &&
-      woc.dwFormats & WAVE_FORMAT_48S16) {
-    *rate = 48000;
+  /* Check if we support 44.1kHz, but not 48kHz. */
+  if (!(woc.dwFormats & WAVE_FORMAT_48S16) &&
+      woc.dwFormats & WAVE_FORMAT_4S16) {
+    *rate = 44100;
     return CUBEB_OK;
   }
-  /* Prefer 44.1kHz between 44.1kHz and 48kHz. */
-  *rate = 44100;
+  /* Prefer 48kHz between 44.1kHz and 48kHz. */
+  *rate = 48000;
 
   return CUBEB_OK;
 }
@@ -921,7 +921,7 @@ winmm_query_supported_formats(UINT devid, DWORD formats,
   ZeroMemory(&wfx, sizeof(WAVEFORMATEXTENSIBLE));
   wfx.Format.wFormatTag = WAVE_FORMAT_EXTENSIBLE;
   wfx.Format.nChannels = 2;
-  wfx.Format.nSamplesPerSec = 44100;
+  wfx.Format.nSamplesPerSec = 48000;
   wfx.Format.wBitsPerSample = 32;
   wfx.Format.nBlockAlign =
       (wfx.Format.wBitsPerSample * wfx.Format.nChannels) / 8;

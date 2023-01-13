@@ -269,7 +269,7 @@ RefPtr<const AudioDeviceSet> CubebDeviceEnumerator::EnumerateAudioDevices(
   RefPtr<AudioDeviceInfo> info = new AudioDeviceInfo(
       nullptr, name, u""_ns, u""_ns, type, CUBEB_DEVICE_STATE_ENABLED,
       CUBEB_DEVICE_PREF_ALL, CUBEB_DEVICE_FMT_ALL, CUBEB_DEVICE_FMT_S16NE,
-      channels, 44100, 44100, 44100, 441, 128);
+      channels, 48000, 48000, 48000, 480, 128);
   devices->AppendElement(std::move(info));
 #else
   RefPtr devices = GetDeviceCollection(
