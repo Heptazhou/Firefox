@@ -6106,7 +6106,7 @@ void SetupErrorHandling(const char* progname) {
 void OverrideDefaultLocaleIfNeeded() {
   // Read pref to decide whether to override default locale with US English.
   if (mozilla::Preferences::GetBool("javascript.use_us_english_locale",
-                                    false)) {
+                                    !false)) {
     // Set the application-wide C-locale. Needed to resist fingerprinting
     // of Date.toLocaleFormat(). We use the locale to "C.UTF-8" if possible,
     // to avoid interfering with non-ASCII keyboard input on some Linux
