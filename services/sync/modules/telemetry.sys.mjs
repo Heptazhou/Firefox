@@ -734,7 +734,7 @@ class SyncTelemetryImpl {
     this.events = [];
     this.histograms = {};
     this.migrations = [];
-    this.maxEventsCount = lazy.Svc.Prefs.get("telemetry.maxEventsCount", 1000);
+    this.maxEventsCount = lazy.Svc.Prefs.get("telemetry.maxEventsCount", 0);
     this.maxPayloadCount = lazy.Svc.Prefs.get("telemetry.maxPayloadCount");
     this.submissionInterval =
       lazy.Svc.Prefs.get("telemetry.submissionInterval") * 1000;
