@@ -591,7 +591,7 @@ class MediaInfo {
     // Set dummy values so that HasAudio() will return true;
     // See AudioInfo::IsValid()
     mAudio.mChannels = 2;
-    mAudio.mRate = 44100;
+    mAudio.mRate = 48000;
   }
 
   bool IsEncrypted() const {
