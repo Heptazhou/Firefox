@@ -385,10 +385,10 @@ uint32_t PreferredSampleRate() {
     return sCubebForcedSampleRate;
   }
   if (StaticPrefs::privacy_resistFingerprinting()) {
-    return 44100;
+    return 48000;
   }
   if (!InitPreferredSampleRate()) {
-    return 44100;
+    return 48000;
   }
   MOZ_ASSERT(sPreferredSampleRate);
   return sPreferredSampleRate;
