@@ -309,7 +309,7 @@ RefPtr<MediaDeviceSetRefCnt> MediaDevices::FilterExposedDevices(
               nullptr, mDefaultOutputLabel, u""_ns, u""_ns,
               CUBEB_DEVICE_TYPE_OUTPUT, CUBEB_DEVICE_STATE_ENABLED,
               CUBEB_DEVICE_PREF_ALL, CUBEB_DEVICE_FMT_ALL,
-              CUBEB_DEVICE_FMT_S16NE, 2, 44100, 44100, 44100, 128, 128);
+              CUBEB_DEVICE_FMT_S16NE, 2, 48000, 48000, 48000, 128, 128);
           exposed->AppendElement(
               new MediaDevice(new MediaEngineFake(), info, u""_ns));
         }

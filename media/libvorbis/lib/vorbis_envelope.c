@@ -283,8 +283,8 @@ long _ve_envelope_search(vorbis_dsp_state *v){
             memset(marker,0,sizeof(*marker)*v->pcm_current);
             fprintf(stderr,"mark! seq=%d, cursor:%fs time:%fs\n",
                     seq,
-                    (totalshift+ve->cursor)/44100.,
-                    (totalshift+j)/44100.);
+                    (totalshift+ve->cursor)/48000.,
+                    (totalshift+j)/48000.);
             _analysis_output_always("pcmL",seq,v->pcm[0],v->pcm_current,0,0,totalshift);
             _analysis_output_always("pcmR",seq,v->pcm[1],v->pcm_current,0,0,totalshift);
 
