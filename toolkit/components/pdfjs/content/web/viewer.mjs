@@ -3644,7 +3644,7 @@ class PDFCursorTools {
 ;// CONCATENATED MODULE: ./web/pdf_document_properties.js
 
 
-const NON_METRIC_LOCALES = ["en-us", "en-lr", "my"];
+const NON_METRIC_LOCALES = [];
 const US_PAGE_NAMES = {
   "8.5x11": "pdfjs-document-properties-page-size-name-letter",
   "8.5x14": "pdfjs-document-properties-page-size-name-legal"
@@ -3775,7 +3775,7 @@ class PDFDocumentProperties {
       };
     }
     const isPortrait = isPortraitOrientation(pageSizeInches),
-      nonMetric = NON_METRIC_LOCALES.includes(this.l10n.getLanguage());
+      nonMetric = false; // NON_METRIC_LOCALES.includes(this.l10n.getLanguage());
     let sizeInches = {
       width: Math.round(pageSizeInches.width * 100) / 100,
       height: Math.round(pageSizeInches.height * 100) / 100
@@ -3794,9 +3794,9 @@ class PDFDocumentProperties {
         width: Math.round(sizeMillimeters.width),
         height: Math.round(sizeMillimeters.height)
       };
-      if (Math.abs(exactMillimeters.width - intMillimeters.width) < 0.1 && Math.abs(exactMillimeters.height - intMillimeters.height) < 0.1) {
+      if (Math.abs(exactMillimeters.width - intMillimeters.width) < 1.0 && Math.abs(exactMillimeters.height - intMillimeters.height) < 1.0) {
         nameId = getPageName(intMillimeters, isPortrait, METRIC_PAGE_NAMES);
-        if (nameId) {
+        if (false) {
           sizeInches = {
             width: Math.round(intMillimeters.width / 25.4 * 100) / 100,
             height: Math.round(intMillimeters.height / 25.4 * 100) / 100
