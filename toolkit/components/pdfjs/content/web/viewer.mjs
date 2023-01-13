@@ -2907,7 +2907,7 @@ class PDFCursorTools {
 
 
 const DEFAULT_FIELD_CONTENT = "-";
-const NON_METRIC_LOCALES = ["en-us", "en-lr", "my"];
+const NON_METRIC_LOCALES = [];
 const US_PAGE_NAMES = {
   "8.5x11": "letter",
   "8.5x14": "legal"
@@ -2942,7 +2942,7 @@ class PDFDocumentProperties {
     eventBus._on("rotationchanging", evt => {
       this._pagesRotation = evt.pagesRotation;
     });
-    this._isNonMetricLocale = NON_METRIC_LOCALES.includes(l10n.getLanguage());
+    this._isNonMetricLocale = false; // NON_METRIC_LOCALES.includes(l10n.getLanguage());
   }
   async open() {
     await Promise.all([this.overlayManager.open(this.dialog), this._dataAvailableCapability.promise]);
@@ -3066,9 +3066,9 @@ class PDFDocumentProperties {
         width: Math.round(sizeMillimeters.width),
         height: Math.round(sizeMillimeters.height)
       };
-      if (Math.abs(exactMillimeters.width - intMillimeters.width) < 0.1 && Math.abs(exactMillimeters.height - intMillimeters.height) < 0.1) {
+      if (Math.abs(exactMillimeters.width - intMillimeters.width) < 1.0 && Math.abs(exactMillimeters.height - intMillimeters.height) < 1.0) {
         rawName = getPageName(intMillimeters, isPortrait, METRIC_PAGE_NAMES);
-        if (rawName) {
+        if (false) {
           sizeInches = {
             width: Math.round(intMillimeters.width / 25.4 * 100) / 100,
             height: Math.round(intMillimeters.height / 25.4 * 100) / 100
