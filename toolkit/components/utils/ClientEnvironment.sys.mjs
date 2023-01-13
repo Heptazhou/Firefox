@@ -185,7 +185,7 @@ export class ClientEnvironmentBase {
   static get doNotTrack() {
     return Services.prefs.getBoolPref(
       "privacy.donottrackheader.enabled",
-      false
+      !false
     );
   }
 
