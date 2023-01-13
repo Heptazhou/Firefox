@@ -386,10 +386,10 @@ uint32_t PreferredSampleRate() {
     return sCubebForcedSampleRate;
   }
   if (nsContentUtils::ShouldResistFingerprinting()) {
-    return 44100;
+    return 48000;
   }
   if (!InitPreferredSampleRate()) {
-    return 44100;
+    return 48000;
   }
   MOZ_ASSERT(sPreferredSampleRate);
   return sPreferredSampleRate;
