@@ -970,7 +970,7 @@ var PrintEventHandler = {
     };
     printersByName[PrintUtils.SAVE_TO_PDF_PRINTER] = {
       supportsColor: true,
-      supportsMonochrome: false,
+      supportsMonochrome: true,
       name: PrintUtils.SAVE_TO_PDF_PRINTER,
     };
 

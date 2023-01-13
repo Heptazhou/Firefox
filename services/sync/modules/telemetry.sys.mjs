@@ -699,7 +699,7 @@ class SyncTelemetryImpl {
     this.migrations = [];
     this.maxEventsCount = lazy.Svc.PrefBranch.getIntPref(
       "telemetry.maxEventsCount",
-      1000
+      0
     );
     this.maxPayloadCount = lazy.Svc.PrefBranch.getIntPref(
       "telemetry.maxPayloadCount"
