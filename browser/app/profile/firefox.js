@@ -48,7 +48,7 @@ pref("extensions.recommendations.privacyPolicyUrl", "https://www.mozilla.org/pri
 // The URL for Firefox Color, recommended on the theme page in about:addons.
 pref("extensions.recommendations.themeRecommendationUrl", "https://color.firefox.com/?utm_source=firefox-browser&utm_medium=firefox-browser&utm_content=theme-footer-link");
 
-pref("extensions.update.autoUpdateDefault", true);
+pref("extensions.update.autoUpdateDefault", false);
 
 // Check AUS for system add-on updates.
 pref("extensions.systemAddon.update.url", "https://aus5.mozilla.org/update/3/SystemAddons/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/%DISTRIBUTION%/%DISTRIBUTION_VERSION%/update.xml");
@@ -151,7 +151,7 @@ pref("app.update.notifyDuringDownload", false);
 
 // If set to true, the Update Service will apply updates in the background
 // when it finishes downloading them.
-pref("app.update.staging.enabled", true);
+pref("app.update.staging.enabled", false);
 
 // Update service URL:
 // app.update.url was removed in Bug 1568994
@@ -173,7 +173,7 @@ pref("app.update.staging.enabled", true);
   pref("app.update.BITS.enabled", true);
 #endif
 
-pref("app.update.langpack.enabled", true);
+pref("app.update.langpack.enabled", false);
 
 #if defined(MOZ_UPDATE_AGENT)
   pref("app.update.background.loglevel", "error");
@@ -206,7 +206,7 @@ pref("app.update.langpack.enabled", true);
 //  extensions.{GUID}.update.url
 //  .. etc ..
 //
-pref("extensions.update.enabled", true);
+pref("extensions.update.enabled", false);
 pref("extensions.update.url", "https://versioncheck.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
 pref("extensions.update.background.url", "https://versioncheck-bg.addons.mozilla.org/update/VersionCheck.php?reqVersion=%REQ_VERSION%&id=%ITEM_ID%&version=%ITEM_VERSION%&maxAppVersion=%ITEM_MAXAPPVERSION%&status=%ITEM_STATUS%&appID=%APP_ID%&appVersion=%APP_VERSION%&appOS=%APP_OS%&appABI=%APP_ABI%&locale=%APP_LOCALE%&currentAppVersion=%CURRENT_APP_VERSION%&updateType=%UPDATE_TYPE%&compatMode=%COMPATIBILITY_MODE%");
 pref("extensions.update.interval", 86400);  // Check for updates to Extensions and
@@ -249,7 +249,7 @@ pref("browser.fixup.domainsuffixwhitelist.local", true);
 // search string, that may contain a valid host, to a search engine.
 pref("browser.fixup.dns_first_for_single_words", false);
 
-#ifdef UNIX_BUT_NOT_MAC
+#ifndef XP_MACOSX
   pref("general.autoScroll", false);
 #else
   pref("general.autoScroll", true);
@@ -288,7 +288,7 @@ pref("browser.shell.setDefaultPDFHandler.onlyReplaceBrowsers", true);
 
 // 0 = blank, 1 = home (browser.startup.homepage), 2 = last visited page, 3 = resume previous browser session
 // The behavior of option 3 is detailed at: http://wiki.mozilla.org/Session_Restore
-pref("browser.startup.page",                1);
+pref("browser.startup.page",                3);
 pref("browser.startup.homepage",            "about:home");
 #ifdef NIGHTLY_BUILD
 pref("browser.startup.homepage.abouthome_cache.enabled", true);
@@ -331,7 +331,7 @@ pref("browser.warnOnQuit", true);
 
 // Whether to warn when quitting when using the shortcut key.
 #if defined(XP_WIN)
-  pref("browser.warnOnQuitShortcut", false);
+  pref("browser.warnOnQuitShortcut", true);
 #else
   pref("browser.warnOnQuitShortcut", true);
 #endif
@@ -393,7 +393,7 @@ pref("browser.urlbar.suggest.remotetab",            true);
 pref("browser.urlbar.suggest.searches",             true);
 pref("browser.urlbar.suggest.topsites",             true);
 pref("browser.urlbar.suggest.engines",              true);
-pref("browser.urlbar.suggest.calculator",           false);
+pref("browser.urlbar.suggest.calculator",           true);
 
 #if defined(EARLY_BETA_OR_EARLIER)
   // Enable QuickActions and its urlbar search mode button.
@@ -466,7 +466,7 @@ pref("browser.urlbar.quicksuggest.blockingEnabled", false);
 #ifdef NIGHTLY_BUILD
 pref("browser.urlbar.unitConversion.enabled", true);
 #else
-pref("browser.urlbar.unitConversion.enabled", false);
+pref("browser.urlbar.unitConversion.enabled", true);
 #endif
 
 // Whether to show search suggestions before general results like history and
@@ -499,11 +499,11 @@ pref("browser.urlbar.sponsoredTopSites", false);
 
 // Global toggle for whether the show search terms feature
 // can be used at all, and enabled/disabled by the user.
-pref("browser.urlbar.showSearchTerms.featureGate", false);
+pref("browser.urlbar.showSearchTerms.featureGate", true);
 
 // If true, show the search term in the Urlbar while on
 // a default search engine results page.
-pref("browser.urlbar.showSearchTerms.enabled", true);
+pref("browser.urlbar.showSearchTerms.enabled", false);
 
 // Controls the empty search behavior in Search Mode:
 //  0 - Show nothing
@@ -677,11 +677,11 @@ pref("permissions.manager.defaultsUrl", "resource://app/defaults/permissions");
 
 // Set default fallback values for site permissions we want
 // the user to be able to globally change.
-pref("permissions.default.camera", 0);
-pref("permissions.default.microphone", 0);
-pref("permissions.default.geo", 0);
-pref("permissions.default.xr", 0);
-pref("permissions.default.desktop-notification", 0);
+pref("permissions.default.camera", 2);
+pref("permissions.default.microphone", 2);
+pref("permissions.default.geo", 2);
+pref("permissions.default.xr", 2);
+pref("permissions.default.desktop-notification", 2);
 pref("permissions.default.shortcuts", 0);
 
 pref("permissions.desktop-notification.postPrompt.enabled", true);
@@ -716,7 +716,7 @@ pref("browser.link.open_newwindow.restriction", 2);
 
 // Tabbed browser
 pref("browser.tabs.closeTabByDblclick", false);
-pref("browser.tabs.closeWindowWithLastTab", true);
+pref("browser.tabs.closeWindowWithLastTab", false);
 pref("browser.tabs.allowTabDetach", true);
 // Open related links to a tab, e.g., link in current tab, at next to the
 // current tab if |insertRelatedAfterCurrent| is true.  Otherwise, always
@@ -727,17 +727,17 @@ pref("browser.tabs.insertRelatedAfterCurrent", true);
 // for non-related links. Note that if this is set to true, it will trump
 // the value of browser.tabs.insertRelatedAfterCurrent.
 pref("browser.tabs.insertAfterCurrent", false);
-pref("browser.tabs.warnOnClose", false);
+pref("browser.tabs.warnOnClose", true);
 pref("browser.tabs.warnOnCloseOtherTabs", true);
 pref("browser.tabs.warnOnOpen", true);
-pref("browser.tabs.maxOpenBeforeWarn", 15);
+pref("browser.tabs.maxOpenBeforeWarn", 10);
 pref("browser.tabs.loadInBackground", true);
 pref("browser.tabs.opentabfor.middleclick", true);
 pref("browser.tabs.loadDivertedInBackground", false);
 pref("browser.tabs.loadBookmarksInBackground", false);
 pref("browser.tabs.loadBookmarksInTabs", false);
-pref("browser.tabs.tabClipWidth", 140);
-pref("browser.tabs.tabMinWidth", 76);
+pref("browser.tabs.tabClipWidth", 180);
+pref("browser.tabs.tabMinWidth", 130);
 // Users running in any of the following language codes will have the
 // secondary text on tabs hidden due to size constraints and readability
 // of the text at small font sizes.
@@ -835,7 +835,7 @@ pref("browser.tabs.min_inactive_duration_before_unload", 600000);
   pref("browser.lowMemoryResponseOnWarn", false);
 #endif
 
-pref("browser.ctrlTab.sortByRecentlyUsed", false);
+pref("browser.ctrlTab.sortByRecentlyUsed", true);
 
 // By default, do not export HTML at shutdown.
 // If true, at shutdown the bookmarks in your menu and toolbar will
@@ -1053,7 +1053,7 @@ pref("browser.preferences.search", true);
 #if defined(NIGHTLY_BUILD)
 pref("browser.preferences.experimental", true);
 #else
-pref("browser.preferences.experimental", false);
+pref("browser.preferences.experimental", true);
 #endif
 pref("browser.preferences.moreFromMozilla", true);
 pref("browser.preferences.experimental.hidden", false);
@@ -1501,7 +1501,7 @@ pref("prompts.defaultModalType", 3);
 
 pref("browser.topsites.useRemoteSetting", true);
 // Fetch sponsored Top Sites from Mozilla Tiles Service (Contile)
-pref("browser.topsites.contile.enabled", true);
+pref("browser.topsites.contile.enabled", false);
 pref("browser.topsites.contile.endpoint", "https://contile.services.mozilla.com/v1/tiles");
 
 // The base URL for the Quick Suggest anonymizing proxy. To make a request to
@@ -1554,10 +1554,10 @@ pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", true)
 
 // The pref that controls if ASRouter uses the remote fluent files.
 // It's enabled by default, but could be disabled to force ASRouter to use the local files.
-pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", true);
+pref("browser.newtabpage.activity-stream.asrouter.useRemoteL10n", false);
 
 // These prefs control if Discovery Stream is enabled.
-pref("browser.newtabpage.activity-stream.discoverystream.enabled", true);
+pref("browser.newtabpage.activity-stream.discoverystream.enabled", false);
 pref("browser.newtabpage.activity-stream.discoverystream.hardcoded-basic-layout", false);
 pref("browser.newtabpage.activity-stream.discoverystream.hybridLayout.enabled", false);
 pref("browser.newtabpage.activity-stream.discoverystream.hideCardBackground.enabled", false);
@@ -1997,10 +1997,10 @@ pref("browser.contentblocking.cfr-milestone.milestone-achieved", 0);
 pref("browser.contentblocking.cfr-milestone.milestones", "[1000, 5000, 10000, 25000, 50000, 100000, 250000, 314159, 500000, 750000, 1000000, 1250000, 1500000, 1750000, 2000000, 2250000, 2500000, 8675309]");
 
 // Enables the new Protections Panel.
-#ifdef NIGHTLY_BUILD
-  pref("browser.protections_panel.enabled", true);
-  pref("browser.protections_panel.infoMessage.seen", false);
-#endif
+// #ifdef NIGHTLY_BUILD
+pref("browser.protections_panel.enabled", true);
+pref("browser.protections_panel.infoMessage.seen", true);
+// #endif
 
 // Always enable newtab segregation using containers
 pref("privacy.usercontext.about_newtab_segregation.enabled", true);
@@ -2252,7 +2252,7 @@ pref("app.normandy.onsync_skew_sec", 600);
 //      the app and browser.
 #if defined(RELEASE_OR_BETA) && !defined(MOZ_DEV_EDITION)
   pref("intl.multilingual.enabled", true);
-  pref("intl.multilingual.downloadEnabled", true);
+  pref("intl.multilingual.downloadEnabled", false);
   pref("intl.multilingual.liveReload", true);
   pref("intl.multilingual.liveReloadBidirectional", false);
   pref("intl.multilingual.aboutWelcome.languageMismatchEnabled", true);
@@ -2414,7 +2414,7 @@ pref("devtools.layout.grid.opened", true);
 #if defined(NIGHTLY_BUILD)
   pref("devtools.layout.boxmodel.highlightProperty", true);
 #else
-  pref("devtools.layout.boxmodel.highlightProperty", false);
+  pref("devtools.layout.boxmodel.highlightProperty", true);
 #endif
 
 // By how many times eyedropper will magnify pixels
@@ -2572,13 +2572,13 @@ pref("devtools.netmonitor.persistlog", false);
 // Web Console timestamp: |true| if you want the logs and instructions
 // in the Web Console to display a timestamp, or |false| to not display
 // any timestamps.
-pref("devtools.webconsole.timestampMessages", false);
+pref("devtools.webconsole.timestampMessages", true);
 
 // Enable the webconsole sidebar toggle in Nightly builds.
 #if defined(NIGHTLY_BUILD)
   pref("devtools.webconsole.sidebarToggle", true);
 #else
-  pref("devtools.webconsole.sidebarToggle", false);
+  pref("devtools.webconsole.sidebarToggle", true);
 #endif
 
 // Saved editor mode state in the console.
@@ -2614,8 +2614,8 @@ pref("devtools.hud.loglimit", 10000);
 // - autoclosebrackets: whether to permit automatic bracket/quote closing.
 // - detectindentation: whether to detect the indentation from the file
 // - enableCodeFolding: Whether to enable code folding or not.
-pref("devtools.editor.tabsize", 2);
-pref("devtools.editor.expandtab", true);
+pref("devtools.editor.tabsize", 4);
+pref("devtools.editor.expandtab", false);
 pref("devtools.editor.keymap", "default");
 pref("devtools.editor.autoclosebrackets", true);
 pref("devtools.editor.detectindentation", true);
