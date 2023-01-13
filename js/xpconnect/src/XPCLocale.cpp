@@ -133,7 +133,7 @@ bool xpc_LocalizeRuntime(JSRuntime* rt) {
 
   // Check a pref to see if we should use US English locale regardless
   // of the system locale.
-  if (Preferences::GetBool("javascript.use_us_english_locale", false)) {
+  if (Preferences::GetBool("javascript.use_us_english_locale", true)) {
     return JS_SetDefaultLocale(rt, "en-US");
   }
 
