@@ -13,7 +13,7 @@
 #include "nsIDocumentActivity.h"
 
 // Max size for allowing queue encoded data in memory
-#define MAX_ALLOW_MEMORY_BUFFER 1024000
+#define MAX_ALLOW_MEMORY_BUFFER 8388608
 namespace mozilla {
 
 class AudioNodeTrack;
