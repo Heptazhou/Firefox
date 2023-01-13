@@ -3788,7 +3788,7 @@ BrowserGlue.prototype = {
       if (
         Services.prefs.getStringPref(
           "browser.contentblocking.category",
-          "standard"
+          "strict"
         ) == "custom"
       ) {
         let shouldMigrate = true;
@@ -3800,7 +3800,7 @@ BrowserGlue.prototype = {
         if (shouldMigrate) {
           Services.prefs.setStringPref(
             "browser.contentblocking.category",
-            "standard"
+            "strict"
           );
         }
       }

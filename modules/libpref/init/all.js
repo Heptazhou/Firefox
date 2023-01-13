@@ -88,7 +88,7 @@ pref("security.crash_tracking.js_load_1.maxCrashes", 0);
 
 pref("general.useragent.compatMode.firefox", false);
 
-pref("general.config.obscure_value", 13); // for MCD .cfg files
+pref("general.config.obscure_value", 0); // for MCD .cfg files
 
 #ifndef MOZ_BUILD_APP_IS_BROWSER
 pref("general.warnOnAboutConfig", true);
@@ -1672,7 +1672,7 @@ pref("intl.regional_prefs.use_os_locales",  false);
 // for ISO-8859-1
 pref("intl.fallbackCharsetList.ISO-8859-1", "windows-1252");
 pref("font.language.group",                 "chrome://global/locale/intl.properties");
-pref("font.cjk_pref_fallback_order",        "zh-cn,zh-hk,zh-tw,ja,ko");
+pref("font.cjk_pref_fallback_order",        "zh-cn,zh-tw,zh-hk,ja,ko");
 
 pref("intl.uidirection", -1); // -1 to set from locale; 0 for LTR; 1 for RTL
 
@@ -3964,8 +3964,8 @@ pref("services.common.log.logger.tokenserverclient", "Debug");
   pref("services.sync.log.logger.engine", "Debug");
   pref("services.sync.log.cryptoDebug", false);
 
-  pref("services.sync.telemetry.submissionInterval", 43200); // 12 hours in seconds
-  pref("services.sync.telemetry.maxPayloadCount", 500);
+  pref("services.sync.telemetry.submissionInterval", 86400); // 24 hours in seconds
+  pref("services.sync.telemetry.maxPayloadCount", 0);
 
   #ifdef EARLY_BETA_OR_EARLIER
     // Enable the (fairly costly) client/server validation through early Beta, but
