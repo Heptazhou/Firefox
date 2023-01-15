@@ -12146,8 +12146,8 @@ class PopupElement {
       modificationDate.textContent = "{{date}}, {{time}}";
       modificationDate.dataset.l10nId = "annotation_date_string";
       modificationDate.dataset.l10nArgs = JSON.stringify({
-        date: dateObject.toLocaleDateString(),
-        time: dateObject.toLocaleTimeString()
+        date: dateObject.toLocaleDateString("sv"),
+        time: dateObject.toLocaleTimeString("sv")
       });
       popup.append(modificationDate);
     }
