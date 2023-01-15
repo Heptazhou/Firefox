@@ -168,7 +168,7 @@ export class OpenSearchEngine extends SearchEngine {
 
       // Keep track of the last modified date, so that we can make conditional
       // server requests for future updates.
-      this.setAttr("updatelastmodified", new Date().toUTCString());
+      this.setAttr("updatelastmodified", new Date().toISOString());
     }
 
     if (this._iconUpdateURL) {
