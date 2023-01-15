@@ -123,8 +123,8 @@ async function setDetails() {
   let index = parseInt(document.getElementById("nicknames").value);
   let cert = certArray.queryElementAt(index, Ci.nsIX509Cert);
 
-  const formatter = new Intl.DateTimeFormat(undefined, {
-    dateStyle: "medium",
+  const formatter = new Intl.DateTimeFormat("sv", {
+    dateStyle: "short",
     timeStyle: "long",
   });
   let detailLines = [
