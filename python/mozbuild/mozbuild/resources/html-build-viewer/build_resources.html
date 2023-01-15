@@ -334,8 +334,8 @@ function updateResourcesGraph() {
   }
   renderTimeline("tiers", currentResources);
   document.getElementById("wall_time").textContent = Math.round(currentResources.duration * 100) / 100;
-  document.getElementById("start_date").textContent = currentResources.startDate.toLocaleString();
-  document.getElementById("end_date").textContent = currentResources.endDate.toLocaleString();
+  document.getElementById("start_date").textContent = currentResources.startDate.toLocaleString("sv");
+  document.getElementById("end_date").textContent = currentResources.endDate.toLocaleString("sv");
   document.getElementById("cpu_percent").textContent = Math.round(currentResources.cpuPercent * 100) / 100;
   document.getElementById("write_bytes").textContent = currentResources.ioTotal["write_bytes"];
   document.getElementById("read_bytes").textContent = currentResources.ioTotal["read_bytes"];
