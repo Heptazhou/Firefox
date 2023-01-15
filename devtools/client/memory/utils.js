@@ -43,8 +43,8 @@ exports.getSnapshotTitle = function (snapshot) {
   }
 
   const date = new Date(snapshot.creationTime / 1000);
-  return date.toLocaleTimeString(void 0, {
-    year: "2-digit",
+  return date.toLocaleTimeString("sv", {
+    year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour12: false,

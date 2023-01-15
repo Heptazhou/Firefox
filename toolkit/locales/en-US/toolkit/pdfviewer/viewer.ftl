@@ -131,7 +131,7 @@ pdfjs-document-properties-modification-date = Modification Date:
 
 # Variables:
 #   $dateObj (Date) - the creation/modification date and time of the PDF file
-pdfjs-document-properties-date-time-string = { DATETIME($dateObj, dateStyle: "short", timeStyle: "medium") }
+pdfjs-document-properties-date-time-string = { $dateObj }
 
 pdfjs-document-properties-creator = Creator:
 pdfjs-document-properties-producer = PDF Producer:
@@ -284,7 +284,7 @@ pdfjs-rendering-error = An error occurred while rendering the page.
 
 # Variables:
 #   $dateObj (Date) - the modification date and time of the annotation
-pdfjs-annotation-date-time-string = { DATETIME($dateObj, dateStyle: "short", timeStyle: "medium") }
+pdfjs-annotation-date-time-string = { $dateObj }
 
 # .alt: This is used as a tooltip.
 # Variables:
