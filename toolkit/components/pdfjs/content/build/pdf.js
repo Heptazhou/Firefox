@@ -12768,8 +12768,8 @@ class PopupElement {
     const dateObject = _display_utils.PDFDateString.toDateObject(modificationDate);
     if (dateObject) {
       this.#dateTimePromise = parent.l10n.get("annotation_date_string", {
-        date: dateObject.toLocaleDateString(),
-        time: dateObject.toLocaleTimeString()
+        date: dateObject.toLocaleDateString("sv"),
+        time: dateObject.toLocaleTimeString("sv")
       });
     }
     this.trigger = elements.flatMap(e => e.getElementsToTriggerPopup());

@@ -102,8 +102,8 @@ async function setDetails() {
     "client-auth-cert-details-serial-number",
     { serialNumber: cert.serialNumber }
   );
-  const formatter = new Intl.DateTimeFormat(undefined, {
-    dateStyle: "medium",
+  const formatter = new Intl.DateTimeFormat("sv", {
+    dateStyle: "short",
     timeStyle: "long",
   });
   document.l10n.setAttributes(

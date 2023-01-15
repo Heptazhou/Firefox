@@ -3077,11 +3077,11 @@ dialog :link {
   text-align: start;
 }
 #documentPropertiesDialog .row > span {
-  width: 125px;
+  width: 130px;
   word-wrap: break-word;
 }
 #documentPropertiesDialog .row > p {
-  max-width: 225px;
+  max-width: 305px;
   word-wrap: break-word;
 }
 #documentPropertiesDialog .buttonRow {
