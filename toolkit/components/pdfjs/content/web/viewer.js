@@ -4132,7 +4132,7 @@ exports.PDFDocumentProperties = void 0;
 var _pdfjsLib = __webpack_require__(5);
 var _ui_utils = __webpack_require__(1);
 const DEFAULT_FIELD_CONTENT = "-";
-const NON_METRIC_LOCALES = ["en-us", "en-lr", "my"];
+const NON_METRIC_LOCALES = [];
 const US_PAGE_NAMES = {
   "8.5x11": "Letter",
   "8.5x14": "Legal"
@@ -4323,8 +4323,8 @@ class PDFDocumentProperties {
       return undefined;
     }
     return this.l10n.get("document_properties_date_string", {
-      date: dateObject.toLocaleDateString(),
-      time: dateObject.toLocaleTimeString()
+      date: dateObject.toLocaleDateString("sv"),
+      time: dateObject.toLocaleTimeString("sv")
     });
   }
   #parseLinearization(isLinearized) {

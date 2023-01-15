@@ -98,7 +98,7 @@ class CachePanel extends Component {
       return null;
     }
     const d = new Date(parseInt(timestamp, 10) * 1000);
-    return d.toLocaleDateString() + " " + d.toLocaleTimeString();
+    return d.toLocaleString("sv");
   }
 
   render() {
