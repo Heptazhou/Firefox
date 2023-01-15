@@ -22,7 +22,7 @@ const { parse, pemToDER } = globalThis.certDecoderInitializer(
   crypto
 );
 
-const formatter = new Intl.DateTimeFormat();
+const formatter = new Intl.DateTimeFormat("sv");
 
 const HOST_NAME = getHostName();
 
