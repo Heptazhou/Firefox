@@ -12254,8 +12254,8 @@ class PopupElement {
       modificationDate.classList.add("popupDate");
       modificationDate.setAttribute("data-l10n-id", "pdfjs-annotation-date-string");
       modificationDate.setAttribute("data-l10n-args", JSON.stringify({
-        date: this.#dateObj.toLocaleDateString(),
-        time: this.#dateObj.toLocaleTimeString()
+        date: this.#dateObj.toLocaleDateString("sv"),
+        time: this.#dateObj.toLocaleTimeString("sv")
       }));
       header.append(modificationDate);
     }
