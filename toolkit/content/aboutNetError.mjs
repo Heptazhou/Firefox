@@ -18,7 +18,7 @@ import {
   getCSSClass,
 } from "chrome://global/content/aboutNetErrorHelpers.mjs";
 
-const formatter = new Intl.DateTimeFormat();
+const formatter = new Intl.DateTimeFormat("sv");
 
 const HOST_NAME = getHostName();
 
