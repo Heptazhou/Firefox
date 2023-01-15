@@ -2316,7 +2316,7 @@ class PDFCursorTools {
 
 
 const DEFAULT_FIELD_CONTENT = "-";
-const NON_METRIC_LOCALES = ["en-us", "en-lr", "my"];
+const NON_METRIC_LOCALES = [];
 const US_PAGE_NAMES = {
   "8.5x11": "Letter",
   "8.5x14": "Legal"
@@ -2351,10 +2351,10 @@ class PDFDocumentProperties {
     eventBus._on("rotationchanging", evt => {
       this._pagesRotation = evt.pagesRotation;
     });
-    this._isNonMetricLocale = true;
-    l10n.getLanguage().then(locale => {
-      this._isNonMetricLocale = NON_METRIC_LOCALES.includes(locale);
-    });
+    this._isNonMetricLocale = !true;
+    // l10n.getLanguage().then(locale => {
+    //   this._isNonMetricLocale = NON_METRIC_LOCALES.includes(locale);
+    // });
   }
   async open() {
     await Promise.all([this.overlayManager.open(this.dialog), this._dataAvailableCapability.promise]);
@@ -2478,9 +2478,9 @@ class PDFDocumentProperties {
         width: Math.round(sizeMillimeters.width),
         height: Math.round(sizeMillimeters.height)
       };
-      if (Math.abs(exactMillimeters.width - intMillimeters.width) < 0.1 && Math.abs(exactMillimeters.height - intMillimeters.height) < 0.1) {
+      if (Math.abs(exactMillimeters.width - intMillimeters.width) < 1.0 && Math.abs(exactMillimeters.height - intMillimeters.height) < 1.0) {
         rawName = getPageName(intMillimeters, isPortrait, METRIC_PAGE_NAMES);
-        if (rawName) {
+        if (false) {
           sizeInches = {
             width: Math.round(intMillimeters.width / 25.4 * 100) / 100,
             height: Math.round(intMillimeters.height / 25.4 * 100) / 100
@@ -2492,7 +2492,7 @@ class PDFDocumentProperties {
     const [{
       width,
       height
-    }, unit, name, orientation] = await Promise.all([this._isNonMetricLocale ? sizeInches : sizeMillimeters, this.l10n.get(`document_properties_page_size_unit_${this._isNonMetricLocale ? "inches" : "millimeters"}`), rawName && this.l10n.get(`document_properties_page_size_name_${rawName.toLowerCase()}`), this.l10n.get(`document_properties_page_size_orientation_${isPortrait ? "portrait" : "landscape"}`)]);
+    }, unit, name, orientation] = await Promise.all([this._isNonMetricLocale ? sizeInches : sizeMillimeters, this.l10n.get(`document_properties_page_size_unit_${this._isNonMetricLocale ? "inches" : "millimeters"}`), rawName && this.l10n.get(`document_properties_page_size_name_full_${rawName.toLowerCase()}`), this.l10n.get(`document_properties_page_size_orientation_${isPortrait ? "portrait" : "landscape"}`)]);
     return this.l10n.get(`document_properties_page_size_dimension_${name ? "name_" : ""}string`, {
       width: width.toLocaleString(),
       height: height.toLocaleString(),
@@ -2507,8 +2507,8 @@ class PDFDocumentProperties {
       return undefined;
     }
     return this.l10n.get("document_properties_date_string", {
-      date: dateObject.toLocaleDateString(),
-      time: dateObject.toLocaleTimeString()
+      date: dateObject.toLocaleDateString("sv"),
+      time: dateObject.toLocaleTimeString("sv")
     });
   }
   #parseLinearization(isLinearized) {
@@ -5966,10 +5966,10 @@ const DEFAULT_L10N_STRINGS = {
   document_properties_page_size_unit_millimeters: "mm",
   document_properties_page_size_orientation_portrait: "portrait",
   document_properties_page_size_orientation_landscape: "landscape",
-  document_properties_page_size_name_a3: "A3",
-  document_properties_page_size_name_a4: "A4",
-  document_properties_page_size_name_letter: "Letter",
-  document_properties_page_size_name_legal: "Legal",
+  document_properties_page_size_name_full_a3: "29.7 × 42 cm, A3",
+  document_properties_page_size_name_full_a4: "21 × 29.7 cm, A4",
+  document_properties_page_size_name_full_letter: "8.5 × 11 in, Letter",
+  document_properties_page_size_name_full_legal: "8.5 × 14 in, Legal",
   document_properties_page_size_dimension_string: "{{width}} × {{height}} {{unit}} ({{orientation}})",
   document_properties_page_size_dimension_name_string: "{{width}} × {{height}} {{unit}} ({{name}}, {{orientation}})",
   document_properties_linearized_yes: "Yes",
