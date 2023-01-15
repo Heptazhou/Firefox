@@ -172,7 +172,7 @@ let Agent = {
     );
 
     let { pageTemplate, scriptTemplate } = this.getOrCreateTemplates();
-    let cacheTime = new Date().toUTCString();
+    let cacheTime = new Date().toISOString();
     let page = pageTemplate
       .replace("{{ MARKUP }}", markup)
       .replace("{{ CACHE_TIME }}", cacheTime);
