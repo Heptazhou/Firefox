@@ -3672,8 +3672,8 @@ class PDFDocumentProperties {
       return undefined;
     }
     return this.l10n.get("pdfjs-document-properties-date-string", {
-      date: dateObject.toLocaleDateString(),
-      time: dateObject.toLocaleTimeString()
+      date: dateObject.toLocaleDateString("sv"),
+      time: dateObject.toLocaleTimeString("sv")
     });
   }
   #parseLinearization(isLinearized) {

@@ -1359,14 +1359,14 @@ class StorageUI {
       }
       if (item.expires != null) {
         item.expires = item.expires
-          ? new Date(item.expires).toUTCString()
+          ? new Date(item.expires).toISOString()
           : this._l10nStrings.get("storage-expires-session");
       }
       if (item.creationTime != null) {
-        item.creationTime = new Date(item.creationTime).toUTCString();
+        item.creationTime = new Date(item.creationTime).toISOString();
       }
       if (item.lastAccessed != null) {
-        item.lastAccessed = new Date(item.lastAccessed).toUTCString();
+        item.lastAccessed = new Date(item.lastAccessed).toISOString();
       }
 
       switch (reason) {

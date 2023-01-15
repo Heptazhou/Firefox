@@ -93,7 +93,7 @@ export class UnitConverterTimezone {
     }
 
     const inputDate = new Date();
-    let isMeridiemNeeded = false;
+    // let isMeridiemNeeded = false;
     if (inputTime === KEYWORD_NOW) {
       inputDate.setUTCHours(inputDate.getHours());
       inputDate.setUTCMinutes(inputDate.getMinutes());
@@ -111,7 +111,7 @@ export class UnitConverterTimezone {
         inputAMPM === "pm" && inputHours < 12 ? 12 : 0;
       inputDate.setUTCHours(inputHours + inputMeridianHourShift);
       inputDate.setUTCMinutes(inputMinutes);
-      isMeridiemNeeded = !!inputAMPM;
+      // isMeridiemNeeded = !!inputAMPM;
     }
 
     const inputOffset = inputTimezone
@@ -133,9 +133,9 @@ export class UnitConverterTimezone {
       outputDate.getUTCMinutes() - inputOffset + outputOffset
     );
 
-    const time = new Intl.DateTimeFormat("en-US", {
+    const time = new Intl.DateTimeFormat("sv", {
       timeStyle: "short",
-      hour12: isMeridiemNeeded,
+      // hour12: isMeridiemNeeded,
       timeZone: "UTC",
     }).format(outputDate);
 
