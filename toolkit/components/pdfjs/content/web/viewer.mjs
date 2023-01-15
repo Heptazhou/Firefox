@@ -3831,7 +3831,7 @@ class PDFDocumentProperties {
   async #parseDate(inputDate) {
     const dateObj = PDFDateString.toDateObject(inputDate);
     return dateObj ? this.#getL10nStr("date-time-string", {
-      dateObj
+      dateObj: dateObj.toLocaleString("sv") + (dateObj.getTimezoneOffset() ? "" : " UTC")
     }) : undefined;
   }
   #parseLinearization(isLinearized) {

@@ -753,15 +753,15 @@ export class PictureInPictureToggleChild extends JSWindowActorChild {
 
     lazy.logConsole.debug(
       "Toggle duration experiment - first time toggle seen on:",
-      new Date(firstSeenStartSeconds * 1000).toLocaleDateString()
+      new Date(firstSeenStartSeconds * 1000).toLocaleDateString("sv")
     );
     lazy.logConsole.debug(
       "Toggle duration experiment - first time toggle will change on:",
-      new Date(firstSeenEndSeconds * 1000).toLocaleDateString()
+      new Date(firstSeenEndSeconds * 1000).toLocaleDateString("sv")
     );
     lazy.logConsole.debug(
       "Toggle duration experiment - current date:",
-      new Date(currentDateSeconds * 1000).toLocaleDateString()
+      new Date(currentDateSeconds * 1000).toLocaleDateString("sv")
     );
 
     if (currentDateSeconds >= firstSeenEndSeconds) {
