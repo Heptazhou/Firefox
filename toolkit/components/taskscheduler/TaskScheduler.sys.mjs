@@ -51,7 +51,7 @@ export var TaskScheduler = {
   MIN_INTERVAL_SECONDS: 1800,
 
   /**
-   * Create a scheduled task that will run a command indepedent of the application.
+   * Create a scheduled task that will run a command independent of the application.
    *
    * It will run every intervalSeconds seconds, starting intervalSeconds seconds from now.
    *

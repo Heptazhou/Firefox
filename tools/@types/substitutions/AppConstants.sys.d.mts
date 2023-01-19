@@ -175,7 +175,7 @@ export const AppConstants: Readonly<{
   // #ifdef MOZ_GECKOVIEW
   MOZ_GECKOVIEW: boolean;
 
-  // Returns true for CN region build when distibution id set as 'MozillaOnline'
+  // Returns true for CN region build when distribution id set as 'MozillaOnline'
   isChinaRepack(): boolean;
 }>;
 

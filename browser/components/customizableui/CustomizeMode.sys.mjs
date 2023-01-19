@@ -1400,7 +1400,7 @@ CustomizeMode.prototype = {
     Services.prefs.setIntPref(gUIDensity.uiDensityPref, mode);
 
     // If the user is choosing a different UI density mode while
-    // the mode is overriden to Touch, remove the override.
+    // the mode is overridden to Touch, remove the override.
     if (currentDensity.overridden) {
       Services.prefs.setBoolPref(gUIDensity.autoTouchModePref, false);
     }

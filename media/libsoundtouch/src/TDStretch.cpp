@@ -865,7 +865,7 @@ void TDStretch::calculateOverlapLength(int aoverlapMs)
 
     // calculate overlap length so that it's power of 2 - thus it's easy to do
     // integer division by right-shifting. Term "-1" at end is to account for 
-    // the extra most significatnt bit left unused in result by signed multiplication 
+    // the extra most significant bit left unused in result by signed multiplication 
     overlapDividerBitsPure = _getClosest2Power((sampleRate * aoverlapMs) / 1000.0) - 1;
     if (overlapDividerBitsPure > 9) overlapDividerBitsPure = 9;
     if (overlapDividerBitsPure < 3) overlapDividerBitsPure = 3;

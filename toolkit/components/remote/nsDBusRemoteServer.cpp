@@ -223,7 +223,7 @@ nsresult nsDBusRemoteServer::Startup(const char* aAppName,
   if (!sDBusValidateBusName(busName.get(), nullptr)) {
     busName = nsPrintfCString("org.mozilla.%s.%s", mAppName.get(), "default");
     if (!sDBusValidateBusName(busName.get(), nullptr)) {
-      // We failed completelly to get a valid bus name - just quit
+      // We failed completely to get a valid bus name - just quit
       // to prevent crash at dbus_bus_request_name().
       g_warning("nsDBusRemoteServer: dbus_validate_bus_name() failed!");
       return NS_ERROR_FAILURE;

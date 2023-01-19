@@ -18,7 +18,7 @@ class L10nConfigParser:
         """Constructor for L10nConfigParsers
 
         inipath -- l10n.ini path
-        Optional keyword arguments are fowarded to the inner ConfigParser as
+        Optional keyword arguments are forwarded to the inner ConfigParser as
         defaults.
         """
         self.inipath = mozpath.normpath(inipath)
@@ -66,7 +66,7 @@ class L10nConfigParser:
         """Entry point to load the l10n.ini file this Parser refers to.
 
         This implementation uses synchronous loads, subclasses might overload
-        this behaviour. If you do, make sure to pass a file-like object
+        this behavior. If you do, make sure to pass a file-like object
         to onLoadConfig.
         """
         cp = ConfigParser(self.defaults)

@@ -92,7 +92,7 @@ bool nsDBusRemoteClient::GetRemoteDestinationName(const char* aProgram,
     aDestinationName =
         nsPrintfCString("org.mozilla.%s.%s", aProgram, "default");
     if (!sDBusValidateBusName(aDestinationName.get(), nullptr)) {
-      // We failed completelly to get a valid bus name - just quit
+      // We failed completely to get a valid bus name - just quit
       // to prevent crash at dbus_bus_request_name().
       LOG("  failed to validate profile DBus name");
       return false;

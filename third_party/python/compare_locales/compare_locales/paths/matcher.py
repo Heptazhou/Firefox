@@ -282,7 +282,7 @@ class Variable(Node):
     def expand(self, env, raise_missing=False):
         '''Create a string for this Variable.
 
-        This expansion happens recursively. We avoid recusion loops
+        This expansion happens recursively. We avoid recursion loops
         by removing the current variable from the environment that's used
         to expand child variable references.
         '''
@@ -337,7 +337,7 @@ class AndroidLocale(Variable):
     def expand(self, env, raise_missing=False):
         '''Create a string for this Variable.
 
-        This expansion happens recursively. We avoid recusion loops
+        This expansion happens recursively. We avoid recursion loops
         by removing the current variable from the environment that's used
         to expand child variable references.
         '''
