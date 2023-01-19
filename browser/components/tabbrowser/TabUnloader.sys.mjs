@@ -17,7 +17,7 @@ ChromeUtils.defineESModuleGetters(lazy, {
 });
 
 // If there are only this many or fewer tabs open, just sort by weight, and close
-// the lowest tab. Otherwise, do a more intensive compuation that determines the
+// the lowest tab. Otherwise, do a more intensive computation that determines the
 // tabs to close based on memory and process use.
 const MIN_TABS_COUNT = 10;
 
