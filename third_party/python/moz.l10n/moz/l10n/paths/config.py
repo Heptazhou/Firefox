@@ -123,7 +123,7 @@ class L10nConfigPaths:
         fp = set(force_paths) if force_paths else None
         for path in toml.get("paths", []):
             ref: str = normpath(join(self._ref_root, path["reference"]))
-            target: str = path["l10n"]  # Note: not normalised, so sep=="/"
+            target: str = path["l10n"]  # Note: not normalized, so sep=="/"
             if env_map:
                 target = target.format_map(env_map)
             self._templates.append((path_stars.sub("{}", ref), path_regex(target)))

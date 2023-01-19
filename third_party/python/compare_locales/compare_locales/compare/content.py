@@ -263,7 +263,7 @@ class ContentComparer:
         except UserWarning:
             p = None
 
-        # if we don't support this file, assume CAN_COPY to mimick
+        # if we don't support this file, assume CAN_COPY to mimic
         # l10n dir as closely as possible
         caps = p.capabilities if p else parser.CAN_COPY
         if (caps & (parser.CAN_COPY | parser.CAN_MERGE)):
