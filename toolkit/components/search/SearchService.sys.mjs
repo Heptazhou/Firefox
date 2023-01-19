@@ -961,7 +961,7 @@ export class SearchService {
   /**
    * A deferred promise that is resolved when initialization has finished.
    *
-   * Resolved when initalization has successfully finished, and rejected if it
+   * Resolved when initialization has successfully finished, and rejected if it
    * has failed.
    *
    * @type {Promise}
@@ -974,7 +974,7 @@ export class SearchService {
    *
    * These are the statuses:
    *   "not initialized" - The SearchService has not started initialization.
-   *   "started" - The SearchService has started initializaiton.
+   *   "started" - The SearchService has started initialization.
    *   "success" - The SearchService successfully completed initialization.
    *   "failed" - The SearchService failed during initialization.
    *
@@ -1067,7 +1067,7 @@ export class SearchService {
 
   /**
    * A Set of installed search extensions reported by AddonManager
-   * startup before SearchSevice has started. Will be installed
+   * startup before SearchService has started. Will be installed
    * during init(). Does not contain application provided engines.
    *
    * @type {Set<object>}
@@ -1076,7 +1076,7 @@ export class SearchService {
 
   /**
    * A Set of removed search extensions reported by AddonManager
-   * startup before SearchSevice has started. Will be removed
+   * startup before SearchService has started. Will be removed
    * during init().
    *
    * @type {Set<object>}
@@ -1308,7 +1308,7 @@ export class SearchService {
    * with it.
    *
    * This function sets #initDeferredPromise to resolve or reject.
-   *   | Resolved | when initalization has successfully finished.
+   *   | Resolved | when initialization has successfully finished.
    *   | Rejected | when initialization has failed.
    */
   async #init() {
@@ -1713,7 +1713,7 @@ export class SearchService {
     // If the user's previous engine id is different than the new current
     // engine id, or if the user was using the app default engine and the
     // app default engine id is different than the new current engine id,
-    // we check if the user's settings metadata has been upddated.
+    // we check if the user's settings metadata has been updated.
     if (
       (prevCurrentEngineId && prevCurrentEngineId !== newCurrentEngineId) ||
       (!prevCurrentEngineId &&
@@ -1759,7 +1759,7 @@ export class SearchService {
 
   /**
    * Loads any engines that have been received from the AddonManager during
-   * startup and before we have finished initialising.
+   * startup and before we have finished initializing.
    *
    * @param {object} [settings]
    *   The saved settings for the user.
@@ -1892,7 +1892,7 @@ export class SearchService {
         this._maybeReloadEngines(changeReason).catch(console.error);
       }, 10000);
       lazy.logConsole.debug(
-        "Post-poning maybeReloadEngines() as we're currently initializing."
+        "Postponing maybeReloadEngines() as we're currently initializing."
       );
       return;
     }
@@ -1922,7 +1922,7 @@ export class SearchService {
    * the default engines, so that we're not removing active defaults or trying
    * to set a default to something that hasn't been added yet. The order is:
    *
-   * 1) Update exising engines that are in both the old and new configuration.
+   * 1) Update existing engines that are in both the old and new configuration.
    * 2) Add any new engines from the new configuration.
    * 3) Check for changes needed to the default engines due to environment changes
    *    and potentially overriding engines as per the override allowlist.
@@ -2492,7 +2492,7 @@ export class SearchService {
   }
 
   #buildSortedEngineList() {
-    // We must initialise _cachedSortedEngines here to avoid infinite recursion
+    // We must initialize _cachedSortedEngines here to avoid infinite recursion
     // in the case of tests which don't define a default search engine.
     // If there's no default defined, then we revert to the first item in the
     // sorted list, but we can't do that if we don't have a list.
@@ -3004,7 +3004,7 @@ export class SearchService {
     );
 
     // Only do this if we're initialized though - this function can get called
-    // during initalization.
+    // during initialization.
     if (this.isInitialized) {
       this.#recordDefaultChangedEvent(
         privateMode,
@@ -3650,7 +3650,7 @@ class SearchDefaultOverrideAllowlistHandler {
    *   The extension object (from add-on manager) that will override the
    *   app provided search engine.
    * @param {string} appProvidedEngineId
-   *   The id of the search engine that will be overriden.
+   *   The id of the search engine that will be overridden.
    * @returns {boolean}
    *   Returns true if the search engine extension may override the app provided
    *   instance.
@@ -3685,7 +3685,7 @@ class SearchDefaultOverrideAllowlistHandler {
    * @param {SearchEngine} engine
    *   The existing search engine.
    * @param {string} appProvidedEngineId
-   *   The id of the search engine that will be overriden.
+   *   The id of the search engine that will be overridden.
    * @returns {boolean}
    *   Returns true if the existing search engine is allowed to override the
    *   app provided instance.
