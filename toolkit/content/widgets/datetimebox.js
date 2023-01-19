@@ -345,9 +345,9 @@ this.DateTimeBoxWidget = class {
 
     if (aIsNumeric) {
       field.classList.add("numeric");
-      // Maximum value allowed.
+      // Minimum value allowed.
       field.setAttribute("min", aMinValue);
-      // Minumim value allowed.
+      // Maximum value allowed.
       field.setAttribute("max", aMaxValue);
       // Interval when pressing pageUp/pageDown key.
       field.setAttribute("pginterval", aPageUpDownInterval);
