@@ -134,7 +134,7 @@ function DatePicker(context) {
     },
 
     /**
-     * Initalize the date picker components.
+     * Initialize the date picker components.
      */
     _createComponents() {
       this.components = {
