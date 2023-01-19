@@ -546,7 +546,7 @@ already_AddRefed<Promise> MediaDevices::GetDisplayMedia(
   // If this is a privileged call or permission is disabled, this gives us full
   // screen sharing by default, which is useful for internal testing.
   //
-  // If this is a non-priviliged call, GetUserMedia() will change it to "window"
+  // If this is a non-privileged call, GetUserMedia() will change it to "window"
   // for us.
   vc.mMediaSource.Reset();
   vc.mMediaSource.Construct().AssignASCII(
