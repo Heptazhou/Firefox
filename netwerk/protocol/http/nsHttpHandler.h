@@ -486,7 +486,7 @@ class nsHttpHandler final : public nsIHttpProtocolHandler,
 
   bool EchConfigEnabled(bool aIsHttp3 = false) const;
   // When EchConfig is enabled and all records with echConfig are failed, this
-  // functon indicate whether we can fallback to the origin server.
+  // function indicate whether we can fallback to the origin server.
   // In the case an HTTPS RRSet contains some RRs with echConfig and some
   // without, we always fallback to the origin one.
   bool FallbackToOriginIfConfigsAreECHAndAllFailed() const;
@@ -793,7 +793,7 @@ class nsHttpHandler final : public nsIHttpProtocolHandler,
   // or rate optimization related to the active/background tab is hit.
   // We carry this value through each http channel's onstoprequest notification
   // to the parent process.  On the content process then we just update this
-  // value from ipc onstoprequest arguments.  This is a sufficent way of passing
+  // value from ipc onstoprequest arguments.  This is a sufficient way of passing
   // it down to the content process, since the value will be used only after
   // onstoprequest notification coming from an http channel.
   Mutex mLastActiveTabLoadOptimizationLock{
