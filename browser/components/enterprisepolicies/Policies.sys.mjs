@@ -653,7 +653,7 @@ export var Policies = {
         );
       }
 
-      // New Cookie Behavior option takes precendence
+      // New Cookie Behavior option takes precedence
       let defaultPref = Services.prefs.getDefaultBranch("");
       let newCookieBehavior = defaultPref.getIntPref(
         "network.cookie.cookieBehavior"

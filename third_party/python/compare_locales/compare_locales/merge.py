@@ -63,12 +63,12 @@ def merge_resources(parser, resources, keep_newest=True):
         if isinstance(entity, cl.Comment):
             counter[entity.val] += 1
             # Use the (value, index) tuple as the key. AddRemove will
-            # de-deplicate identical comments at the same index.
+            # de-duplicate identical comments at the same index.
             return ((entity.val, counter[entity.val]), entity)
 
         if isinstance(entity, cl.Whitespace):
             # Use the Whitespace instance as the key so that it's always
-            # unique. Adjecent whitespace will be folded into the longer one in
+            # unique. Adjacent whitespace will be folded into the longer one in
             # prune.
             return (entity, entity)
 

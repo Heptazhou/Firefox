@@ -15,7 +15,7 @@
  * will be defined as 'inline', and will only be defined if the corresponding
  * #define directive has not been #undef-ed.
  *
- * NOTE: This is *NOT* a real C header, but rather an input to the avove script.
+ * NOTE: This is *NOT* a real C header, but rather an input to the above script.
  * Only basic declarations in the form found here are allowed.
  */
 
