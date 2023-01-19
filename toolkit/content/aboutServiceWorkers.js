@@ -79,7 +79,7 @@ async function display(info, pushService) {
     let bold = document.createElement("strong");
     bold.setAttribute("data-l10n-name", "item-label");
     item.appendChild(bold);
-    // Falsey values like "" are still valid values, so check exactly against
+    // Falsy values like "" are still valid values, so check exactly against
     // undefined for the cases where the caller did not provide any value.
     if (value === undefined) {
       document.l10n.setAttributes(item, l10nId);

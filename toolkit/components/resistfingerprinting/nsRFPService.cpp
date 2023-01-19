@@ -437,7 +437,7 @@ double nsRFPService::TimerResolution(RTPCallerType aRTPCallerType) {
 }
 
 /**
- * The purpose of this function is to deterministicly generate a random midpoint
+ * The purpose of this function is to deterministically generate a random midpoint
  * between a lower clamped value and an upper clamped value. Assuming a clamping
  * resolution of 100, here is an example:
  *
@@ -451,7 +451,7 @@ double nsRFPService::TimerResolution(RTPCallerType aRTPCallerType) {
  *
  * The question is: does time go backwards?
  *
- * The midpoint is deterministicly random and generated from three components:
+ * The midpoint is deterministically random and generated from three components:
  * a secret seed, a per-timeline (context) 'mix-in', and a clamped time.
  *
  * When comparing times across different seed values: time may go backwards.

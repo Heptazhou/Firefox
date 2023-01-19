@@ -466,7 +466,7 @@ export class AppProvidedSearchEngine extends SearchEngine {
    *   An object suitable for serialization as JSON.
    */
   toJSON() {
-    // For applicaiton provided engines we don't want to store all their data in
+    // For application provided engines we don't want to store all their data in
     // the settings file so just store the relevant metadata.
     return {
       id: this.id,
