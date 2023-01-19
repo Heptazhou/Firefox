@@ -127,7 +127,7 @@ HandlerService.prototype = {
       }
     }
 
-    // Now, we're going to cheat. Terribly. The idiologically correct way
+    // Now, we're going to cheat. Terribly. The ideologically correct way
     // of implementing the following bit of code would be to fetch the
     // handler info objects from the protocol service, manipulate those,
     // and then store each of them.

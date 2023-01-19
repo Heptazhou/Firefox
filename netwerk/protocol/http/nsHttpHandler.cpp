@@ -362,7 +362,7 @@ nsresult nsHttpHandler::Init() {
   }
 #endif
 
-  // This perference is only used in parent process.
+  // This preference is only used in parent process.
   if (!IsNeckoChild()) {
     mActiveTabPriority =
         Preferences::GetBool(HTTP_PREF("active_tab_priority"), true);
