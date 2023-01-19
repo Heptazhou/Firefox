@@ -66,7 +66,7 @@
 #     variable is accessed, via its getter function.) This is mostly useful for
 #     graphics prefs where we often don't want a new pref value to apply until
 #     restart. Otherwise, this update policy is best avoided because its
-#     behaviour can cause confusion and bugs.
+#     behavior can cause confusion and bugs.
 #
 #   * `always`: The mirror variable is always kept in sync with the pref value.
 #     This is the most common choice.
@@ -454,7 +454,7 @@
   include: <cmath>
 
 # Whether to lock touch scrolling to one axis at a time. When a new
-# axis lock mode is added, the APZCAxisLockCompatTester GTest shoud
+# axis lock mode is added, the APZCAxisLockCompatTester GTest should
 # be updated to include the lock mode value.
 # 0 = FREE (No locking at all)
 # 1 = STANDARD (Once locked, remain locked until scrolling ends)
@@ -1203,7 +1203,7 @@
   value: "path_user"
   mirror: never
 
-# Space-separated list of regexs that are compared to URLs of resources
+# Space-separated list of regexes that are compared to URLs of resources
 # being checked by content-analysis.  Resources that match are not checked
 # and are always permitted.
 # By default this does not check any about: page except for about:blank
@@ -1213,7 +1213,7 @@
   value: "^about:(?!blank|srcdoc).*"
   mirror: never
 
-# Space-separated list of regexs that are compared to URLs of resources
+# Space-separated list of regexes that are compared to URLs of resources
 # being checked by content-analysis.  Resources that match are not checked
 # and are always denied.
 - name: browser.contentanalysis.deny_url_regex_list
@@ -1571,7 +1571,7 @@
   value: true
   mirror: always
 
-# Maximium delay between keystrokes that will be considered typing (milliseconds).
+# Maximum delay between keystrokes that will be considered typing (milliseconds).
 - name: browser.places.interactions.typing_timeout_ms
   type: RelaxedAtomicUint32
   value: 3000
@@ -1884,7 +1884,7 @@
   mirror: never
 
 # When true, soft reloads (including location.reload())
-# will only froce validate the top level document, subresources will
+# will only force validate the top level document, subresources will
 # be loaded normally as-if users normally navigated to the page.
 - name: browser.soft_reload.only_force_validate_top_level_document
   type: bool
@@ -2624,7 +2624,7 @@
   value: true
   mirror: always
 
-# In addition to the above IPC layer compresison, allow touchmove
+# In addition to the above IPC layer compression, allow touchmove
 # events to be further coalesced in the child side after they
 # are sent.
 - name: dom.events.coalesce.touchmove
@@ -3376,7 +3376,7 @@
 
 # An upper limit for the "age" of an origin. Any origin which is older than the
 # threshold is considered as unaccessed. That doesn't necessarily mean that
-# such origins will be immediatelly archived. They will be archived only when
+# such origins will be immediately archived. They will be archived only when
 # dom.quotaManager.checkQuotaInfoLoadTime is true and loading of quota info
 # takes a long time (dom.quotaManager.longQuotaInfoLoadTimeThresholdMs is used
 # to decide what is a long quota info load time).
@@ -3444,7 +3444,7 @@
     mirror: always
     do_not_use_directly: true
 
-  # Preference that is used to enable the hack for overrriding xFullPathname in
+  # Preference that is used to enable the hack for overriding xFullPathname in
   # QuotaVFS.
 -   name: dom.quotaManager.overrideXFullPathname
     type: RelaxedAtomicBool
@@ -3760,7 +3760,7 @@
   mirror: always
 
 # If true, tries to break upgrade downgrade cycles where https-only tries
-# to upgrad ethe connection, but the website tries to downgrade again.
+# to upgrade the connection, but the website tries to downgrade again.
 - name: dom.security.https_only_mode_break_upgrade_downgrade_endless_loop
   type: RelaxedAtomicBool
   value: true
@@ -3845,7 +3845,7 @@
   value: false
   mirror: always
 
-# Pref that controls the Element.setHTML API idenpendetly of the sanitizer
+# Pref that controls the Element.setHTML API independently of the sanitizer
 # API.
 - name: dom.security.setHTML.enabled
   type: bool
@@ -4120,7 +4120,7 @@
   value: 25 * 1024
   mirror: always
 
-# Whether or not the unsupported legacy implemenation should be enabled. Please
+# Whether or not the unsupported legacy implementation should be enabled. Please
 # don't advertise this pref as a way for disabling LSNG. This pref is intended
 # for internal testing only and will be removed in near future. Accidental
 # disabling of LSNG can lead to a data loss in a combination with disabled
@@ -5040,7 +5040,7 @@
   mirror: always
 
 # Controls if a double click word selection also deletes one adjacent whitespace
-# (if feasible). This mimics native behaviour on MacOS.
+# (if feasible). This mimics native behavior on MacOS.
 - name: editor.word_select.delete_space_after_doubleclick_selection
   type: bool
   value: true
@@ -9499,7 +9499,7 @@
   mirror: always
 
 # On Android, don't synth mouse move events after scrolling, as they cause
-# unexpected user-visible behaviour. Can remove this after bug 1633450 is
+# unexpected user-visible behavior. Can remove this after bug 1633450 is
 # satisfactorily resolved.
 - name: layout.reflow.synthMouseMove
   type: bool
@@ -14384,13 +14384,13 @@
   value: 1080
   mirror: always
 
-# Enable resetting the fingerprinting randomization key daily for normal windwos.
+# Enable resetting the fingerprinting randomization key daily for normal windows.
 - name: privacy.resistFingerprinting.randomization.daily_reset.enabled
   type: RelaxedAtomicBool
   value: false
   mirror: always
 
-# Enable resetting the fingerprinting randomization key daily for private windwos.
+# Enable resetting the fingerprinting randomization key daily for private windows.
 - name: privacy.resistFingerprinting.randomization.daily_reset.private.enabled
   type: RelaxedAtomicBool
   value: false

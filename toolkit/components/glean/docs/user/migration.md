@@ -150,7 +150,7 @@ So for a Histogram that records timing samples like this:
   },
 ```
 
-You will migrate to a `timing_distibution` metric type like this:
+You will migrate to a `timing_distribution` metric type like this:
 
 ```yaml
 js:

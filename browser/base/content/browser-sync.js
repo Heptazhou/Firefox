@@ -817,7 +817,7 @@ var gSync = {
     if (!fxAccounts.device.recentDeviceList) {
       if (await this.refreshFxaDevices()) {
         // Assuming we made the call successfully it should be impossible to end
-        // up with a falsey recentDeviceList, so make noise if that's false.
+        // up with a falsy recentDeviceList, so make noise if that's false.
         if (!fxAccounts.device.recentDeviceList) {
           console.warn("Refreshing device list didn't find any devices.");
         }
@@ -1746,7 +1746,7 @@ var gSync = {
 
   // "Send Tab to Device" menu item
   updateTabContextMenu(aPopupMenu, aTargetTab) {
-    // We may get here before initialisation. This situation
+    // We may get here before initialization. This situation
     // can lead to a empty label for 'Send To Device' Menu.
     this.init();
 
