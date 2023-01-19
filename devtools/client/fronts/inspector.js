@@ -214,7 +214,7 @@ class InspectorFront extends FrontClassWithSpec(inspectorSpec) {
         // use drawWindow in order to get the screenshot of the page (that's a decent
         // fallback, even if it doesn't handle remote frames).
         console.error(
-          "Error occured when taking a screenshot for the eyedropper",
+          "Error occurred when taking a screenshot for the eyedropper",
           e
         );
       }

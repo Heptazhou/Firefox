@@ -601,7 +601,7 @@ class MediaInfo {
 
   bool HasValidMedia() const { return HasVideo() || HasAudio(); }
 
-  // TODO: Store VideoInfo and AudioIndo in arrays to support multi-tracks.
+  // TODO: Store VideoInfo and AudioInfo in arrays to support multi-tracks.
   VideoInfo mVideo;
   AudioInfo mAudio;
 

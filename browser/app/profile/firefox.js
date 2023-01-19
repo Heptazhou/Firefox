@@ -336,7 +336,7 @@ pref("browser.warnOnQuit", true);
   pref("browser.warnOnQuitShortcut", true);
 #endif
 
-// TODO bug 1702563: Renable fullscreen autohide by default on macOS.
+// TODO bug 1702563: Reenable fullscreen autohide by default on macOS.
 #ifdef XP_MACOSX
   pref("browser.fullscreen.autohide", false);
 #else
@@ -852,7 +852,7 @@ pref("browser.tabs.delayHidingAudioPlayingIconMS", 3000);
 // Pref to control whether we use a separate privileged content process
 // for about: pages. This pref name did not age well: we will have multiple
 // types of privileged content processes, each with different privileges.
-// types of privleged content processes, each with different privleges.
+//
 pref("browser.tabs.remote.separatePrivilegedContentProcess", true);
 
 #if defined(NIGHTLY_BUILD) && !defined(MOZ_ASAN)
@@ -909,7 +909,7 @@ pref("browser.tabs.searchclipboardfor.middleclick", false);
   // implementation, but otherwise the 10s value is arbitrary.
   pref("browser.lowMemoryPollingIntervalMS", 10000);
 
-  // Pref to control the reponse taken on macOS when the OS is under memory
+  // Pref to control the response taken on macOS when the OS is under memory
   // pressure. Changes to the pref take effect immediately. Browser restart not
   // required. The pref value is a bitmask:
   // 0x0: No response (other than recording for telemetry, crash reporting)
@@ -927,7 +927,7 @@ pref("browser.tabs.searchclipboardfor.middleclick", false);
   // Controls which macOS memory-pressure level triggers the browser low memory
   // response. Changes to the pref take effect immediately. Browser restart not
   // required. By default, use the "critical" level as that occurs after "warn"
-  // and we only want to trigger the low memory reponse when necessary.
+  // and we only want to trigger the low memory response when necessary.
   // The macOS system memory-pressure level is either none, "warn", or
   // "critical". The OS notifies the browser when the level changes. A false
   // value for the pref indicates the low memory response should occur when
@@ -1824,7 +1824,7 @@ pref("identity.sync.tokenserver.uri", "https://token.services.mozilla.com/1.0/sy
 
 // Auto-config URL for FxA self-hosters, makes an HTTP request to
 // [identity.fxaccounts.autoconfig.uri]/.well-known/fxa-client-configuration
-// This is now the prefered way of pointing to a custom FxA server, instead
+// This is now the preferred way of pointing to a custom FxA server, instead
 // of making changes to "identity.fxaccounts.*.uri".
 pref("identity.fxaccounts.autoconfig.uri", "");
 
@@ -1973,19 +1973,19 @@ pref("browser.contentblocking.reject-and-isolate-cookies.preferences.ui.enabled"
 //     "qpsPBM": Query parameter stripping enabled in private windows
 //     "-qpsPBM": Query parameter stripping disabled in private windows
 //   Cookie behavior:
-//     "cookieBehavior0": cookie behaviour BEHAVIOR_ACCEPT
-//     "cookieBehavior1": cookie behaviour BEHAVIOR_REJECT_FOREIGN
-//     "cookieBehavior2": cookie behaviour BEHAVIOR_REJECT
-//     "cookieBehavior3": cookie behaviour BEHAVIOR_LIMIT_FOREIGN
-//     "cookieBehavior4": cookie behaviour BEHAVIOR_REJECT_TRACKER
-//     "cookieBehavior5": cookie behaviour BEHAVIOR_REJECT_TRACKER_AND_PARTITION_FOREIGN
+//     "cookieBehavior0": cookie behavior BEHAVIOR_ACCEPT
+//     "cookieBehavior1": cookie behavior BEHAVIOR_REJECT_FOREIGN
+//     "cookieBehavior2": cookie behavior BEHAVIOR_REJECT
+//     "cookieBehavior3": cookie behavior BEHAVIOR_LIMIT_FOREIGN
+//     "cookieBehavior4": cookie behavior BEHAVIOR_REJECT_TRACKER
+//     "cookieBehavior5": cookie behavior BEHAVIOR_REJECT_TRACKER_AND_PARTITION_FOREIGN
 //   Cookie behavior for private windows:
-//     "cookieBehaviorPBM0": cookie behaviour BEHAVIOR_ACCEPT
-//     "cookieBehaviorPBM1": cookie behaviour BEHAVIOR_REJECT_FOREIGN
-//     "cookieBehaviorPBM2": cookie behaviour BEHAVIOR_REJECT
-//     "cookieBehaviorPBM3": cookie behaviour BEHAVIOR_LIMIT_FOREIGN
-//     "cookieBehaviorPBM4": cookie behaviour BEHAVIOR_REJECT_TRACKER
-//     "cookieBehaviorPBM5": cookie behaviour BEHAVIOR_REJECT_TRACKER_AND_PARTITION_FOREIGN
+//     "cookieBehaviorPBM0": cookie behavior BEHAVIOR_ACCEPT
+//     "cookieBehaviorPBM1": cookie behavior BEHAVIOR_REJECT_FOREIGN
+//     "cookieBehaviorPBM2": cookie behavior BEHAVIOR_REJECT
+//     "cookieBehaviorPBM3": cookie behavior BEHAVIOR_LIMIT_FOREIGN
+//     "cookieBehaviorPBM4": cookie behavior BEHAVIOR_REJECT_TRACKER
+//     "cookieBehaviorPBM5": cookie behavior BEHAVIOR_REJECT_TRACKER_AND_PARTITION_FOREIGN
 // One value from each section must be included in the browser.contentblocking.features.strict pref.
 pref("browser.contentblocking.features.strict", "tp,tpPrivate,cookieBehavior5,cookieBehaviorPBM5,cm,fp,stp,emailTP,emailTPPrivate,lvl2,rp,rpTop,ocsp,qps,qpsPBM");
 
@@ -2428,7 +2428,7 @@ pref("devtools.target-switching.server.enabled", true);
 // remote frames).
 pref("devtools.every-frame-target.enabled", true);
 
-// Controls the hability to debug popups from the same DevTools
+// Controls the ability to debug popups from the same DevTools
 // of the original tab the popups are coming from
 pref("devtools.popups.debug", true);
 
@@ -2466,7 +2466,7 @@ pref("devtools.inspector.imagePreviewTooltipSize", 300);
 pref("devtools.inspector.showUserAgentStyles", false);
 // Show native anonymous content and user agent shadow roots
 pref("devtools.inspector.showAllAnonymousContent", false);
-// Enable the inline CSS compatiblity warning in inspector rule view
+// Enable the inline CSS compatibility warning in inspector rule view
 pref("devtools.inspector.ruleview.inline-compatibility-warning.enabled", true);
 // Enable the compatibility tool in the inspector.
 pref("devtools.inspector.compatibility.enabled", true);
@@ -2591,9 +2591,9 @@ pref("devtools.netmonitor.har.multiple-pages", false);
 pref("devtools.netmonitor.audits.slow", 500);
 
 // Enable the new Edit and Resend panel
-  pref("devtools.netmonitor.features.newEditAndResend", true);
+pref("devtools.netmonitor.features.newEditAndResend", true);
 
-pref("devtools.netmonitor.customRequest", '{}');
+pref("devtools.netmonitor.customRequest", "{}");
 
 // Enable the Storage Inspector
 pref("devtools.storage.enabled", true);
