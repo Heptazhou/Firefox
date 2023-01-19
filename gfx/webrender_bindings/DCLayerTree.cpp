@@ -163,7 +163,7 @@ bool DCLayerTree::Initialize(HWND aHwnd, nsACString& aError) {
   SupportsSwapChainTearing();
 
   mCompositionTarget->SetRoot(mRootVisual);
-  // Set interporation mode to nearest, to ensure 1:1 sampling.
+  // Set interpolation mode to nearest, to ensure 1:1 sampling.
   // By default, a visual inherits the interpolation mode of the parent visual.
   // If no visuals set the interpolation mode, the default for the entire visual
   // tree is nearest neighbor interpolation.
