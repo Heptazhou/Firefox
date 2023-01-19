@@ -986,7 +986,7 @@ class RecursiveMakeBackend(MakeBackend):
 
                     # In the export and libs tiers, we don't skip directories
                     # containing a Makefile.in.
-                    # topobjdir is handled separatedly, don't do anything for
+                    # topobjdir is handled separately, don't do anything for
                     # it.
                     if bf.relobjdir:
                         for tier in ("export", "libs"):

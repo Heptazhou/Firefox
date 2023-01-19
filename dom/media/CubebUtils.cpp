@@ -139,7 +139,7 @@ MOZ_RUNINIT std::unordered_map<std::string, BackendLabel>
         {"sun", BackendLabel::eSunaudio},
 };
 
-// Prefered samplerate, in Hz (characteristic of the hardware, mixer, platform,
+// Preferred samplerate, in Hz (characteristic of the hardware, mixer, platform,
 // and API used).
 //
 // sMutex protects *initialization* of this, which must be performed from each
@@ -184,7 +184,7 @@ static void ShutdownAudioIPCServer() {
 }  // namespace
 
 static const uint32_t CUBEB_NORMAL_LATENCY_MS = 100;
-// Consevative default that can work on all platforms.
+// Conservative default that can work on all platforms.
 static const uint32_t CUBEB_NORMAL_LATENCY_FRAMES = 1024;
 
 namespace CubebUtils {

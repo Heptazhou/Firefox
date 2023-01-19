@@ -212,7 +212,7 @@ nsresult nsReadConfig::readConfigFile() {
   if (NS_SUCCEEDED(rv)) {
     fileNameLen = strlen(lockFileName.get());
 
-    // lockVendor and lockFileName should be the same with the addtion of
+    // lockVendor and lockFileName should be the same with the addition of
     // .cfg to the filename by checking this post reading of the cfg file
     // this value can be set within the cfg file adding a level of security.
 

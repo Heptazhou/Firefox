@@ -750,7 +750,7 @@ class StorageModule extends RootBiDiModule {
         // This is a workaround until CHIPS support is enabled (see Bug 1898253).
         // It handles the "context" type partitioning of the `setCookie` command
         // (when domain is provided) and if partitioned cookies are disabled,
-        // but ignore `about` pаges.
+        // but ignore `about` pages.
         const principal =
           Services.scriptSecurityManager.createContentPrincipalFromOrigin(
             partitionKey.sourceOrigin

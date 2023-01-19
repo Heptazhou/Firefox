@@ -1391,7 +1391,7 @@ class AddonInstall {
    * if possible.
    *
    * Note this method is overridden to handle additional state in
-   * the subclassses below.
+   * the subclasses below.
    *
    * @returns {Promise<Addon>}
    * @throws if installation cannot proceed from the current state
@@ -2211,7 +2211,7 @@ class AddonInstall {
 
 var LocalAddonInstall = class extends AddonInstall {
   /**
-   * Initialises this install to be an install from a local file.
+   * Initializes this install to be an install from a local file.
    */
   async init() {
     this.file = this.sourceURI.QueryInterface(Ci.nsIFileURL).file;

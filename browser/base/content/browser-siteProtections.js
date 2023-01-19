@@ -674,7 +674,7 @@ let ThirdPartyCookies =
         // of the Preferences UI.
         Ci.nsICookieService.BEHAVIOR_REJECT_FOREIGN, // Block all third-party cookies
         Ci.nsICookieService.BEHAVIOR_REJECT_TRACKER, // Block third-party cookies from trackers
-        Ci.nsICookieService.BEHAVIOR_REJECT_TRACKER_AND_PARTITION_FOREIGN, // Block trackers and patition third-party trackers
+        Ci.nsICookieService.BEHAVIOR_REJECT_TRACKER_AND_PARTITION_FOREIGN, // Block trackers and partition third-party trackers
         Ci.nsICookieService.BEHAVIOR_REJECT, // Block all cookies
       ];
 
