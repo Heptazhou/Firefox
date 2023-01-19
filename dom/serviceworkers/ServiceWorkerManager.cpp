@@ -2258,7 +2258,7 @@ bool ServiceWorkerManager::IsAvailable(nsIPrincipal* aPrincipal, nsIURI* aURI,
   // If it does, directly return true and handle the client controlling logic
   // in DispatchFetchEvent(). otherwise, do followings then return false.
   // 1. Set the matched service worker as the controller of LoadInfo and
-  //    correspoinding ClinetInfo
+  //    corresponding ClinetInfo
   // 2. Maybe schedule a soft update
   if (!registration->GetActive()->HandlesFetch()) {
     // Checkin if the channel is not allowed for the service worker.

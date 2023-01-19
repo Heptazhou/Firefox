@@ -75,7 +75,7 @@ function createBrowserElementSessionContext(browserElement, config) {
   return {
     type,
     browserId: browserElement.browserId,
-    // Nowaday, it should always be enabled except for WebExtension special
+    // Nowadays, it should always be enabled except for WebExtension special
     // codepath and some tests.
     isServerTargetSwitchingEnabled: config.isServerTargetSwitchingEnabled,
     // Should we instantiate targets for popups opened in distinct tabs/windows?

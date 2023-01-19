@@ -340,7 +340,7 @@ export var SessionStore = {
             to identify which closed tabs to include in the count.
    * @param {Window} aOptions.sourceWindow
             A browser window used to identity privateness.
-            When closedTabsFromAllWindows is false, we only count closed tabs assocated with this window.
+            When closedTabsFromAllWindows is false, we only count closed tabs associated with this window.
    * @param {boolean} [aOptions.private = false]
             Explicit indicator to constrain tab count to only private or non-private windows,
    * @param {boolean} [aOptions.closedTabsFromAllWindows]
@@ -378,7 +378,7 @@ export var SessionStore = {
             to identify which closed tabs to get data from
    * @param {Window} aOptions.sourceWindow
             A browser window used to identity privateness.
-            When closedTabsFromAllWindows is false, we only include closed tabs assocated with this window.
+            When closedTabsFromAllWindows is false, we only include closed tabs associated with this window.
    * @param {boolean} [aOptions.private = false]
             Explicit indicator to constrain tab data to only private or non-private windows,
    * @param {boolean} [aOptions.closedTabsFromAllWindows]
@@ -480,7 +480,7 @@ export var SessionStore = {
             A SessionStore window id used to look up the window where the tab was closed
    * @param {number} aSourceOptions.sourceClosedId
             The closedId used to look up the closed window where the tab was closed
-   * @throws {InvalidArgumentError} if the closedId doesnt match a closed tab in any window
+   * @throws {InvalidArgumentError} if the closedId doesn't match a closed tab in any window
    */
   forgetClosedTabById: function ss_forgetClosedTabById(
     aClosedId,
@@ -496,7 +496,7 @@ export var SessionStore = {
    *
    * @param {integer} aClosedId
    *        The closedId of the window
-   * @throws {InvalidArgumentError} if the closedId doesnt match a closed window
+   * @throws {InvalidArgumentError} if the closedId doesn't match a closed window
    */
   forgetClosedWindowById: function ss_forgetClosedWindowById(aClosedId) {
     SessionStoreInternal.forgetClosedWindowById(aClosedId);
@@ -2550,7 +2550,7 @@ var SessionStoreInternal = {
     // Clear closed tab data.
     if (windowData._closedTabs.length) {
       // Remove all of the closed tabs data.
-      // This also clears out the permenentKey-mapped data for pending state updates
+      // This also clears out the permanentKey-mapped data for pending state updates
       // and removes the tabs from from the _lastClosedActions list
       while (windowData._closedTabs.length) {
         this.removeClosedTabData(windowData, windowData._closedTabs, 0);
@@ -5209,7 +5209,7 @@ var SessionStoreInternal = {
       // Remove all previous tab data.
       tabsDataArray.length = 0;
     } else {
-      // Remove all previous tab data except tabs that should not be overriden.
+      // Remove all previous tab data except tabs that should not be overridden.
       tabsDataArray.splice(numTabsInWindow - numTabsToRestore);
     }
 
@@ -5423,7 +5423,7 @@ var SessionStoreInternal = {
       // TAB_LAZY_STATES holds data for lazy-browser tabs to proxy for
       // data unobtainable from the unbound browser.  This only applies to lazy
       // browsers and will be removed once the browser is inserted in the document.
-      // This must preceed `updateTabLabelAndIcon` call for required data to be present.
+      // This must precede `updateTabLabelAndIcon` call for required data to be present.
       let url = "about:blank";
       let title = "";
 
@@ -7315,7 +7315,7 @@ var TabRestoreQueue = {
   },
 };
 
-// A map storing a closed window's state data until it goes aways (is GC'ed).
+// A map storing a closed window's state data until it goes away (is GC'ed).
 // This ensures that API clients can still read (but not write) states of
 // windows they still hold a reference to but we don't.
 var DyingWindowCache = {
