@@ -341,7 +341,7 @@ sec_per_extra_frame = 1 / (extra_frames_per_frame * 60) // 833.33
 min_per_extra_frame = sec_per_extra_frame / 60 // 13.89
 ```
 We expect an extra frame every ~14 minutes, which is enough to be smooth.
-16.67 would be ~1.4 minutes, which is OK, but is more noticable.
+16.67 would be ~1.4 minutes, which is OK, but is more noticeable.
 Put another way, if this is the only unacceptable hitch you have across 14
 minutes, I'm impressed, and we might revisit this.
 */
@@ -357,7 +357,7 @@ double nsRFPService::TimerResolution(RTPCallerType aRTPCallerType) {
 }
 
 /**
- * The purpose of this function is to deterministicly generate a random midpoint
+ * The purpose of this function is to deterministically generate a random midpoint
  * between a lower clamped value and an upper clamped value. Assuming a clamping
  * resolution of 100, here is an example:
  *
@@ -371,7 +371,7 @@ double nsRFPService::TimerResolution(RTPCallerType aRTPCallerType) {
  *
  * The question is: does time go backwards?
  *
- * The midpoint is deterministicly random and generated from three components:
+ * The midpoint is deterministically random and generated from three components:
  * a secret seed, a per-timeline (context) 'mix-in', and a clamped time.
  *
  * When comparing times across different seed values: time may go backwards.

@@ -220,7 +220,7 @@ function init_all() {
     register_module("paneMoreFromMozilla", gMoreFromMozillaPane);
   }
   // The Sync category needs to be the last of the "real" categories
-  // registered and inititalized since many tests wait for the
+  // registered and initialized since many tests wait for the
   // "sync-pane-loaded" observer notification before starting the test.
   if (Services.prefs.getBoolPref("identity.fxaccounts.enabled")) {
     document.getElementById("category-sync").hidden = false;

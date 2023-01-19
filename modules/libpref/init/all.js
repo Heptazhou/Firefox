@@ -661,7 +661,7 @@ pref("devtools.performance.recording.ui-base-url", "https://profiler.firefox.com
 // When gathering profiles from child processes, this is the longest time (in
 // seconds) allowed between two responses. 0 = Use internal default.
 pref("devtools.performance.recording.child.timeout_s", 0);
-// The popup is only enabled by default on Nightly, Dev Edition, and debug buildsd since
+// The popup is only enabled by default on Nightly, Dev Edition, and debug builds since
 // it's a developer focused item. It can still be enabled by going to profiler.firefox.com,
 // but by default it is off on Release and Beta. Note that this only adds it to the
 // the customization palette, not to the navbar.
@@ -858,7 +858,7 @@ pref("privacy.fingerprintingProtection.overrides", "+AllTargets,-CSSPrefersColor
 // or remove features on a domain granular level.
 pref("privacy.fingerprintingProtection.granularOverrides", "");
 
-// Fix cookie blocking breakage by providing ephemeral Paritioned LocalStorage
+// Fix cookie blocking breakage by providing ephemeral Partitioned LocalStorage
 // for a list of hosts when detected as trackers.
 // (See nsICookieService::BEHAVIOR_REJECT_TRACKER cookie behavior)
 // See: Bug 1505212, Bug 1659394, Bug 1631811, Bug 1665035.
