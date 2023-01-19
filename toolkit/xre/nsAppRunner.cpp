@@ -414,7 +414,7 @@ void MozExpectedExit() { gIsExpectedExit = true; }
  */
 static void UnexpectedExit() {
   if (!gIsExpectedExit) {
-    gIsExpectedExit = true;  // Don't risk re-entrency issues when crashing.
+    gIsExpectedExit = true;  // Don't risk re-entrancy issues when crashing.
     MOZ_CRASH("Exit called by third party code.");
   }
 }
@@ -637,7 +637,7 @@ static nsIXULRuntime::ExperimentStatus gWin32kExperimentStatus =
 //  Enrolled
 //  - User does the default aka Default
 //
-// We expect the below behvaior.  In the code, there may be references to these
+// We expect the below behavior.  In the code, there may be references to these
 //     behaviors (e.g. [A]) but not always.
 //
 // [A] Becoming enrolled in the experiment while NonDefaultPref disqualifies

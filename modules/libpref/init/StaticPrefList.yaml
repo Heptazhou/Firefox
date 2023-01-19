@@ -65,7 +65,7 @@
 #     variable is accessed, via its getter function.) This is mostly useful for
 #     graphics prefs where we often don't want a new pref value to apply until
 #     restart. Otherwise, this update policy is best avoided because its
-#     behaviour can cause confusion and bugs.
+#     behavior can cause confusion and bugs.
 #
 #   * `always`: The mirror variable is always kept in sync with the pref value.
 #     This is the most common choice.
@@ -411,7 +411,7 @@
   include: <cmath>
 
 # Whether to lock touch scrolling to one axis at a time. When a new
-# axis lock mode is added, the APZCAxisLockCompatTester GTest shoud
+# axis lock mode is added, the APZCAxisLockCompatTester GTest should
 # be updated to include the lock mode value.
 # 0 = FREE (No locking at all)
 # 1 = STANDARD (Once locked, remain locked until scrolling ends)
@@ -1478,7 +1478,7 @@
   value: true
   mirror: always
 
-# Maximium delay between keystrokes that will be considered typing (milliseconds).
+# Maximum delay between keystrokes that will be considered typing (milliseconds).
 - name: browser.places.interactions.typing_timeout_ms
   type: RelaxedAtomicUint32
   value: 3000
@@ -2579,7 +2579,7 @@
   value: true
   mirror: always
 
-# In addition to the above IPC layer compresison, allow touchmove
+# In addition to the above IPC layer compression, allow touchmove
 # events to be further coalesced in the child side after they
 # are sent.
 - name: dom.events.coalesce.touchmove
@@ -3275,7 +3275,7 @@
 
 # An upper limit for the "age" of an origin. Any origin which is older than the
 # threshold is considered as unaccessed. That doesn't necessarily mean that
-# such origins will be immediatelly archived. They will be archived only when
+# such origins will be immediately archived. They will be archived only when
 # dom.quotaManager.checkQuotaInfoLoadTime is true and loading of quota info
 # takes a long time (dom.quotaManager.longQuotaInfoLoadTimeThresholdMs is used
 # to decide what is a long quota info load time).
@@ -3343,7 +3343,7 @@
     mirror: always
     do_not_use_directly: true
 
-  # Preference that is used to enable the hack for overrriding xFullPathname in
+  # Preference that is used to enable the hack for overriding xFullPathname in
   # QuotaVFS.
 -   name: dom.quotaManager.overrideXFullPathname
     type: RelaxedAtomicBool
@@ -3646,7 +3646,7 @@
   mirror: always
 
 # If true, tries to break upgrade downgrade cycles where https-only tries
-# to upgrad ethe connection, but the website tries to downgrade again.
+# to upgrade the connection, but the website tries to downgrade again.
 - name: dom.security.https_only_mode_break_upgrade_downgrade_endless_loop
   type: RelaxedAtomicBool
   value: true
@@ -4849,7 +4849,7 @@
   mirror: always
 
 # Controls if a double click word selection also deletes one adjacent whitespace
-# (if feasible). This mimics native behaviour on MacOS.
+# (if feasible). This mimics native behavior on MacOS.
 - name: editor.word_select.delete_space_after_doubleclick_selection
   type: bool
   value: true
@@ -4965,7 +4965,7 @@
   mirror: never
 
 # This pref has no effect within fission windows, it only controls the
-# behaviour within non-fission windows. If true, preserve browsing contexts
+# behavior within non-fission windows. If true, preserve browsing contexts
 # between process swaps.
 - name: fission.preserve_browsing_contexts
   type: bool
@@ -8883,7 +8883,7 @@
   mirror: always
 
 # On Android, don't synth mouse move events after scrolling, as they cause
-# unexpected user-visible behaviour. Can remove this after bug 1633450 is
+# unexpected user-visible behavior. Can remove this after bug 1633450 is
 # satisfactorily resolved.
 - name: layout.reflow.synthMouseMove
   type: bool
@@ -13018,13 +13018,13 @@
   value: 1080
   mirror: always
 
-# Enable resetting the fingerprinting randomization key daily for normal windwos.
+# Enable resetting the fingerprinting randomization key daily for normal windows.
 - name: privacy.resistFingerprinting.randomization.daily_reset.enabled
   type: RelaxedAtomicBool
   value: false
   mirror: always
 
-# Enable resetting the fingerprinting randomization key daily for private windwos.
+# Enable resetting the fingerprinting randomization key daily for private windows.
 - name: privacy.resistFingerprinting.randomization.daily_reset.private.enabled
   type: RelaxedAtomicBool
   value: false
