@@ -254,7 +254,7 @@ export var DateTimePickerPanel = class {
       return day === 7 ? 0 : day;
     }
 
-    let firstDayOfWeek = toDateWeekday(calendarInfo.firstDayOfWeek),
+    let firstDayOfWeek = toDateWeekday(calendarInfo.firstDayOfWeek) || 1,
       weekend = calendarInfo.weekend;
 
     let weekends = weekend.map(toDateWeekday);
