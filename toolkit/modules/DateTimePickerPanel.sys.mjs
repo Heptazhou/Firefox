@@ -124,7 +124,7 @@ export var DateTimePickerPanel = class {
     switch (this.type) {
       case "time": {
         const { hour, minute } = detail.value;
-        const format = detail.format || "12";
+        const format = detail.format || "24";
 
         this.postMessageToPicker({
           name: "PickerInit",
@@ -256,6 +256,8 @@ export var DateTimePickerPanel = class {
       weekend = calendarInfo.weekend;
 
     let weekends = weekend.map(toDateWeekday);
+    while (weekends.length < 7 && weekends.includes(firstDayOfWeek))
+      firstDayOfWeek = (firstDayOfWeek + 1) % 7;
 
     return {
       firstDayOfWeek,

@@ -12,7 +12,7 @@ function log(...stuff) {
   }
 
   var d = new Date();
-  let msg = "SafeBrowsing: " + d.toTimeString() + ": " + stuff.join(" ");
+  let msg = "SafeBrowsing: " + d.toLocaleTimeString("sv") + ": " + stuff.join(" "); // prettier-ignore
   dump(Services.urlFormatter.trimSensitiveURLs(msg) + "\n");
 }
 

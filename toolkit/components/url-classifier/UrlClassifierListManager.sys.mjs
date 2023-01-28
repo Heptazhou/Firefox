@@ -38,7 +38,7 @@ function log(...stuff) {
   }
 
   var d = new Date();
-  let msg = "listmanager: " + d.toTimeString() + ": " + stuff.join(" ");
+  let msg = "listmanager: " + d.toLocaleTimeString("sv") + ": " + stuff.join(" "); // prettier-ignore
   msg = Services.urlFormatter.trimSensitiveURLs(msg);
   Services.console.logStringMessage(msg);
   dump(msg + "\n");
