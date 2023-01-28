@@ -41,7 +41,7 @@ function log(...stuff) {
   }
 
   var d = new Date();
-  let msg = "hashcompleter: " + d.toTimeString() + ": " + stuff.join(" ");
+  let msg = "hashcompleter: " + d.toLocaleTimeString("sv") + ": " + stuff.join(" "); // prettier-ignore
   dump(Services.urlFormatter.trimSensitiveURLs(msg) + "\n");
 }
 
