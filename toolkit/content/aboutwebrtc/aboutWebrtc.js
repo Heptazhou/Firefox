@@ -854,7 +854,7 @@ function renderTransportStats(
     );
   }
 
-  const time = new Date(timestamp).toTimeString();
+  const time = new Date(timestamp).toLocaleTimeString("sv");
   elements.push(renderText("span", `${time} ${type}`));
 
   if (packetsReceived) {

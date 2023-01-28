@@ -41,8 +41,8 @@ function log(...stuff) {
     return;
   }
 
-  var d = new Date();
-  let msg = "hashcompleter: " + d.toTimeString() + ": " + stuff.join(" ");
+  var d = new Date().toLocaleTimeString("sv");
+  let msg = "hashcompleter: " + d + ": " + stuff.join(" ");
   dump(Services.urlFormatter.trimSensitiveURLs(msg) + "\n");
 }
 
