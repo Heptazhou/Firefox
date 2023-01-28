@@ -37,8 +37,8 @@ function log(...stuff) {
     return;
   }
 
-  var d = new Date();
-  let msg = "listmanager: " + d.toTimeString() + ": " + stuff.join(" ");
+  var d = new Date().toLocaleTimeString("sv");
+  let msg = "listmanager: " + d + ": " + stuff.join(" ");
   msg = Services.urlFormatter.trimSensitiveURLs(msg);
   Services.console.logStringMessage(msg);
   dump(msg + "\n");

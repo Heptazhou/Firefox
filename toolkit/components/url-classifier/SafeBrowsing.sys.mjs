@@ -11,8 +11,8 @@ function log(...stuff) {
     return;
   }
 
-  var d = new Date();
-  let msg = "SafeBrowsing: " + d.toTimeString() + ": " + stuff.join(" ");
+  var d = new Date().toLocaleTimeString("sv");
+  let msg = "SafeBrowsing: " + d + ": " + stuff.join(" ");
   dump(Services.urlFormatter.trimSensitiveURLs(msg) + "\n");
 }
 
