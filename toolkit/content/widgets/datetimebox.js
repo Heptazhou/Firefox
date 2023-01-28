@@ -173,7 +173,7 @@ this.DateTimeBoxWidget = class {
     this.mAMIndicator = amString || kDefaultAMString;
     this.mPMIndicator = pmString || kDefaultPMString;
 
-    this.mHour12 = this.is12HourTime(this.mLocales);
+    this.mHour12 = false;
     this.mMillisecSeparatorText = ".";
     this.mMaxLength = 2;
     this.mMillisecMaxLength = 3;
@@ -813,7 +813,7 @@ this.DateTimeBoxWidget = class {
       options.year = options.month = options.day = "numeric";
     }
 
-    let formatter = Intl.DateTimeFormat(this.mLocales, options);
+    let formatter = Intl.DateTimeFormat("sv", options);
     formatter.formatToParts(Date.now()).map(part => {
       switch (part.type) {
         case "year":
