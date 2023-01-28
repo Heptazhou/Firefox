@@ -61,7 +61,7 @@ function DateKeeper(props) {
       max,
       step,
       stepBase,
-      firstDayOfWeek = 0,
+      firstDayOfWeek = 1,
       weekends = [0],
       calViewSize = 42,
     }) {
