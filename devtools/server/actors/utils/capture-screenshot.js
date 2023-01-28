@@ -191,7 +191,10 @@ function getFilename(defaultName) {
   const dayString = date.getDate().toString().padStart(2, "0");
   const dateString = `${date.getFullYear()}-${monthString}-${dayString}`;
 
-  const timeString = date.toTimeString().replace(/:/g, ".").split(" ")[0];
+  const timeString = date
+    .toLocaleTimeString("sv")
+    .replace(/:/g, ".")
+    .split(" ")[0];
 
   return `${dateString} ${timeString} devtool.png`;
 }

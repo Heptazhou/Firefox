@@ -301,18 +301,18 @@ var Provider = {
 
       let pref =
         "browser.safebrowsing.provider." + provider + ".lastupdatetime";
-      let lut = Services.prefs.getCharPref(pref, "");
-      values["col-lastupdatetime"] = lut ? new Date(lut * 1) : null;
+      let lut = Services.prefs.getCharPref(pref, "") * 1;
+      values["col-lastupdatetime"] = lut ? new Date(lut).toISOString() : null;
 
       pref = "browser.safebrowsing.provider." + provider + ".nextupdatetime";
-      let nut = Services.prefs.getCharPref(pref, "");
-      values["col-nextupdatetime"] = nut ? new Date(nut * 1) : null;
+      let nut = Services.prefs.getCharPref(pref, "") * 1;
+      values["col-nextupdatetime"] = nut ? new Date(nut).toISOString() : null;
 
       let listmanager = Cc[
         "@mozilla.org/url-classifier/listmanager;1"
       ].getService(Ci.nsIUrlListManager);
-      let bot = listmanager.getBackOffTime(provider);
-      values["col-backofftime"] = bot ? new Date(bot * 1) : null;
+      let bot = listmanager.getBackOffTime(provider) * 1;
+      values["col-backofftime"] = bot ? new Date(bot).toISOString() : null;
 
       for (let key of Object.keys(values)) {
         let elem = document.getElementById(provider + "-" + key);
@@ -487,7 +487,7 @@ var Cache = {
               let tds = [
                 table,
                 entry.prefix,
-                new Date(entry.expiry * 1000).toString(),
+                new Date(entry.expiry * 1000).toISOString(),
               ];
               let j = 0;
               do {
@@ -498,7 +498,7 @@ var Cache = {
                   );
                   let list = [
                     match.fullhash,
-                    new Date(match.expiry * 1000).toString(),
+                    new Date(match.expiry * 1000).toISOString(),
                   ];
                   tds = tds.concat(list);
                 } else {
