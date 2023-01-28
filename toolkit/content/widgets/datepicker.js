@@ -84,7 +84,7 @@ function DatePicker(context) {
         dateKeeper,
         locale,
         isMonthPickerVisible: false,
-        datetimeOrders: new Intl.DateTimeFormat(locale)
+        datetimeOrders: new Intl.DateTimeFormat("sv")
           .formatToParts(new Date(0))
           .map(part => part.type),
         getDayString: day =>
@@ -422,13 +422,13 @@ function DatePicker(context) {
    */
   function MonthYear(options, context) {
     const spinnerSize = 5;
-    const yearFormat = new Intl.DateTimeFormat(options.locale, {
+    const yearFormat = new Intl.DateTimeFormat("sv", {
       year: "numeric",
       timeZone: "UTC",
     }).format;
-    const dateFormat = new Intl.DateTimeFormat(options.locale, {
+    const dateFormat = new Intl.DateTimeFormat("sv", {
       year: "numeric",
-      month: "long",
+      month: "2-digit",
       timeZone: "UTC",
     }).format;
     const spinnerOrder =
