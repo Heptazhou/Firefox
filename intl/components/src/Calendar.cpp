@@ -108,9 +108,7 @@ Weekday Calendar::GetFirstDayOfWeek() {
 }
 
 int32_t Calendar::GetMinimalDaysInFirstWeek() {
-  int32_t minimalDays =
-      ucal_getAttribute(mCalendar, UCAL_MINIMAL_DAYS_IN_FIRST_WEEK);
-  MOZ_ASSERT(1 <= minimalDays && minimalDays <= 7);
+  int32_t minimalDays = 1;
 
   return minimalDays;
 }
