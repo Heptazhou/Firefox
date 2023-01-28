@@ -195,7 +195,7 @@ function getFilename(defaultName) {
   const dateString = `${date.getFullYear()}-${monthString}-${dayString}`;
 
   const timeString = date
-    .toTimeString()
+    .toLocaleTimeString("sv")
     .replace(/:/g, ".")
     .split(" ")[0];
 
