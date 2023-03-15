@@ -505,6 +505,7 @@ ${RemoveDefaultBrowserAgentShortcut}
   ${AddAssociationIfNoneExist} ".svg" "SnowfoxHTML$5"
   ${AddAssociationIfNoneExist} ".webp"  "SnowfoxHTML$5"
   ${AddAssociationIfNoneExist} ".avif" "SnowfoxHTML$5"
+  ${AddAssociationIfNoneExist} ".jxl" "SnowfoxHTML$5"
 
   ${AddAssociationIfNoneExist} ".pdf" "SnowfoxPDF$5"
 
@@ -601,6 +602,7 @@ ${RemoveDefaultBrowserAgentShortcut}
   WriteRegStr ${RegKey} "$0\Capabilities\FileAssociations" ".svg"   "SnowfoxHTML$2"
   WriteRegStr ${RegKey} "$0\Capabilities\FileAssociations" ".webp"  "SnowfoxHTML$2"
   WriteRegStr ${RegKey} "$0\Capabilities\FileAssociations" ".avif"  "SnowfoxHTML$2"
+  WriteRegStr ${RegKey} "$0\Capabilities\FileAssociations" ".jxl"   "SnowfoxHTML$2"
 
   WriteRegStr ${RegKey} "$0\Capabilities\FileAssociations" ".pdf"   "SnowfoxPDF$2"
 
@@ -673,6 +675,7 @@ ${RemoveDefaultBrowserAgentShortcut}
     ${WriteApplicationsSupportedType} ${RegKey} ".webm"
     ${WriteApplicationsSupportedType} ${RegKey} ".webp"
     ${WriteApplicationsSupportedType} ${RegKey} ".avif"
+    ${WriteApplicationsSupportedType} ${RegKey} ".jxl"
     ${WriteApplicationsSupportedType} ${RegKey} ".xht"
     ${WriteApplicationsSupportedType} ${RegKey} ".xhtml"
     ${WriteApplicationsSupportedType} ${RegKey} ".xml"
@@ -1579,6 +1582,8 @@ Function SetAsDefaultAppUserHKCU
     AppAssocReg::SetAppAsDefault "$R9" ".webp" "file"
     Pop $0
     AppAssocReg::SetAppAsDefault "$R9" ".avif" "file"
+    Pop $0
+    AppAssocReg::SetAppAsDefault "$R9" ".jxl" "file"
     Pop $0
     AppAssocReg::SetAppAsDefault "$R9" ".xht" "file"
     Pop $0
