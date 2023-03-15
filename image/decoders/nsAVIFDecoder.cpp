@@ -18,6 +18,7 @@
 #include "SurfacePipeFactory.h"
 
 #include "mozilla/glean/GleanMetrics.h"
+#include "mozilla/StaticPrefs_image.h"
 #include "mozilla/Telemetry.h"
 #include "mozilla/TelemetryComms.h"
 #include "mozilla/UniquePtrExtensions.h"
@@ -1605,6 +1606,8 @@ nsAVIFDecoder::DecodeResult nsAVIFDecoder::DoDecodeInternal(
 
   if (mIsAnimated) {
     PostIsAnimated(parsedImage.mDuration);
+    if (MOZ_LIKELY(StaticPrefs::image_avif_force_loop()))
+      goto case_MP4PARSE_AVIF_LOOP_MODE_LOOP_INFINITELY;
 
     switch (mParser->GetInfo().loop_mode) {
       case MP4PARSE_AVIF_LOOP_MODE_LOOP_BY_COUNT: {
@@ -1614,6 +1617,7 @@ nsAVIFDecoder::DecodeResult nsAVIFDecoder::DoDecodeInternal(
         break;
       }
       case MP4PARSE_AVIF_LOOP_MODE_LOOP_INFINITELY:
+      case_MP4PARSE_AVIF_LOOP_MODE_LOOP_INFINITELY:
       case MP4PARSE_AVIF_LOOP_MODE_NO_EDITS:
       default:
         PostLoopCount(-1);
