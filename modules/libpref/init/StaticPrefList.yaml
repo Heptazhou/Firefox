@@ -6956,6 +6956,12 @@
   value: false
   mirror: always
 
+# Whether to always loop animated AVIF sequences.
+- name: image.avif.force-loop
+  type: RelaxedAtomicBool
+  value: true
+  mirror: always
+
 # Whether we attempt to decode JXL images or not.
 - name: image.jxl.enabled
   type: RelaxedAtomicBool
