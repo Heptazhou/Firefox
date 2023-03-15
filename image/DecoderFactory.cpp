@@ -234,6 +234,9 @@ nsresult DecoderFactory::CreateAnimationDecoder(
   }
 
   MOZ_ASSERT(aType == DecoderType::GIF || aType == DecoderType::PNG ||
+#ifdef MOZ_JXL
+                 aType == DecoderType::JXL ||
+#endif
                  aType == DecoderType::WEBP || aType == DecoderType::AVIF,
              "Calling CreateAnimationDecoder for non-animating DecoderType");
 
@@ -289,6 +292,9 @@ already_AddRefed<Decoder> DecoderFactory::CloneAnimationDecoder(
   // rediscover it is animated).
   DecoderType type = aDecoder->GetType();
   MOZ_ASSERT(type == DecoderType::GIF || type == DecoderType::PNG ||
+#ifdef MOZ_JXL
+                 type == DecoderType::JXL ||
+#endif
                  type == DecoderType::WEBP || type == DecoderType::AVIF,
              "Calling CloneAnimationDecoder for non-animating DecoderType");
 
