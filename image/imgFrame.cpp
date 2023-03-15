@@ -23,6 +23,7 @@
 #include "mozilla/MemoryReporting.h"
 #include "mozilla/ProfilerLabels.h"
 #include "mozilla/StaticPrefs_browser.h"
+#include "mozilla/StaticPrefs_image.h"
 #include "nsMargin.h"
 #include "nsRefreshDriver.h"
 #include "nsThreadUtils.h"
@@ -107,11 +108,12 @@ static bool ClearSurface(SourceSurfaceSharedData* aSurface,
   MOZ_ASSERT(data);
 
   if (aFormat == SurfaceFormat::OS_RGBX) {
+    const auto x = StaticPrefs::image_rgbx_mode() > 0 ? 0xFF : 0x00;
     // Skia doesn't support RGBX surfaces, so ensure the alpha value is set
-    // to opaque white. While it would be nice to only do this for Skia,
+    // to opaque b / w. While it would be nice to only do this for Skia,
     // imgFrame can run off main thread and past shutdown where
     // we might not have gfxPlatform, so just memset every time instead.
-    memset(data, 0xFF, stride * aSize.height);
+    memset(data, x, stride * aSize.height);
   } else if (aSurface->OnHeap()) {
     // We only need to memset it if the buffer was allocated on the heap.
     // Otherwise, it's allocated via mmap and refers to a zeroed page and will
