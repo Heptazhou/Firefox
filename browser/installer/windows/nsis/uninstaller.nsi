@@ -504,6 +504,7 @@ Section "Uninstall"
   ${un.RegCleanFileHandler}  ".svg"   "SnowfoxHTML-$AppUserModelID"
   ${un.RegCleanFileHandler}  ".webp"  "SnowfoxHTML-$AppUserModelID"
   ${un.RegCleanFileHandler}  ".avif"  "SnowfoxHTML-$AppUserModelID"
+  ${un.RegCleanFileHandler}  ".jxl"   "SnowfoxHTML-$AppUserModelID"
 
   ${un.RegCleanFileHandler}  ".pdf"   "SnowfoxPDF-$AppUserModelID"
 
