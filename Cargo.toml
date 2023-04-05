@@ -130,6 +130,9 @@ memoffset = { path = "build/rust/memoffset" }
 # Patch nom 6 to 7
 nom = { path = "build/rust/nom" }
 
+# Patch ntapi 0.3 to 0.4
+ntapi = { path = "build/rust/ntapi" }
+
 # Patch nix 0.24 to 0.25
 nix = { path = "build/rust/nix" }
 
