@@ -16,13 +16,13 @@ BEGIN
   BEGIN
       BLOCK "040904b0"
       BEGIN
-          VALUE "CompanyName", "Mozilla"
-          VALUE "FileDescription", "Firefox"
+          VALUE "CompanyName", "0h7z"
+          VALUE "FileDescription", "Snowfox"
           VALUE "FileVersion", MY_VERSION
           VALUE "InternalName", "7zSD.sfx"
-          VALUE "LegalCopyright", "Mozilla"
+          VALUE "LegalCopyright", "0h7z"
           VALUE "OriginalFilename", "7zSD.sfx"
-          VALUE "ProductName", "Firefox"
+          VALUE "ProductName", "Snowfox"
           VALUE "ProductVersion", MY_VERSION
       END
   END
