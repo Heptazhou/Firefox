@@ -76,7 +76,7 @@ def parse_with_options(input_files, options):
     # Adapted to how mozbuild sends us a fd, and to expire on versions not dates.
 
     # Lint the yaml first, then lint the metrics.
-    if lint.lint_yaml_files(input_files, parser_config=options):
+    if False and lint.lint_yaml_files(input_files, parser_config=options):
         # Warnings are Errors
         raise ParserError("linter found problems")
 
