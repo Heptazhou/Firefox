@@ -780,12 +780,20 @@ class RecursiveMakeBackend(MakeBackend):
         ]
 
         def add_category_rules(category, roots, graph):
+            FUNC = add_category_rules.__name__
             rule = root_deps_mk.create_rule(["recurse_%s" % category])
             # Directories containing rust compilations don't generally depend
             # on other directories in the tree, so putting them first here will
             # start them earlier in the build.
             rust_roots = sorted(r for r in roots if r in self._rust_targets)
             if category == "compile" and rust_roots:
+                gkrust = [t for t in rust_roots if t == self._gkrust_target]
+                others = [t for t in rust_roots if t != self._gkrust_target]
+                if len(gkrust) > 0 and len(others) > 0:
+                    rust_roots = [*gkrust, ".WAIT", *others]
+                    rust_rule = " ".join(rust_roots[:3 + len(gkrust)])
+                    self.log(logging.INFO, FUNC, {}, f"[{FUNC}]")
+                    self.log(logging.INFO, FUNC, {}, f"recurse_rust: {rust_rule} ...")
                 rust_rule = root_deps_mk.create_rule(["recurse_rust"])
                 rust_rule.add_dependencies(rust_roots)
                 # Ensure our cargo invocations are serialized, and gecko comes
@@ -795,18 +803,24 @@ class RecursiveMakeBackend(MakeBackend):
                 # poorly, so prioritizing these will save some idle time in full
                 # builds.
                 for prior_target, target in pairwise(
-                    sorted(
-                        [t for t in rust_roots], key=lambda t: t != self._gkrust_target
-                    )
+                    chain(gkrust, others)
                 ):
                     r = root_deps_mk.create_rule([target])
                     r.add_dependencies([prior_target])
 
             rule.add_dependencies(chain(rust_roots, sorted(roots)))
             for target, deps in sorted(graph.items()):
+                if deps: deps = sorted(deps) # set
                 if deps:
+                    gkrust = [t for t in deps if t == self._gkrust_target]
+                    others = [t for t in deps if t != self._gkrust_target]
+                    if len(gkrust) > 0 and len(others) > 0:
+                        deps = [*gkrust, ".WAIT", *others]
+                        rule = " ".join(rust_roots[:3 + len(gkrust)])
+                        self.log(logging.INFO, FUNC, {}, f"[{FUNC}]")
+                        self.log(logging.INFO, FUNC, {}, f"{target}: {rule} ...")
                     rule = root_deps_mk.create_rule([target])
-                    rule.add_dependencies(sorted(deps))
+                    rule.add_dependencies(deps)
 
         non_default_roots = defaultdict(list)
         non_default_graphs = defaultdict(lambda: defaultdict(set))

@@ -7,7 +7,7 @@
 #
 
 ifndef topsrcdir
-$(error topsrcdir was not set))
+$(error topsrcdir was not set!)
 endif
 
 # Define an include-at-most-once flag

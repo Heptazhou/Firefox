@@ -311,7 +311,7 @@ ifneq (android,$(MOZ_WIDGET_TOOLKIT))
 endif
 
 ifeq ($(OS_TARGET), WINNT)
-  INSTALLER_PACKAGE = $(DIST)/$(PKG_INST_PATH)$(PKG_INST_BASENAME).exe
+  INSTALLER_PACKAGE = $(DIST)/$(PKG_INST_BASENAME).exe
 endif
 
 # These are necessary because some of our packages/installers contain spaces
