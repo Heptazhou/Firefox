@@ -2817,7 +2817,7 @@ with only_when(requires_wasm_sandboxing & compile_environment):
     @imports("os")
     def wasi_sysroot(wasi_sysroot, bootstrapped_sysroot):
         if not wasi_sysroot:
-            return bootstrapped_sysroot
+            return bootstrapped_sysroot or "/usr/share/wasi-sysroot"
 
         wasi_sysroot = wasi_sysroot[0]
         if not os.path.isdir(wasi_sysroot):
