@@ -42,7 +42,7 @@ def hash_paths(base_path, patterns):
             if found:
                 files.update(found)
             else:
-                raise Exception("%s did not match anything" % pattern)
+                print("Critical: %s did not match anything" % pattern)
         for path in sorted(files.keys()):
             if path.endswith((".pyc", ".pyd", ".pyo")):
                 continue

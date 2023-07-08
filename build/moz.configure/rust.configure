@@ -295,6 +295,7 @@ def detect_rustc_target(
     candidates = rust_supported_targets.get(
         (host_or_target.cpu, host_or_target.endianness, host_or_target.os), []
     )
+    log.debug(f"[detect_rustc_target] candidates = {[c.rust_target for c in candidates]}")
 
     def find_candidate(candidates):
         if len(candidates) == 1:
@@ -309,6 +310,8 @@ def detect_rustc_target(
             if host_or_target.abi:
                 if host_or_target.abi == "msvc":
                     suffix = "windows-msvc"
+                elif host_or_target.abi == "mingw" and compiler_info.type != "gcc":
+                    suffix = "windows-gnullvm"
                 elif host_or_target.abi == "mingw":
                     suffix = "windows-gnu"
             elif compiler_info.type in ("gcc", "clang"):
@@ -332,6 +335,8 @@ def detect_rustc_target(
 
             if len(narrowed) == 1:
                 return narrowed[0].rust_target
+            elif narrowed:
+                candidates = narrowed
 
         # - For arm targets, correlate with arm_target
         #   we could be more thorough with the supported rust targets, but they
@@ -526,6 +531,10 @@ def rust_host_triple(
 def rust_target_triple(
     rustc, target, compiler_info, rust_supported_targets, arm_target
 ):
+    log.debug(f"[rust_target_triple] rustc         = {rustc             }")
+    log.debug(f"[rust_target_triple] target        = {target.alias      }")
+    log.debug(f"[rust_target_triple] compiler_info = {compiler_info.type}")
+
     rustc_target = detect_rustc_target(
         target, compiler_info, arm_target, rust_supported_targets
     )
