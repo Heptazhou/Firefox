@@ -60,6 +60,7 @@ def archive_exe(pkg_dir, tagfile, sfx_package, package, use_upx):
                 "-mb0:1",
                 "-mb0s1:2",
                 "-mb0s2:3",
+                "-mtm-",
             ]
         )
 

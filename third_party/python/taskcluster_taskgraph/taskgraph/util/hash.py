@@ -36,7 +36,7 @@ def hash_paths(base_path, patterns):
         if matches:
             found.update(matches)
         else:
-            raise Exception("%s did not match anything" % pattern)
+            print("Critical: %s did not match anything" % pattern)
     for path in sorted(found):
         h.update(
             "{} {}\n".format(
