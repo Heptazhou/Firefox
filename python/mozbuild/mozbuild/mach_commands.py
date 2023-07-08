@@ -3245,8 +3245,8 @@ def repackage_desktop_file(
     "--locales",
     metavar="LOCALES",
     nargs="+",
-    required=True,
-    help="List of locales to package",
+    required=False,
+    help="List of locales to package (default browser/locales/shipped-locales)",
 )
 @CommandArgument(
     "--verbose", action="store_true", help="Log informative status messages."
@@ -3261,6 +3261,12 @@ def package_l10n(command_context, verbose=False, locales=[]):
             "in your mozconfig."
         )
         return 1
+
+    if not locales:
+        with open(mozpath.join(
+            command_context.topsrcdir, "browser/locales/shipped-locales",
+        ), "r") as io:
+            locales = io.read().splitlines()
 
     locales = sorted(locale for locale in locales if locale != "en-US")
 
