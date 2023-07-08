@@ -16,7 +16,7 @@ def buildid_header(output):
         print("Ignoring invalid MOZ_BUILD_DATE: %s" % buildid, file=sys.stderr)
         buildid = None
     if not buildid:
-        buildid = datetime.now().strftime("%Y%m%d%H%M%S")
+        buildid = datetime.now().strftime("%Y%m%d%H%M%S")[:-3] + "000"
     output.write("#define MOZ_BUILDID %s\n" % buildid)
 
 
