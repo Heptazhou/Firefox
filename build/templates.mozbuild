@@ -121,6 +121,16 @@ def RustLibrary(name, features=None, output_category=None, is_gkrust=False):
     if is_gkrust:
         IS_GKRUST = True
 
+        # --no-keep-memory
+        # ld normally optimizes for speed over memory usage by caching the symbol tables of input files in memory. This option tells ld to instead optimize for memory usage, by rereading the symbol tables as necessary. This may be required if ld runs out of memory space while linking a large executable.
+        LDFLAGS += ["-Wl,--no-keep-memory"]
+
+        # --reduce-memory-overheads
+        # This option reduces memory requirements at ld runtime, at the expense of linking speed. This was introduced to select the old O(n^2) algorithm for link map file generation, rather than the new O(n) algorithm which uses about 40% more memory for symbol storage.
+        # Another effect of the switch is to set the default hash table size to 1021, which again saves memory at the cost of lengthening the linker's run time. This is not done however if the --hash-size switch has been used.
+        # The --reduce-memory-overheads switch may be also be used to enable other tradeoffs in future versions of the linker.
+        # LDFLAGS += ["-Wl,--reduce-memory-overheads"]
+
 
 @template
 def RustProgram(name):

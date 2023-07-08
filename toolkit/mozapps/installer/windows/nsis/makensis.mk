@@ -66,7 +66,7 @@ installer:: $(CONFIG_DIR)/setup.exe $(ZIP_IN)
 	@echo 'Packaging $(WIN32_INSTALLER_OUT).'
 	$(NSINSTALL) -D '$(ABS_DIST)/$(PKG_INST_PATH)'
 	$(PYTHON3) $(MOZILLA_DIR)/mach repackage installer \
-	  -o '$(ABS_DIST)/$(PKG_INST_PATH)$(PKG_INST_BASENAME).exe' \
+	  -o '$(ABS_DIST)/$(PKG_INST_BASENAME).exe' \
 	  --package-name '$(MOZ_PKG_DIR)' \
 	  --package '$(ZIP_IN)' \
 	  --tag $(topsrcdir)/$(MOZ_BUILD_APP)/installer/windows/app.tag \

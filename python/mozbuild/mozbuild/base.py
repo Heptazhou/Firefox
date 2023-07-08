@@ -748,11 +748,11 @@ class MozbuildObject(ProcessExecutionMixin):
             if job_size == 0:
                 job_size = 2.0 if self.substs.get("CC_TYPE") == "gcc" else 1.0  # GiB
 
-            cpus = cpu_count()
+            cpus = cpu_count() or 1
             if not psutil or not job_size:
                 num_jobs = cpus
             else:
-                mem_gb = psutil.virtual_memory().total / 1024**3
+                mem_gb = psutil.virtual_memory().available / 1024**3
                 from_mem = round(mem_gb / job_size)
                 num_jobs = max(1, min(cpus, from_mem))
                 print(

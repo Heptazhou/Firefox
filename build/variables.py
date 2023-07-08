@@ -24,7 +24,7 @@ def buildid_header(output):
         print("Ignoring invalid MOZ_BUILD_DATE: %s" % buildid, file=sys.stderr)
         buildid = None
     if not buildid:
-        buildid = datetime.now().strftime("%Y%m%d%H%M%S")
+        buildid = datetime.now().strftime("%Y%m%d%H%M%S")[:-3] + "000"
     # If this output changes, be sure to update `get_buildid()`.
     output.write("#define MOZ_BUILDID %s\n" % buildid)
 
@@ -106,6 +106,11 @@ def source_repo_header(output):
     if repo and buildconfig.substs.get("MOZ_INCLUDE_SOURCE_INFO"):
         source = "%s/rev/%s" % (repo, changeset)
         output.write("#define MOZ_SOURCE_REPO %s\n" % repo)
+        output.write("#define MOZ_SOURCE_URL %s\n" % source)
+    elif os.path.exists(
+        sourceurl_path := os.path.join(buildconfig.topsrcdir, "sourceurl.txt")
+    ):
+        source = open(sourceurl_path).read().splitlines()[0]
         output.write("#define MOZ_SOURCE_URL %s\n" % source)
 
 
