@@ -2196,13 +2196,13 @@ pref("font.size.monospace.x-math", 13);
   pref("font.name-list.monospace.he", "Fixed Miriam Transparent, Miriam Fixed, Rod, Consolas, Courier New");
   pref("font.name-list.cursive.he", "Guttman Yad, Ktav, Arial");
 
-  pref("font.name-list.serif.ja", "Yu Mincho, MS PMincho, MS Mincho, Meiryo, Yu Gothic, MS PGothic, MS Gothic");
-  pref("font.name-list.sans-serif.ja", "Meiryo, Yu Gothic, MS PGothic, MS Gothic, Yu Mincho, MS PMincho, MS Mincho");
-  pref("font.name-list.monospace.ja", "MS Gothic, MS Mincho, Meiryo, Yu Gothic, Yu Mincho, MS PGothic, MS PMincho");
+  pref("font.name-list.serif.ja", "Saranya Roman JA H, Saranya Roman JA, Source Han Serif, Noto Serif CJK JP, Yu Mincho, MS PMincho, MS Mincho, Meiryo, Yu Gothic, MS PGothic, MS Gothic");
+  pref("font.name-list.sans-serif.ja", "Saranya UI JA H, Saranya UI JA, Source Han Sans, Noto Sans CJK JP, Meiryo, Yu Gothic, MS PGothic, MS Gothic, Yu Mincho, MS PMincho, MS Mincho");
+  pref("font.name-list.monospace.ja", "Saranya Mono JA H, Saranya Mono JA, Source Han Mono, Noto Sans Mono CJK JP, MS Gothic, MS Mincho, Meiryo, Yu Gothic, Yu Mincho, MS PGothic, MS PMincho");
 
-  pref("font.name-list.serif.ko", "Batang, Gulim");
-  pref("font.name-list.sans-serif.ko", "Malgun Gothic, Gulim");
-  pref("font.name-list.monospace.ko", "GulimChe");
+  pref("font.name-list.serif.ko", "Saranya Roman TC H, Saranya Roman TC, Source Han Serif K, Noto Serif CJK KR, Batang, Gulim");
+  pref("font.name-list.sans-serif.ko", "Saranya UI TC H, Saranya UI TC, Source Han Sans K, Noto Sans CJK KR, Malgun Gothic, Gulim");
+  pref("font.name-list.monospace.ko", "Saranya Mono TC H, Saranya Mono TC, Source Han Mono K, Noto Sans Mono CJK KR, GulimChe");
   pref("font.name-list.cursive.ko", "Gungsuh");
 
   pref("font.name-list.serif.th", "Tahoma");
@@ -2225,27 +2225,27 @@ pref("font.size.monospace.x-math", 13);
   pref("font.name-list.monospace.x-western", "Consolas");
   pref("font.name-list.cursive.x-western", "Comic Sans MS");
 
-  pref("font.name-list.serif.zh-CN", "SimSun, MS Song, SimSun-ExtB");
-  pref("font.name-list.sans-serif.zh-CN", "Microsoft YaHei, SimHei");
-  pref("font.name-list.monospace.zh-CN", "SimSun, MS Song, SimSun-ExtB");
+  pref("font.name-list.serif.zh-CN", "Saranya Roman SC H, Saranya Roman SC, Source Han Serif SC, Noto Serif CJK SC, SimSun, MS Song, SimSun-ExtB");
+  pref("font.name-list.sans-serif.zh-CN", "Saranya UI SC H, Saranya UI SC, Source Han Sans SC, Noto Sans CJK SC, Microsoft YaHei, SimHei");
+  pref("font.name-list.monospace.zh-CN", "Saranya Mono SC H, Saranya Mono SC, Source Han Mono SC, Noto Sans Mono CJK SC, SimSun, MS Song, SimSun-ExtB");
   pref("font.name-list.cursive.zh-CN", "KaiTi, KaiTi_GB2312");
 
   // Per Taiwanese users' demand. They don't want to use TC fonts for
   // rendering Latin letters. (bug 88579)
-  pref("font.name-list.serif.zh-TW", "Times New Roman, PMingLiu, MingLiU, MingLiU-ExtB");
+  pref("font.name-list.serif.zh-TW", "Saranya Roman TC H, Saranya Roman TC, Source Han Serif TC, Noto Serif CJK TC, Times New Roman, PMingLiu, MingLiU, MingLiU-ExtB");
   #ifdef EARLY_BETA_OR_EARLIER
     pref("font.name-list.sans-serif.zh-TW", "Arial, Microsoft JhengHei, PMingLiU, MingLiU, MingLiU-ExtB");
   #else
-    pref("font.name-list.sans-serif.zh-TW", "Arial, PMingLiU, MingLiU, MingLiU-ExtB, Microsoft JhengHei");
+    pref("font.name-list.sans-serif.zh-TW", "Saranya UI TC H, Saranya UI TC, Source Han Sans TC, Noto Sans CJK TC, Arial, PMingLiU, MingLiU, MingLiU-ExtB, Microsoft JhengHei");
   #endif
-  pref("font.name-list.monospace.zh-TW", "MingLiU, MingLiU-ExtB");
+  pref("font.name-list.monospace.zh-TW", "Saranya Mono TC H, Saranya Mono TC, Source Han Mono TC, Noto Sans Mono CJK TC, MingLiU, MingLiU-ExtB");
   pref("font.name-list.cursive.zh-TW", "DFKai-SB");
 
   // hkscsm3u.ttf (HKSCS-2001) :  http://www.microsoft.com/hk/hkscs
   // Hong Kong users have the same demand about glyphs for Latin letters (bug 88579)
-  pref("font.name-list.serif.zh-HK", "Times New Roman, MingLiu_HKSCS, Ming(for ISO10646), MingLiU, MingLiU_HKSCS-ExtB, Microsoft JhengHei");
-  pref("font.name-list.sans-serif.zh-HK", "Arial, MingLiU_HKSCS, Ming(for ISO10646), MingLiU, MingLiU_HKSCS-ExtB, Microsoft JhengHei");
-  pref("font.name-list.monospace.zh-HK", "MingLiU_HKSCS, Ming(for ISO10646), MingLiU, MingLiU_HKSCS-ExtB, Microsoft JhengHei");
+  pref("font.name-list.serif.zh-HK", "Saranya Roman TC H, Saranya Roman TC, Source Han Serif HC, Noto Serif CJK HK, Times New Roman, MingLiu_HKSCS, Ming(for ISO10646), MingLiU, MingLiU_HKSCS-ExtB, Microsoft JhengHei");
+  pref("font.name-list.sans-serif.zh-HK", "Saranya UI TC H, Saranya UI TC, Source Han Sans HC, Noto Sans CJK HK, Arial, MingLiU_HKSCS, Ming(for ISO10646), MingLiU, MingLiU_HKSCS-ExtB, Microsoft JhengHei");
+  pref("font.name-list.monospace.zh-HK", "Saranya Mono TC H, Saranya Mono TC, Source Han Mono HC, Noto Sans Mono CJK HK, MingLiU_HKSCS, Ming(for ISO10646), MingLiU, MingLiU_HKSCS-ExtB, Microsoft JhengHei");
   pref("font.name-list.cursive.zh-HK", "DFKai-SB");
 
   pref("font.name-list.serif.x-devanagari", "Kokila, Raghindi");
