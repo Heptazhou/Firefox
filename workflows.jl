@@ -81,10 +81,18 @@ const ACT_RUN(cmd::StrOrSym) = ODict(S"run" => cmd)
 # const ACT_UPDT(dict::AbstractDict, rel::StrOrSym) = nothing
 
 const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
-	S"container" => S"archlinux:base-devel",
+	S"container" => ODict(
+		S"image" => S"archlinux:base-devel",
+		S"volumes" => ["/:/mnt"],
+	),
 	S"runs-on" => S"ubuntu-latest",
 	S"steps" => [
-		ACT_INIT(["github-cli", "julia", "msitools", "python-pip"])
+		ACT_RUN("""
+			cd /mnt
+			rm -vrf opt/{ghc,hostedtoolcache}
+			rm -vrf usr/{local,share/{dotnet,swift}}"""
+		)
+		ACT_INIT(["github-cli", "julia", "msitools", "python-pip", "tree"])
 		ACT_CHECKOUT(
 			S"path" => Symbol("firefox"),
 			S"ref" => Symbol(commit),
@@ -93,7 +101,7 @@ const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
 			"""
 			cd firefox && git log --date=iso --show-signature
 			ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
-			curl -LO https://github.com/Heptazhou/Snowfox/raw/master/Windows/vs.jl
+			curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
 			mkdir -p \$MOZBUILD_STATE_PATH && julia vs.jl / && cd .. && pwd
 			mv -vt . \$MOZBUILD_STATE_PATH/*.tar.zst"""
 			S"ls -lav *.tar.zst"
@@ -102,7 +110,8 @@ const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
 		ACT_GH("""
 			gh version
 			gh release delete \$GH_TAG --cleanup-tag -y || true
-			gh release create \$GH_TAG *.tar.zst --target $commit""",
+			gh release create \$GH_TAG *.tar.zst --target \\
+			  $commit --title \$GH_TAG""",
 			S"GH_TAG" => Symbol(tag),
 		)
 	],
@@ -130,5 +139,5 @@ end
 
 branch = sort((f = "branch.toml") |> TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_125_END"], "v125")
+make_vs(branch["FIREFOX_NIGHTLY_126_END"], "v126")
 

@@ -8,9 +8,16 @@ on:
 
 jobs:
   make_vs:
-    container: archlinux:base-devel
+    container:
+      image: archlinux:base-devel
+      volumes:
+        - "/:/mnt"
     runs-on: ubuntu-latest
     steps:
+      - run: |-
+          cd /mnt
+          rm -vrf opt/{ghc,hostedtoolcache}
+          rm -vrf usr/{local,share/{dotnet,swift}}
       - run: |-
           uname -a
           mkdir ~/.ssh -p && cd /etc/pacman.d
@@ -25,16 +32,16 @@ jobs:
           pacman -Syu --noconfirm dbus-daemon-units git pacman-contrib
           sed -r 's/\b(EUID)\s*==\s*0\b/\1 < -0/' -i /bin/makepkg
           makepkg --version
-      - run: pacman -S --noconfirm github-cli julia msitools python-pip
+      - run: pacman -S --noconfirm github-cli julia msitools python-pip tree
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
           path: firefox
-          ref: e41be1e61b11e44df25beae413ad0e05c04970ac
+          ref: c29594635e4bcbc06342e96df3ca3fdf84d55a0d
       - run: |-
           cd firefox && git log --date=iso --show-signature
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
-          curl -LO https://github.com/Heptazhou/Snowfox/raw/master/Windows/vs.jl
+          curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
           mkdir -p $MOZBUILD_STATE_PATH && julia vs.jl / && cd .. && pwd
           mv -vt . $MOZBUILD_STATE_PATH/*.tar.zst
       - run: ls -lav *.tar.zst
@@ -45,8 +52,9 @@ jobs:
       - run: |-
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
-          gh release create $GH_TAG *.tar.zst --target e41be1e61b11e44df25beae413ad0e05c04970ac
+          gh release create $GH_TAG *.tar.zst --target \
+            c29594635e4bcbc06342e96df3ca3fdf84d55a0d --title $GH_TAG
         env:
-          GH_TAG: v125
+          GH_TAG: v126
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}
