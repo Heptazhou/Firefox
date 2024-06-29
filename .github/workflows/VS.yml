@@ -7,7 +7,7 @@ on:
       - "version.txt"
 
 jobs:
-  makepkg:
+  make_vs:
     container: archlinux:base-devel
     runs-on: ubuntu-latest
     steps:

@@ -122,7 +122,7 @@ function make_vs(commit::StrOrSym, tag::StrOrSym)
 				),
 			),
 			S"jobs" => ODict(
-				S"makepkg" => JOB_MSVC(commit, tag),
+				S"make_vs" => JOB_MSVC(commit, tag),
 			),
 		),
 	)
