@@ -139,5 +139,5 @@ end
 
 branch = sort((f = "branch.toml") |> TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_126_END"], "v126")
+make_vs(branch["FIREFOX_NIGHTLY_127_END"], "v127")
 
