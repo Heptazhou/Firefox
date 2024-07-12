@@ -37,7 +37,7 @@ jobs:
         with:
           persist-credentials: false
           path: firefox
-          ref: 23a1ac866ac4c1f5366979c94c65d0717f73591c
+          ref: d77da4d11c07b3733c674ee0abea26ef6df32643
       - run: |-
           cd firefox && git log --date=iso --show-signature
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
@@ -53,8 +53,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            23a1ac866ac4c1f5366979c94c65d0717f73591c --title $GH_TAG
+            d77da4d11c07b3733c674ee0abea26ef6df32643 --title $GH_TAG
         env:
-          GH_TAG: v127
+          GH_TAG: v128
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}
