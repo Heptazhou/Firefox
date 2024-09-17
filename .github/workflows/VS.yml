@@ -16,10 +16,11 @@ jobs:
     steps:
       - run: |-
           cd /mnt
-          du -hd1 opt usr
-          rm -vrf opt/{ghc,hostedtoolcache}        | wc -l
-          rm -vrf usr/{local,share/{dotnet,swift}} | wc -l
-          du -hd1 opt usr
+          du -hd0 opt/ usr/ && du -hd1 opt/* usr/{lib,local{/lib,},share}
+          rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx} | wc -l
+          rm -vrf usr/{lib/{google-*,heroku,jvm,llvm-*},local}   | wc -l
+          rm -vrf usr/share/{az_*,dotnet,miniconda,swift}        | wc -l
+          du -hd0 opt/ usr/
       - run: |-
           uname -a
           mkdir ~/.ssh -p && cd /etc/pacman.d
@@ -39,7 +40,7 @@ jobs:
         with:
           persist-credentials: false
           path: firefox
-          ref: 2c875ef12593121d0d0d565e8cec87022f659e34
+          ref: 306386a9fd12553b42d65503f11374421d2ab613
       - run: |-
           cd firefox && git log --date=iso --show-signature
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
@@ -55,8 +56,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            2c875ef12593121d0d0d565e8cec87022f659e34 --title $GH_TAG
+            306386a9fd12553b42d65503f11374421d2ab613 --title $GH_TAG
         env:
-          GH_TAG: v129
+          GH_TAG: v130
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}

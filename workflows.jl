@@ -89,10 +89,11 @@ const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
 	S"steps" => [
 		ACT_RUN("""
 			cd /mnt
-			du -hd1 opt usr
-			rm -vrf opt/{ghc,hostedtoolcache}        | wc -l
-			rm -vrf usr/{local,share/{dotnet,swift}} | wc -l
-			du -hd1 opt usr"""
+			du -hd0 opt/ usr/ && du -hd1 opt/* usr/{lib,local{/lib,},share}
+			rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx} | wc -l
+			rm -vrf usr/{lib/{google-*,heroku,jvm,llvm-*},local}   | wc -l
+			rm -vrf usr/share/{az_*,dotnet,miniconda,swift}        | wc -l
+			du -hd0 opt/ usr/"""
 		)
 		ACT_INIT(["github-cli", "julia", "msitools", "python-pip", "tree"])
 		ACT_CHECKOUT(
@@ -141,5 +142,5 @@ end
 
 branch = sort((f = "branch.toml") |> TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_129_END"], "v129")
+make_vs(branch["FIREFOX_NIGHTLY_130_END"], "v130")
 
