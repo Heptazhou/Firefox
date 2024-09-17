@@ -16,8 +16,10 @@ jobs:
     steps:
       - run: |-
           cd /mnt
-          rm -vrf opt/{ghc,hostedtoolcache}
-          rm -vrf usr/{local,share/{dotnet,swift}}
+          du -hd1 opt usr
+          rm -vrf opt/{ghc,hostedtoolcache}        | wc -l
+          rm -vrf usr/{local,share/{dotnet,swift}} | wc -l
+          du -hd1 opt usr
       - run: |-
           uname -a
           mkdir ~/.ssh -p && cd /etc/pacman.d
@@ -29,7 +31,7 @@ jobs:
           sed -r 's/^#(PACKAGER)=.*/\1="Seele <seele@0h7z.com>"/' -i makepkg.conf
           pacman-key --init
       - run: |-
-          pacman -Syu --noconfirm dbus-daemon-units git pacman-contrib
+          pacman -Syu --noconfirm git pacman-contrib
           sed -r 's/\b(EUID)\s*==\s*0\b/\1 < -0/' -i /bin/makepkg
           makepkg --version
       - run: pacman -S --noconfirm github-cli julia msitools python-pip tree
@@ -37,7 +39,7 @@ jobs:
         with:
           persist-credentials: false
           path: firefox
-          ref: d77da4d11c07b3733c674ee0abea26ef6df32643
+          ref: 2c875ef12593121d0d0d565e8cec87022f659e34
       - run: |-
           cd firefox && git log --date=iso --show-signature
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
@@ -53,8 +55,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            d77da4d11c07b3733c674ee0abea26ef6df32643 --title $GH_TAG
+            2c875ef12593121d0d0d565e8cec87022f659e34 --title $GH_TAG
         env:
-          GH_TAG: v128
+          GH_TAG: v129
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}
