@@ -16,7 +16,7 @@ using Exts
 using TOML: TOML
 using YAML: yaml
 
-const COMPRESS = "zstdmt -17 -M1024M --long"
+const COMPRESS = "zstdmt -18 -M1024M --long"
 const NAME, MAIL = "Seele", "seele@0h7z.com"
 const PACKAGER = "$NAME <$MAIL>"
 const PUSH_NOP = "Everything up-to-date"
@@ -81,18 +81,15 @@ const JOB_MSVC(commit::SymOrStr, tag::SymOrStr) = LDict(
 	),
 	S"runs-on" => S"ubuntu-latest",
 	S"steps" => [
-		ACT_RUN("""
+		ACT_RUN(let x = raw"wc -l | xargs -I# echo $'rm:\t#'"
+			"""
 			cd /mnt
 			du -hd0 opt/ usr/ && du -hd1 opt/* usr/{lib,local{/lib,},share}
-			$(strip(let wc = raw"wc -l | xargs -I# echo $'rm:\t#'"
-			"""
-			rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx} | $wc
-			rm -vrf usr/{lib/{google-*,heroku,jvm,llvm-*},local}   | $wc
-			rm -vrf usr/share/{az_*,dotnet,miniconda,swift}        | $wc
-			"""
-			end))
+			rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx}    | $x
+			rm -vrf usr/{local,share/{az_*,dotnet,miniconda,swift}}   | $x
+			rm -vrf usr/lib/{firefox,google-*,heroku,jvm,llvm-*,mono} | $x
 			du -hd0 opt/ usr/"""
-		)
+		end)
 		ACT_INIT(["github-cli", "julia", "msitools", "python-pip", "tree"])
 		ACT_CHECKOUT(
 			S"path" => Symbol("firefox"),
@@ -142,5 +139,5 @@ end
 
 branch = sort!((f = "branch.toml") |> ODict ∘ TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_131_END"], :v131)
+make_vs(branch["FIREFOX_NIGHTLY_132_END"], :v132)
 

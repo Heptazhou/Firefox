@@ -18,9 +18,9 @@ const py = "taskcluster/scripts/misc/get_vs.py"
 
 const vs = "build/vs/vs2022.yaml"
 
-isempty(ARGS) || let moz = "\${MOZBUILD_STATE_PATH:=/moz}"
-	sh.(["mach python --virtualenv=build $py $vs $moz/vs"])
-	sh.(["mach clobber", "tree -La 2 $moz/vs"])
-	sh.(["tar IfCc \"zstdmt -17 -M1024M --long\" $moz/vs.tar.zst $moz vs"])
+isempty(ARGS) || let moz = raw"${MOZBUILD_STATE_PATH:=/moz}"
+	sh.(["time mach python --virtualenv=build $py $vs $moz/vs"])
+	sh.(["time mach clobber", "tree -La 2 $moz/vs"])
+	sh.(["time tar IfCc \"zstdmt -18 -M1024M --long\" $moz/vs.tar.zst $moz vs"])
 end
 

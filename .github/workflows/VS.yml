@@ -17,9 +17,9 @@ jobs:
       - run: |-
           cd /mnt
           du -hd0 opt/ usr/ && du -hd1 opt/* usr/{lib,local{/lib,},share}
-          rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx} | wc -l | xargs -I# echo $'rm:\t#'
-          rm -vrf usr/{lib/{google-*,heroku,jvm,llvm-*},local}   | wc -l | xargs -I# echo $'rm:\t#'
-          rm -vrf usr/share/{az_*,dotnet,miniconda,swift}        | wc -l | xargs -I# echo $'rm:\t#'
+          rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx}    | wc -l | xargs -I# echo $'rm:\t#'
+          rm -vrf usr/{local,share/{az_*,dotnet,miniconda,swift}}   | wc -l | xargs -I# echo $'rm:\t#'
+          rm -vrf usr/lib/{firefox,google-*,heroku,jvm,llvm-*,mono} | wc -l | xargs -I# echo $'rm:\t#'
           du -hd0 opt/ usr/
       - run: |-
           uname -a
@@ -27,7 +27,7 @@ jobs:
           echo -e 'Server = https://mirrors.dotsrc.org/archlinux/$repo/os/$arch' >> mirrorlist
           echo -e 'Server = https://mirrors.kernel.org/archlinux/$repo/os/$arch' >> mirrorlist
           tac mirrorlist > mirrorlist~ && mv mirrorlist{~,} && cd /etc
-          sed -r 's/^(COMPRESSZST)=.*/\1=(zstdmt -17 -M1024M --long)/' -i makepkg.conf
+          sed -r 's/^(COMPRESSZST)=.*/\1=(zstdmt -18 -M1024M --long)/' -i makepkg.conf
           sed -r 's/^#(MAKEFLAGS)=.*/\1="-j`nproc`"/' -i makepkg.conf
           sed -r 's/^#(PACKAGER)=.*/\1="Seele <seele@0h7z.com>"/' -i makepkg.conf
           pacman-key --init
@@ -40,7 +40,7 @@ jobs:
         with:
           persist-credentials: false
           path: firefox
-          ref: 7115d9e36288b223319f7b41165f0af7db550d5a
+          ref: 47dffde2ab1744f56b18e11023dac58fc9d5ea30
       - run: |-
           cd firefox && git log --date=iso --show-signature
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
@@ -56,8 +56,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            7115d9e36288b223319f7b41165f0af7db550d5a --title $GH_TAG
+            47dffde2ab1744f56b18e11023dac58fc9d5ea30 --title $GH_TAG
         env:
-          GH_TAG: v131
+          GH_TAG: v132
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}
