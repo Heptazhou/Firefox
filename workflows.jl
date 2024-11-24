@@ -2,8 +2,7 @@
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
+# published by the Free Software Foundation, version 3.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -13,48 +12,43 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-using OrderedCollections: LittleDict as LDict
-using OrderedCollections: OrderedDict as ODict
+using Exts
 using TOML: TOML
-using YAML: YAML, yaml
+using YAML: yaml
 
 const COMPRESS = "zstdmt -17 -M1024M --long"
 const NAME, MAIL = "Seele", "seele@0h7z.com"
 const PACKAGER = "$NAME <$MAIL>"
 const PUSH_NOP = "Everything up-to-date"
-const StrOrSym = Union{AbstractString, Symbol}
 const URL_AUR = "https://aur.archlinux.org"
 const URL_DEB = "https://deb.debian.org/debian"
-const YAML.yaml(xs...) = join(map(yaml, xs), "\n")
-macro S_str(string)
-	:(Symbol($string))
-end
-const cquote(s::StrOrSym) = "\$'$(escape(s, "'"))'"
-const escape(s::StrOrSym, xs...; kw...) = escape_string(s, xs...; kw...)
+
+const cquote(s::SymOrStr)::String = "\$'$(escape(s, "'"))'"
+const escape(s::SymOrStr, xs...; kw...) = escape_string(s, xs...; kw...)
 const escape(sym::Symbol, xs...; kw...) = escape(string(sym), xs...; kw...)
-const mirror = [
+const mirror = String[
 	raw"https://mirrors.dotsrc.org/archlinux/$repo/os/$arch"
 	raw"https://mirrors.kernel.org/archlinux/$repo/os/$arch"
 ]
 
-const ACT_ARTIFACT(pat::StrOrSym) = ODict(
+const ACT_ARTIFACT(pat::SymOrStr) = LDict(
 	S"uses" => S"actions/upload-artifact@v4",
-	S"with" => ODict(S"compression-level" => 0, S"path" => pat),
+	S"with" => LDict(S"compression-level" => 0, S"path" => pat),
 )
-const ACT_CHECKOUT(ref::StrOrSym) = ACT_CHECKOUT(
+const ACT_CHECKOUT(ref::SymOrStr) = ACT_CHECKOUT(
 	S"path" => Symbol(ref),
 	S"ref"  => Symbol(ref),
 )
-const ACT_CHECKOUT(xs::Pair...) = ODict(
+const ACT_CHECKOUT(xs::Pair...) = LDict(
 	S"uses" => S"actions/checkout@v4",
 	S"with" => ODict(S"persist-credentials" => false, xs...),
 )
-const ACT_GH(cmd::StrOrSym, envs::Pair...) = ACT_RUN(
+const ACT_GH(cmd::SymOrStr, envs::Pair...) = ACT_RUN(
 	cmd, envs...,
 	S"GH_REPO"  => S"${{ github.repository }}",
 	S"GH_TOKEN" => S"${{ secrets.PAT }}",
 )
-const ACT_INIT(cmd::StrOrSym, envs::Pair...) = ACT_RUN("""
+const ACT_INIT(cmd::SymOrStr, envs::Pair...) = ACT_RUN("""
 	uname -a
 	mkdir ~/.ssh -p && cd /etc/pacman.d
 	echo -e 'Server = $(mirror[1])' >> mirrorlist
@@ -71,17 +65,17 @@ const ACT_INIT(cmd::StrOrSym, envs::Pair...) = ACT_RUN("""
 const ACT_INIT(pkg::Vector{String}) = ACT_INIT(
 	Symbol(join(["pacman -S --noconfirm"; pkg], " ")),
 )
-# const ACT_PUSH(msg::StrOrSym; m = cquote(msg)) = nothing
-const ACT_RUN(cmd::StrOrSym, envs::Pair...) = ODict(
+# const ACT_PUSH(msg::SymOrStr; m = cquote(msg)) = nothing
+const ACT_RUN(cmd::SymOrStr, envs::Pair...) = LDict(
 	S"run" => cmd, S"env" => ODict(envs...),
 )
-const ACT_RUN(cmd::StrOrSym...) = ACT_RUN.([cmd...])
-const ACT_RUN(cmd::StrOrSym) = ODict(S"run" => cmd)
-# const ACT_SYNC(pkgbase::StrOrSym) = nothing
-# const ACT_UPDT(dict::AbstractDict, rel::StrOrSym) = nothing
+const ACT_RUN(cmd::SymOrStr...) = ACT_RUN.([cmd...])
+const ACT_RUN(cmd::SymOrStr) = LDict(S"run" => cmd)
+# const ACT_SYNC(pkgbase::SymOrStr) = nothing
+# const ACT_UPDT(dict::AbstractDict, rel::SymOrStr) = nothing
 
-const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
-	S"container" => ODict(
+const JOB_MSVC(commit::SymOrStr, tag::SymOrStr) = LDict(
+	S"container" => LDict(
 		S"image" => S"archlinux:base-devel",
 		S"volumes" => ["/:/mnt"],
 	),
@@ -90,9 +84,13 @@ const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
 		ACT_RUN("""
 			cd /mnt
 			du -hd0 opt/ usr/ && du -hd1 opt/* usr/{lib,local{/lib,},share}
-			rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx} | wc -l
-			rm -vrf usr/{lib/{google-*,heroku,jvm,llvm-*},local}   | wc -l
-			rm -vrf usr/share/{az_*,dotnet,miniconda,swift}        | wc -l
+			$(strip(let wc = raw"wc -l | xargs -I# echo $'rm:\t#'"
+			"""
+			rm -vrf opt/{az,google,hostedtoolcache,microsoft,pipx} | $wc
+			rm -vrf usr/{lib/{google-*,heroku,jvm,llvm-*},local}   | $wc
+			rm -vrf usr/share/{az_*,dotnet,miniconda,swift}        | $wc
+			"""
+			end))
 			du -hd0 opt/ usr/"""
 		)
 		ACT_INIT(["github-cli", "julia", "msitools", "python-pip", "tree"])
@@ -101,12 +99,12 @@ const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
 			S"ref" => Symbol(commit),
 		)
 		ACT_RUN.([
-			"""
+			raw"""
 			cd firefox && git log --date=iso --show-signature
 			ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
 			curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
-			mkdir -p \$MOZBUILD_STATE_PATH && julia vs.jl / && cd .. && pwd
-			mv -vt . \$MOZBUILD_STATE_PATH/*.tar.zst"""
+			mkdir -p $MOZBUILD_STATE_PATH && julia vs.jl / && cd .. && pwd
+			mv -vt . $MOZBUILD_STATE_PATH/*.tar.zst"""
 			S"ls -lav *.tar.zst"
 		])
 		ACT_ARTIFACT("*.tar.zst")
@@ -120,27 +118,29 @@ const JOB_MSVC(commit::StrOrSym, tag::StrOrSym) = ODict(
 	],
 )
 
-function make_vs(commit::StrOrSym, tag::StrOrSym)
+function make_vs(commit::SymOrStr, tag::SymOrStr)
+	q = "version.txt"
 	f = ".github/workflows/VS.yml"
 	mkpath(dirname(f))
-	write("version.txt", tag, "\n")
+	write(q, tag, "\n")
 	write(f,
 		yaml(
-			S"on" => ODict(
-				S"workflow_dispatch" => nothing,
-				S"push" => ODict(
-					S"branches" => ["github"],
-					S"paths"    => ["version.txt"],
+			:on => LDict(
+				:workflow_dispatch => nothing,
+				:push => LDict(
+					:branches => ["github"],
+					:paths    => [q],
 				),
 			),
-			S"jobs" => ODict(
-				S"make_vs" => JOB_MSVC(commit, tag),
+			:jobs => LDict(
+				:make_vs => JOB_MSVC(commit, tag),
 			),
+			delim = "\n",
 		),
 	)
 end
 
-branch = sort((f = "branch.toml") |> TOML.parsefile)
+branch = sort!((f = "branch.toml") |> ODict ∘ TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_130_END"], "v130")
+make_vs(branch["FIREFOX_NIGHTLY_131_END"], :v131)
 

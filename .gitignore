@@ -1,3 +1,5 @@
 
 .vscode/
+Manifest-v*.toml
+Manifest.toml
 node_modules/
