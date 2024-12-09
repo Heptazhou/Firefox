@@ -128,8 +128,8 @@ locales = [
     l10n = "{l}browser/**"
 
 [[paths]]
-    reference = "browser/branding/official/locales/en-US/**"
-    l10n = "{l}browser/branding/official/**"
+    reference = "browser/branding/snowfox/locales/en-US/**"
+    l10n = "{l}browser/branding/snowfox/**"
 
 [[paths]]
     reference = "browser/extensions/formautofill/locales/en-US/**"

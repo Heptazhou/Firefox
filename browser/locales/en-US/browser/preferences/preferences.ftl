@@ -984,7 +984,7 @@ sync-engine-payment-methods2 =
 
 sync-engine-addons =
     .label = Add-ons
-    .tooltiptext = Extensions and themes for Firefox desktop
+    .tooltiptext = Extensions and themes for Snowfox desktop
     .accesskey = A
 
 sync-engine-settings =
