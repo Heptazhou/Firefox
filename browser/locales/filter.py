@@ -18,7 +18,7 @@ def test(mod, path, entity=None):
         "browser/extensions/report-site-issue",
         "extensions/spellcheck",
         "other-licenses/branding/firefox",
-        "browser/branding/official",
+        "browser/branding/snowfox",
         "services/sync",
     ):
         return "ignore"
