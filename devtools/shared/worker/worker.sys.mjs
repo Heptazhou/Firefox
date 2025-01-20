@@ -57,7 +57,7 @@ DevToolsWorker.prototype.performTask = function (task, data, transfer) {
       "Sending message to worker" +
         (this._name ? " (" + this._name + ")" : "") +
         ": " +
-        JSON.stringify(payload, null, 2)
+        JSON.stringify(payload, null, "\t")
     );
   }
   worker.postMessage(payload, transfer);
@@ -69,7 +69,7 @@ DevToolsWorker.prototype.performTask = function (task, data, transfer) {
           "Received message from worker" +
             (this._name ? " (" + this._name + ")" : "") +
             ": " +
-            JSON.stringify(result, null, 2)
+            JSON.stringify(result, null, "\t")
         );
       }
 
