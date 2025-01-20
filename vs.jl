@@ -1,4 +1,4 @@
-# Copyright (C) 2023-2024 Heptazhou <zhou@0h7z.com>
+# Copyright (C) 2023-2025 Heptazhou <zhou@0h7z.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -19,8 +19,10 @@ const py = "taskcluster/scripts/misc/get_vs.py"
 const vs = "build/vs/vs2022.yaml"
 
 isempty(ARGS) || let moz = raw"${MOZBUILD_STATE_PATH:=/moz}"
-	sh.(["time mach python --virtualenv=build $py $vs $moz/vs"])
-	sh.(["time mach clobber", "tree -La 2 $moz/vs"])
-	sh.(["time tar IfCc \"zstdmt -18 -M1024M --long\" $moz/vs.tar.zst $moz vs"])
+	cd(only(ARGS))
+	@time sh("mach python --virtualenv=build $py $vs $moz/vs")
+	@time sh("mach clobber")
+	@time sh("tree -La 2 $moz/vs")
+	@time sh("tar IfCc \"zstdmt -18 -M1024M --long\" $moz/vs.tar.zst $moz vs")
 end
 

@@ -36,16 +36,22 @@ jobs:
           sed -r 's/\b(EUID)\s*==\s*0\b/\1 < -0/' -i /bin/makepkg
           makepkg --version
       - run: pacman -S --noconfirm github-cli julia msitools python-pip tree
+      - run: |-
+          sed -re 's/(SigLevel) .+/\1 = Optional/g' -i /etc/pacman.conf
+          pacman -U --noconfirm \
+          https://github.com/0h7z/aur/releases/download/python311-v3.11.11-1/python311-3.11.11-1-x86_64.pkg.tar.zst
+          python3.11 -VV
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
           path: firefox
-          ref: 47dffde2ab1744f56b18e11023dac58fc9d5ea30
+          ref: 7229af9311c28a1d444e56bdf645a69739bce39a
       - run: |-
           cd firefox && git log --date=iso --show-signature
+          sed -r 's|^#(!/usr/bin/env python).*|#\13.11|' -i mach
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
           curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
-          mkdir -p $MOZBUILD_STATE_PATH && julia vs.jl / && cd .. && pwd
+          mkdir -p $MOZBUILD_STATE_PATH && julia vs.jl . && cd .. && pwd
           mv -vt . $MOZBUILD_STATE_PATH/*.tar.zst
       - run: ls -lav *.tar.zst
       - uses: actions/upload-artifact@v4
@@ -56,8 +62,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            47dffde2ab1744f56b18e11023dac58fc9d5ea30 --title $GH_TAG
+            7229af9311c28a1d444e56bdf645a69739bce39a --title $GH_TAG
         env:
-          GH_TAG: v132
+          GH_TAG: v133
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}

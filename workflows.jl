@@ -1,4 +1,4 @@
-# Copyright (C) 2022-2024 Heptazhou <zhou@0h7z.com>
+# Copyright (C) 2022-2025 Heptazhou <zhou@0h7z.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -17,11 +17,11 @@ using TOML: TOML
 using YAML: yaml
 
 const COMPRESS = "zstdmt -18 -M1024M --long"
-const NAME, MAIL = "Seele", "seele@0h7z.com"
-const PACKAGER = "$NAME <$MAIL>"
+const PACKAGER = "Seele <seele@0h7z.com>"
 const PUSH_NOP = "Everything up-to-date"
-const URL_AUR = "https://aur.archlinux.org"
-const URL_DEB = "https://deb.debian.org/debian"
+const URL_AUR  = "https://aur.archlinux.org"
+const URL_DEB  = "https://deb.debian.org/debian"
+const VPY, _   = "3.11", "../Firefox/mach"
 
 const cquote(s::SymOrStr)::String = "\$'$(escape(s, "'"))'"
 const escape(s::SymOrStr, xs...; kw...) = escape_string(s, xs...; kw...)
@@ -91,17 +91,25 @@ const JOB_MSVC(commit::SymOrStr, tag::SymOrStr) = LDict(
 			du -hd0 opt/ usr/"""
 		end)
 		ACT_INIT(["github-cli", "julia", "msitools", "python-pip", "tree"])
+		ACT_RUN(let url = "https://github.com/0h7z/aur/releases/download"
+			"""
+			sed -re 's/(SigLevel) .+/\\1 = Optional/g' -i /etc/pacman.conf
+			pacman -U --noconfirm \\
+			$url/python311-v3.11.11-1/python311-3.11.11-1-x86_64.pkg.tar.zst
+			python$VPY -VV"""
+		end)
 		ACT_CHECKOUT(
 			S"path" => Symbol("firefox"),
 			S"ref" => Symbol(commit),
 		)
 		ACT_RUN.([
-			raw"""
+			"""
 			cd firefox && git log --date=iso --show-signature
+			sed -r 's|^#(!/usr/bin/env python).*|#\\1$VPY|' -i mach
 			ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
 			curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
-			mkdir -p $MOZBUILD_STATE_PATH && julia vs.jl / && cd .. && pwd
-			mv -vt . $MOZBUILD_STATE_PATH/*.tar.zst"""
+			mkdir -p \$MOZBUILD_STATE_PATH && julia vs.jl . && cd .. && pwd
+			mv -vt . \$MOZBUILD_STATE_PATH/*.tar.zst"""
 			S"ls -lav *.tar.zst"
 		])
 		ACT_ARTIFACT("*.tar.zst")
@@ -137,7 +145,9 @@ function make_vs(commit::SymOrStr, tag::SymOrStr)
 	)
 end
 
+# https://github.com/Heptazhou/Firefox/blob/master/.hgtags
+# https://github.com/mozilla/gecko-dev/blob/master/.hgtags
 branch = sort!((f = "branch.toml") |> ODict ∘ TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_132_END"], :v132)
+make_vs(branch["FIREFOX_NIGHTLY_133_END"], :v133)
 
