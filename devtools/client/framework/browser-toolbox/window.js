@@ -207,7 +207,7 @@ function onReloadBrowser() {
 async function openToolbox(commands) {
   const form = commands.descriptorFront._form;
   appendStatusMessage(
-    `Create toolbox for target descriptor: ${JSON.stringify({ form }, null, 2)}`
+    `Create toolbox for target descriptor: ${JSON.stringify({ form }, null, "\t")}`
   );
 
   // Remember the last panel that was used inside of this profile.
