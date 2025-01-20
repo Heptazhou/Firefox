@@ -38,7 +38,7 @@ export var WindowsGPOParser = {
     // Need an extra check here so we don't
     // JSON.stringify if we aren't in debug mode
     if (lazy.log._maxLogLevel == "debug") {
-      lazy.log.debug(JSON.stringify(policies, null, 2));
+      lazy.log.debug(JSON.stringify(policies, null, "\t"));
     }
     return policies;
   },

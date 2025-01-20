@@ -323,7 +323,7 @@ function generateDocumentation() {
     let schema_row = document.createElement("tr");
     if (schema.properties[policyName].properties) {
       let column = col(
-        JSON.stringify(schema.properties[policyName].properties, null, 1),
+        JSON.stringify(schema.properties[policyName].properties, null, "\t"),
         "schema"
       );
       column.colSpan = "2";
@@ -331,7 +331,7 @@ function generateDocumentation() {
       sec_tbody.appendChild(schema_row);
     } else if (schema.properties[policyName].items) {
       let column = col(
-        JSON.stringify(schema.properties[policyName], null, 1),
+        JSON.stringify(schema.properties[policyName], null, "\t"),
         "schema"
       );
       column.colSpan = "2";
@@ -346,7 +346,7 @@ function generateDocumentation() {
         let enum_row = document.createElement("tr");
         column = col(
           "enum: " +
-            JSON.stringify(schema.properties[policyName].enum, null, 1),
+            JSON.stringify(schema.properties[policyName].enum, null, "\t"),
           "schema"
         );
         column.colSpan = "2";

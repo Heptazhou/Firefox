@@ -359,7 +359,7 @@ function copyDataToClipboard(aData) {
   });
   let clipboardData = { modules: modulesData, blocked: blockedData };
 
-  return navigator.clipboard.writeText(JSON.stringify(clipboardData, null, 2));
+  return navigator.clipboard.writeText(JSON.stringify(clipboardData, null, "\t"));
 }
 
 function correctProcessTypeForFluent(type) {
