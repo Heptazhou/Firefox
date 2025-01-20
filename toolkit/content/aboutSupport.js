@@ -767,7 +767,7 @@ var snapshotFormatters = {
     for (let feature of featureKeys) {
       const obj = data[feature];
       if (obj) {
-        const str = JSON.stringify(obj, null, "  ");
+        const str = JSON.stringify(obj, null, "\t");
         await addRow("features", feature, [new Text(str)]);
         delete data[feature];
       }
@@ -1680,7 +1680,7 @@ function copyRawDataToClipboard(button) {
       let str = Cc["@mozilla.org/supports-string;1"].createInstance(
         Ci.nsISupportsString
       );
-      str.data = JSON.stringify(snapshot, undefined, 2);
+      str.data = JSON.stringify(snapshot, undefined, "\t");
       let transferable = Cc[
         "@mozilla.org/widget/transferable;1"
       ].createInstance(Ci.nsITransferable);

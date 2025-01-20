@@ -674,7 +674,7 @@ class RequestListContextMenu {
       mode: "cors",
     };
 
-    const options = JSON.stringify(fetchOptions, null, 4);
+    const options = JSON.stringify(fetchOptions, null, "\t");
     const fetchString = `await fetch("${url}", ${options});`;
     return fetchString;
   }

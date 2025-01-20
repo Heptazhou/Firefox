@@ -511,7 +511,7 @@ class SourcesManager extends EventEmitter {
     try {
       DevToolsUtils.reportException("SourceActor", error);
 
-      const lines = JSON.stringify(this.form(), null, 4).split(/\n/g);
+      const lines = JSON.stringify(this.form(), null, "\t").split(/\n/g);
       lines.forEach(line => console.error("\t", line));
     } catch (e) {
       // ignore

@@ -802,7 +802,7 @@ WebConsoleCommandsManager.register({
       } else if (typeof value == "string") {
         payload = value;
       } else {
-        payload = JSON.stringify(value, null, "  ");
+        payload = JSON.stringify(value, null, "\t");
       }
     } catch (ex) {
       owner.helperResult = {

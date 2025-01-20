@@ -110,7 +110,7 @@ define(function (require) {
 
                 return value;
               },
-              "  "
+              "\t"
             )
           );
         }

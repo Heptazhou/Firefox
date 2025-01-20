@@ -227,7 +227,7 @@ const HarExporter = {
     }
 
     try {
-      return JSON.stringify(har, null, "  ");
+      return JSON.stringify(har, null, "\t");
     } catch (err) {
       console.error(err);
       return undefined;

@@ -32,7 +32,7 @@ export var macOSPoliciesParser = {
     // Need an extra check here so we don't
     // JSON.stringify if we aren't in debug mode
     if (lazy.log.maxLogLevel == "debug") {
-      lazy.log.debug(JSON.stringify(nativePolicies, null, 2));
+      lazy.log.debug(JSON.stringify(nativePolicies, null, "\t"));
     }
 
     return nativePolicies;
