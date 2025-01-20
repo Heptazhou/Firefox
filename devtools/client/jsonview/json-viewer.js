@@ -88,7 +88,7 @@ define(function (require) {
         theApp.setState({ jsonText: input.jsonText });
       } else {
         if (!input.jsonPretty) {
-          input.jsonPretty = new Text(JSON.stringify(input.json, null, "  "));
+          input.jsonPretty = new Text(JSON.stringify(input.json, null, "\t"));
         }
         theApp.setState({ jsonText: input.jsonPretty });
       }
