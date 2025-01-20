@@ -307,7 +307,7 @@ PROT_ListManager.prototype.kickoffUpdate_ = function () {
   initialUpdateDelay += Math.floor(Math.random() * (1 * 60 * 1000));
 
   // If the user has never downloaded tables, do the check now.
-  log("needsUpdate: " + JSON.stringify(this.needsUpdate_, undefined, 2));
+  log("needsUpdate: " + JSON.stringify(this.needsUpdate_, undefined, "\t"));
   for (var updateUrl in this.needsUpdate_) {
     // If we haven't already kicked off updates for this updateUrl, set a
     // non-repeating timer for it. The timer delay will be reset either on
@@ -485,7 +485,7 @@ PROT_ListManager.prototype.makeUpdateRequest_ = function (
   updateUrl,
   tableData
 ) {
-  log("this.tablesData: " + JSON.stringify(this.tablesData, undefined, 2));
+  log("this.tablesData: " + JSON.stringify(this.tablesData, undefined, "\t"));
   log("existing chunks: " + tableData + "\n");
   // Disallow blank updateUrls
   if (!updateUrl) {
@@ -601,7 +601,7 @@ PROT_ListManager.prototype.makeUpdateRequest_ = function (
     streamerMap.isPostRequest = true;
   }
 
-  log("update request: " + JSON.stringify(streamerMap, undefined, 2) + "\n");
+  log("update request: " + JSON.stringify(streamerMap, undefined, "\t") + "\n");
 
   // Don't send an empty request.
   if (streamerMap.requestPayload.length) {

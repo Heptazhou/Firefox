@@ -265,7 +265,7 @@ class Message extends Component {
                         }
                         return value;
                       },
-                      2
+                      "\t"
                     )
                   ),
               },

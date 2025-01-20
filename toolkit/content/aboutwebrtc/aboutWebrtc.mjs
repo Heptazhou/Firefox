@@ -774,7 +774,7 @@ function renderPeerConnectionTools(rndr, report, forceRefreshFn) {
             onclick() {
               WGI.getStatsHistorySince(
                 hist =>
-                  navigator.clipboard.writeText(JSON.stringify(hist, null, 2)),
+                  navigator.clipboard.writeText(JSON.stringify(hist, null, "\t")),
                 pcid
               );
             },
@@ -816,7 +816,7 @@ function renderPeerConnectionTools(rndr, report, forceRefreshFn) {
       rndr,
       report.pcid,
       "about-webrtc-copy-report-button",
-      () => JSON.stringify({ ...report }, null, 2)
+      () => JSON.stringify({ ...report }, null, "\t")
     ),
     ...copyHistButton,
     forceRefreshButton,
@@ -1119,7 +1119,7 @@ function renderRTPStats(rndr, report, hist) {
     { id: "rtp-stats: " + report.pcid, className: "rtp-stats" },
     [
       renderSubsectionHeading("about-webrtc-rtp-stats-heading", () =>
-        JSON.stringify([...rtpStats, ...remoteRtpStats], null, 2)
+        JSON.stringify([...rtpStats, ...remoteRtpStats], null, "\t")
       ),
       ...rtpStats.map(stat => {
         const { ssrc, remoteId, remoteRtpStats: rtcpStats } = stat;

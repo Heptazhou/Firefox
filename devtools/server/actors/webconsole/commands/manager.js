@@ -807,7 +807,7 @@ WebConsoleCommandsManager.register({
         if (value && Cu) {
           value = Cu.waiveXrays(value);
         }
-        payload = JSON.stringify(value, null, "  ");
+        payload = JSON.stringify(value, null, "\t");
       }
     } catch (ex) {
       owner.helperResult = {
