@@ -1,0 +1,9 @@
+{
+	"[css]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+	"[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+	"clang-format.style": "file",
+	"files.associations": { "*.configure": "python" },
+	"files.trimTrailingWhitespace": false,
+	"rust-analyzer.initializeStopped": true,
+	"search.ripgrep.maxThreads": 2
+}
