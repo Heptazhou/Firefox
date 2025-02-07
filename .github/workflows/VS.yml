@@ -23,19 +23,20 @@ jobs:
           du -hd0 opt/ usr/
       - run: |-
           uname -a
-          mkdir ~/.ssh -p && cd /etc/pacman.d
-          echo -e 'Server = https://mirrors.dotsrc.org/archlinux/$repo/os/$arch' >> mirrorlist
-          echo -e 'Server = https://mirrors.kernel.org/archlinux/$repo/os/$arch' >> mirrorlist
-          tac mirrorlist > mirrorlist~ && mv mirrorlist{~,} && cd /etc
+          mkdir ~/.ssh -p && cd /etc/pacman.d && cat \
+          <<< 'Server = https://mirrors.kernel.org/archlinux/$repo/os/$arch' \
+          <<< 'Server = https://mirrors.dotsrc.org/archlinux/$repo/os/$arch' \
+          <<< `< mirrorlist` > mirrorlist && cd /etc
           sed -r 's/^(COMPRESSZST)=.*/\1=(zstdmt -18 -M1024M --long)/' -i makepkg.conf
           sed -r 's/^#(MAKEFLAGS)=.*/\1="-j`nproc`"/' -i makepkg.conf
           sed -r 's/^#(PACKAGER)=.*/\1="Seele <seele@0h7z.com>"/' -i makepkg.conf
           pacman-key --init
       - run: |-
           pacman -Syu --noconfirm git pacman-contrib
+          git config --system log.date iso8601
           sed -r 's/\b(EUID)\s*==\s*0\b/\1 < -0/' -i /bin/makepkg
           makepkg --version
-      - run: pacman -S --noconfirm github-cli julia msitools python-pip tree
+      - run: pacman -S --noconfirm github-cli julia msitools tree
       - run: |-
           sed -re 's/(SigLevel) .+/\1 = Optional/g' -i /etc/pacman.conf
           pacman -U --noconfirm \
@@ -45,9 +46,9 @@ jobs:
         with:
           persist-credentials: false
           path: firefox
-          ref: 6dc8c27d672fef50efdad840a5f4c5ac4cbe36dd
+          ref: 0413c44a53cc7e5baab7c02e45498f618d57cd9c
       - run: |-
-          cd firefox && git log --date=iso --show-signature
+          cd firefox && git log --show-signature
           sed -r 's|^#(!/usr/bin/env python).*|#\13.11|' -i mach
           ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
           curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
@@ -62,8 +63,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            6dc8c27d672fef50efdad840a5f4c5ac4cbe36dd --title $GH_TAG
+            0413c44a53cc7e5baab7c02e45498f618d57cd9c --title $GH_TAG
         env:
-          GH_TAG: v134
+          GH_TAG: v135
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}

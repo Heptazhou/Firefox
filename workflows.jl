@@ -27,8 +27,8 @@ const cquote(s::SymOrStr)::String = "\$'$(escape(s, "'"))'"
 const escape(s::SymOrStr, xs...; kw...) = escape_string(s, xs...; kw...)
 const escape(sym::Symbol, xs...; kw...) = escape(string(sym), xs...; kw...)
 const mirror = String[
-	raw"https://mirrors.dotsrc.org/archlinux/$repo/os/$arch"
 	raw"https://mirrors.kernel.org/archlinux/$repo/os/$arch"
+	raw"https://mirrors.dotsrc.org/archlinux/$repo/os/$arch"
 ]
 
 const ACT_ARTIFACT(pat::SymOrStr) = LDict(
@@ -50,15 +50,16 @@ const ACT_GH(cmd::SymOrStr, envs::Pair...) = ACT_RUN(
 )
 const ACT_INIT(cmd::SymOrStr, envs::Pair...) = ACT_RUN("""
 	uname -a
-	mkdir ~/.ssh -p && cd /etc/pacman.d
-	echo -e 'Server = $(mirror[1])' >> mirrorlist
-	echo -e 'Server = $(mirror[2])' >> mirrorlist
-	tac mirrorlist > mirrorlist~ && mv mirrorlist{~,} && cd /etc
+	mkdir ~/.ssh -p && cd /etc/pacman.d && cat \\
+	<<< 'Server = $(mirror[1])' \\
+	<<< 'Server = $(mirror[2])' \\
+	<<< `< mirrorlist` > mirrorlist && cd /etc
 	sed -r 's/^(COMPRESSZST)=.*/\\1=($COMPRESS)/' -i makepkg.conf
 	sed -r 's/^#(MAKEFLAGS)=.*/\\1="-j`nproc`"/' -i makepkg.conf
 	sed -r 's/^#(PACKAGER)=.*/\\1="$PACKAGER"/' -i makepkg.conf
 	pacman-key --init""", """
 	pacman -Syu --noconfirm git pacman-contrib
+	git config --system log.date iso8601
 	sed -r 's/\\b(EUID)\\s*==\\s*0\\b/\\1 < -0/' -i /bin/makepkg
 	makepkg --version""", cmd, envs...,
 )
@@ -90,7 +91,7 @@ const JOB_MSVC(commit::SymOrStr, tag::SymOrStr) = LDict(
 			rm -vrf usr/lib/{firefox,google-*,heroku,jvm,llvm-*,mono} | $x
 			du -hd0 opt/ usr/"""
 		end)
-		ACT_INIT(["github-cli", "julia", "msitools", "python-pip", "tree"])
+		ACT_INIT(["github-cli", "julia", "msitools", "tree"])
 		ACT_RUN(let url = "https://github.com/0h7z/aur/releases/download"
 			"""
 			sed -re 's/(SigLevel) .+/\\1 = Optional/g' -i /etc/pacman.conf
@@ -104,7 +105,7 @@ const JOB_MSVC(commit::SymOrStr, tag::SymOrStr) = LDict(
 		)
 		ACT_RUN.([
 			"""
-			cd firefox && git log --date=iso --show-signature
+			cd firefox && git log --show-signature
 			sed -r 's|^#(!/usr/bin/env python).*|#\\1$VPY|' -i mach
 			ln -s mach /bin/mach -r && export MOZBUILD_STATE_PATH=/tmp/moz
 			curl -LO https://github.com/Heptazhou/Firefox/raw/github/vs.jl
@@ -149,5 +150,5 @@ end
 # https://github.com/mozilla/gecko-dev/blob/master/.hgtags
 branch = sort!((f = "branch.toml") |> ODict ∘ TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_134_END"], :v134)
+make_vs(branch["FIREFOX_NIGHTLY_135_END"], :v135)
 
