@@ -1,4 +1,5 @@
 {
+  "name": "@types/gecko",
   "description": "TypeScript definitions for gecko dom and xpcom.",
   "repository": {
     "type": "git",
