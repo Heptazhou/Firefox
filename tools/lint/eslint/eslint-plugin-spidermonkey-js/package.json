@@ -1,4 +1,5 @@
 {
+  "name": "eslint-plugin-spidermonkey-js",
   "description": "A collection of rules that help enforce JavaScript coding standard in the Mozilla SpiderMonkey project.",
   "keywords": [
     "eslint",
