@@ -12,6 +12,7 @@
 
 #include <shellscalingapi.h>
 #include <windows.h>
+#include <winerror.h>
 
 #include <string>
 #include <vector>
@@ -147,13 +148,20 @@ DesktopRect GetFullscreenRect() {
 }
 
 DesktopVector GetDpiForMonitor(HMONITOR monitor) {
+#ifdef MOZ_GECKO_PROFILER
   UINT dpi_x, dpi_y;
   // MDT_EFFECTIVE_DPI includes the scale factor as well as the system DPI.
+  // * api-ms-win-shcore-scaling-l1-1-1.dll
+  // https://learn.microsoft.com/windows/win32/api/shellscalingapi/nf-shellscalingapi-getdpiformonitor
   HRESULT hr = ::GetDpiForMonitor(monitor, MDT_EFFECTIVE_DPI, &dpi_x, &dpi_y);
   if (SUCCEEDED(hr)) {
     return {static_cast<INT>(dpi_x), static_cast<INT>(dpi_y)};
   }
   RTC_LOG_GLE_EX(LS_WARNING, hr) << "GetDpiForMonitor() failed";
+#else
+  HRESULT hr = E_NOTIMPL;
+  RTC_LOG_GLE_EX(LS_WARNING, hr) << "GetDpiForMonitor() not allowed";
+#endif
 
   // If we can't get the per-monitor DPI, then return the system DPI.
   HDC hdc = GetDC(nullptr);
