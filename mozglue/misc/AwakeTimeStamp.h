@@ -26,6 +26,7 @@ class AwakeTimeDuration;
 // When using NowLoRes(), the timestamp shouldn't be considered to be
 // high-resolution, and is suitable to measure time from a hundred of
 // milliseconds (because of Windows limitations).
+// When MOZ_GECKO_PROFILER is defined,
 // Now() can be a bit more expensive on Windows, and is precise. Both
 // methods are equivalent on non-Windows.
 class AwakeTimeStamp {

@@ -91,12 +91,18 @@ AwakeTimeStamp AwakeTimeStamp::NowLoRes() {
   return AwakeTimeStamp(interrupt_time / kHNSperUS);
 }
 
+#  ifndef MOZ_GECKO_PROFILER
+AwakeTimeStamp AwakeTimeStamp::Now() { return NowLoRes(); }
+#  else
 AwakeTimeStamp AwakeTimeStamp::Now() {
   ULONGLONG interrupt_time;
+  // * api-ms-win-core-realtime-l1-1-1.dll
+  // https://learn.microsoft.com/windows/win32/api/realtimeapiset/nf-realtimeapiset-queryunbiasedinterrupttimeprecise
   QueryUnbiasedInterruptTimePrecise(&interrupt_time);
 
   return AwakeTimeStamp(interrupt_time / kHNSperUS);
 }
+#  endif
 
 #else  // Linux and other POSIX but not macOS
 #  include <time.h>
