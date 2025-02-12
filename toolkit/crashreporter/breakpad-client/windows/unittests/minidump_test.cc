@@ -130,7 +130,7 @@ class MinidumpTest: public testing::Test {
 bool HasFileInfo(const std::wstring& file_path) {
   DWORD dummy;
   const wchar_t* path = file_path.c_str();
-  DWORD length = ::GetFileVersionInfoSize(path, &dummy);
+  DWORD length = ::GetFileVersionInfoSizeEx(0, path, &dummy);
   if (length == 0)
     return NULL;
 
@@ -138,7 +138,7 @@ bool HasFileInfo(const std::wstring& file_path) {
   if (!data)
     return false;
 
-  if (!::GetFileVersionInfo(path, dummy, length, data)) {
+  if (!::GetFileVersionInfoEx(0, path, dummy, length, data)) {
     free(data);
     return false;
   }

@@ -1271,7 +1271,7 @@ void gfxWindowsPlatform::GetDLLVersion(char16ptr_t aDLLPath,
   DWORD versInfoSize, vers[4] = {0};
   // version info not available case
   aVersion.AssignLiteral(u"0.0.0.0");
-  versInfoSize = GetFileVersionInfoSizeW(aDLLPath, nullptr);
+  versInfoSize = GetFileVersionInfoSizeExW(0, aDLLPath, nullptr);
   AutoTArray<BYTE, 512> versionInfo;
 
   if (versInfoSize == 0) {
@@ -1282,8 +1282,8 @@ void gfxWindowsPlatform::GetDLLVersion(char16ptr_t aDLLPath,
   // pretended earlier.
   versionInfo.AppendElements(uint32_t(versInfoSize));
 
-  if (!GetFileVersionInfoW(aDLLPath, 0, versInfoSize,
-                           LPBYTE(versionInfo.Elements()))) {
+  if (!GetFileVersionInfoExW(0, aDLLPath, 0, versInfoSize,
+                             LPBYTE(versionInfo.Elements()))) {
     return;
   }
 

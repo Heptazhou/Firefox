@@ -1661,13 +1661,13 @@ nsLocalFile::GetVersionInfoField(const char* aField, nsAString& aResult) {
   const WCHAR* path = mWorkingPath.get();
 
   DWORD dummy;
-  DWORD size = ::GetFileVersionInfoSizeW(path, &dummy);
+  DWORD size = ::GetFileVersionInfoSizeExW(0, path, &dummy);
   if (!size) {
     return rv;
   }
 
   void* ver = moz_xcalloc(size, 1);
-  if (::GetFileVersionInfoW(path, 0, size, ver)) {
+  if (::GetFileVersionInfoExW(0, path, 0, size, ver)) {
     LANGANDCODEPAGE* translate = nullptr;
     UINT pageCount;
     BOOL queryResult = ::VerQueryValueW(ver, L"\\VarFileInfo\\Translation",

@@ -1,6 +1,6 @@
 INPUT(
 libwinapi_mincore-dfscli.a
-libwinapi_mincore-api-ms-win-core-version-l1-1-1.a
+libwinapi_mincore-api-ms-win-core-version-l1-1-0.a
 libwinapi_mincore-api-ms-win-core-processthreads-l1-1-1.a
 libwinapi_mincore-api-ms-win-core-winrt-error-l1-1-0.a
 libwinapi_mincore-api-ms-win-devices-config-l1-1-1.a

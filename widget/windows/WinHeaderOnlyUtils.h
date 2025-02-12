@@ -673,14 +673,14 @@ class ModuleVersion final {
 
 inline LauncherResult<ModuleVersion> GetModuleVersion(
     const wchar_t* aModuleFullPath) {
-  DWORD verInfoLen = ::GetFileVersionInfoSizeW(aModuleFullPath, nullptr);
+  DWORD verInfoLen = ::GetFileVersionInfoSizeExW(0, aModuleFullPath, nullptr);
   if (!verInfoLen) {
     return LAUNCHER_ERROR_FROM_LAST();
   }
 
   auto verInfoBuf = MakeUnique<BYTE[]>(verInfoLen);
-  if (!::GetFileVersionInfoW(aModuleFullPath, 0, verInfoLen,
-                             verInfoBuf.get())) {
+  if (!::GetFileVersionInfoExW(0, aModuleFullPath, 0, verInfoLen,
+                               verInfoBuf.get())) {
     return LAUNCHER_ERROR_FROM_LAST();
   }
 

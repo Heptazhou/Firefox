@@ -124,7 +124,7 @@ libwinapi_onecoreuap-api-ms-win-core-rtlsupport-l1-1-0.a
 libwinapi_onecoreuap-uiautomationcore.a
 libwinapi_onecoreuap-api-ms-win-core-util-l1-1-1.a
 libwinapi_onecoreuap-api-ms-win-core-libraryloader-l1-2-2.a
-libwinapi_onecoreuap-api-ms-win-core-version-l1-1-1.a
+libwinapi_onecoreuap-api-ms-win-core-version-l1-1-0.a
 libwinapi_onecoreuap-ws2_32.a
 libwinapi_onecoreuap-api-ms-win-core-wow64-l1-1-0.a
 libwinapi_onecoreuap-api-ms-win-core-namedpipe-ansi-l1-1-0.a

@@ -78,10 +78,10 @@ static int ReadMaintenanceServiceStrings(
  */
 static BOOL GetVersionNumberFromPath(LPWSTR path, DWORD& A, DWORD& B, DWORD& C,
                                      DWORD& D) {
-  DWORD fileVersionInfoSize = GetFileVersionInfoSizeW(path, 0);
+  DWORD fileVersionInfoSize = GetFileVersionInfoSizeExW(0, path, 0);
   mozilla::UniquePtr<char[]> fileVersionInfo(new char[fileVersionInfoSize]);
-  if (!GetFileVersionInfoW(path, 0, fileVersionInfoSize,
-                           fileVersionInfo.get())) {
+  if (!GetFileVersionInfoExW(0, path, 0, fileVersionInfoSize,
+                             fileVersionInfo.get())) {
     LOG_WARN(
         ("Could not obtain file info of old service.  (%lu)", GetLastError()));
     return FALSE;

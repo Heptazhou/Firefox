@@ -384,12 +384,12 @@ static bool AddModuleInfo(const nsAutoHandle& aSnapshot,
     aJson.StartArrayProperty(mozilla::MakeStringSpan(leafUtf8.get()));
 
     std::string version;
-    DWORD verInfoSize = ::GetFileVersionInfoSizeW(module.szExePath, nullptr);
+    DWORD verInfoSize = ::GetFileVersionInfoSizeExW(0, module.szExePath, nullptr);
     if (verInfoSize) {
       auto verInfoBuf = mozilla::MakeUnique<BYTE[]>(verInfoSize);
 
-      if (::GetFileVersionInfoW(module.szExePath, 0, verInfoSize,
-                                verInfoBuf.get())) {
+      if (::GetFileVersionInfoExW(0, module.szExePath, 0, verInfoSize,
+                                  verInfoBuf.get())) {
         VS_FIXEDFILEINFO* fixedInfo = nullptr;
         UINT fixedInfoLen = 0;
 

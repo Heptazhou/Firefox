@@ -24,7 +24,7 @@ libwinapi_onecore-api-ms-win-shcore-scaling-l1-1-2.a
 libwinapi_onecore-mswsock.a
 libwinapi_onecore-api-ms-win-core-fibers-l2-1-0.a
 libwinapi_onecore-api-ms-win-shell-shdirectory-l1-1-0.a
-libwinapi_onecore-api-ms-win-core-version-l1-1-1.a
+libwinapi_onecore-api-ms-win-core-version-l1-1-0.a
 libwinapi_onecore-api-ms-win-core-processthreads-l1-1-2.a
 libwinapi_onecore-dsrole.a
 libwinapi_onecore-schedcli.a

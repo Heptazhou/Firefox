@@ -294,7 +294,7 @@ libwinapi_onecoreuap-api-ms-win-core-file-l1-2-2.a
 libwinapi_onecoreuap-api-ms-win-core-processthreads-l1-1-1.a
 libwinapi_onecoreuap-api-ms-win-security-systemfunctions-l1-1-0.a
 libwinapi_onecoreuap-api-ms-win-core-com-l1-1-2.a
-libwinapi_onecoreuap-api-ms-win-core-version-l1-1-1.a
+libwinapi_onecoreuap-api-ms-win-core-version-l1-1-0.a
 libwinapi_onecoreuap-api-ms-win-core-kernel32-legacy-l1-1-1.a
 libwinapi_onecoreuap-api-ms-win-core-profile-l1-1-0.a
 libwinapi_onecoreuap-api-ms-win-eventing-classicprovider-l1-1-0.a

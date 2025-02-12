@@ -75,13 +75,13 @@ using google_breakpad::WindowsStringUtils;
 // as a string, for example, "1.2.3.4".  Returns true on success.
 static bool GetFileVersionString(const wchar_t *filename, wstring *version) {
   DWORD handle;
-  DWORD version_size = GetFileVersionInfoSize(filename, &handle);
+  DWORD version_size = GetFileVersionInfoSizeEx(0, filename, &handle);
   if (version_size < sizeof(VS_FIXEDFILEINFO)) {
     return false;
   }
 
   vector<char> version_info(version_size);
-  if (!GetFileVersionInfo(filename, handle, version_size, &version_info[0])) {
+  if (!GetFileVersionInfoEx(0, filename, handle, version_size, &version_info[0])) {
     return false;
   }
 

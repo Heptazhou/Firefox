@@ -69,13 +69,13 @@ static bool QueryStringValue(const void* aBlock, const DWORD* aTranslations,
 
 bool ModuleVersionInfo::GetFromImage(const nsAString& aPath) {
   nsString path(aPath);
-  DWORD infoSize = GetFileVersionInfoSizeW(path.get(), nullptr);
+  DWORD infoSize = GetFileVersionInfoSizeExW(0, path.get(), nullptr);
   if (!infoSize) {
     return false;
   }
 
   auto verInfo = MakeUnique<BYTE[]>(infoSize);
-  if (!::GetFileVersionInfoW(path.get(), 0, infoSize, verInfo.get())) {
+  if (!::GetFileVersionInfoExW(0, path.get(), 0, infoSize, verInfo.get())) {
     return false;
   }
 

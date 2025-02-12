@@ -135,7 +135,7 @@ libwinapi_mincore-api-ms-win-core-rtlsupport-l1-1-0.a
 libwinapi_mincore-mpr.a
 libwinapi_mincore-api-ms-win-core-synch-l1-1-0.a
 libwinapi_mincore-bcrypt.a
-libwinapi_mincore-api-ms-win-core-version-l1-1-1.a
+libwinapi_mincore-api-ms-win-core-version-l1-1-0.a
 libwinapi_mincore-api-ms-win-core-timezone-l1-1-0.a
 libwinapi_mincore-dnsapi.a
 libwinapi_mincore-api-ms-win-core-datetime-l1-1-1.a
