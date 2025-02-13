@@ -54,7 +54,7 @@ using namespace js;
 using namespace js::jit;
 
 #ifdef XP_WIN
-#  if defined(HAVE_64BIT_BUILD)
+#  if defined(HAVE_64BIT_BUILD) && defined(MOZ_GECKO_PROFILER)
 #    define NEED_JIT_UNWIND_HANDLING
 #  endif
 
@@ -196,6 +196,8 @@ static DWORD ExceptionHandler(PEXCEPTION_RECORD exceptionRecord,
 }
 
 // Required for enabling Stackwalking on windows using external tools.
+// * ntdll.dll
+// https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtladdgrowablefunctiontable
 extern "C" NTSYSAPI DWORD NTAPI RtlAddGrowableFunctionTable(
     PVOID* DynamicTable, PRUNTIME_FUNCTION FunctionTable, DWORD EntryCount,
     DWORD MaximumEntryCount, ULONG_PTR RangeBase, ULONG_PTR RangeEnd);
