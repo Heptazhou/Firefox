@@ -172,10 +172,18 @@ impl ProcessToolsService {
         };
         let new_thread = Handle::from_raw(new_thread).ok_or(NS_ERROR_FAILURE)?;
 
+        // third_party/rust/winapi/src/um/synchapi.rs
+        extern "system" {
+            pub fn WaitForSingleObject(
+                hHandle: winapi::um::winnt::HANDLE,
+                dwMilliseconds: winapi::shared::minwindef::DWORD,
+            ) -> winapi::shared::minwindef::DWORD;
+        }
         unsafe {
-            winapi::um::synchapi::WaitForSingleObject(
+            WaitForSingleObject(
                 new_thread.raw(),
                 winapi::um::winbase::INFINITE,
+                // winapi::um::synchapi::WaitForSingleObject
             );
         }
 
