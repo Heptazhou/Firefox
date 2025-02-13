@@ -110,7 +110,7 @@ static inline uint32_t BlockUntilDifferent(const uint32_t prev,
     }
   }
 
-#elif HWY_OS_WIN && !defined(HWY_DISABLE_FUTEX)
+#elif HWY_OS_WIN && !defined(HWY_DISABLE_FUTEX) && defined(MOZ_GECKO_PROFILER)
   // It is always safe to cast to void.
   volatile void* address = static_cast<volatile void*>(&current);
   // API is not const-correct, but only loads from the pointer.
@@ -119,6 +119,8 @@ static inline uint32_t BlockUntilDifferent(const uint32_t prev,
   for (;;) {
     const uint32_t next = current.load(acq);
     if (next != prev) return next;
+    // * api-ms-win-core-synch-l1-2-0.dll
+    // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitonaddress
     const BOOL ok = WaitOnAddress(address, pprev, sizeof(prev), max_ms);
     HWY_DASSERT(ok);
     (void)ok;

@@ -8,6 +8,15 @@ LOCAL_INCLUDES += [
     "/third_party/highway/",
 ]
 
+# third_party/highway/hwy/contrib/thread_pool/futex.h
+if CONFIG["OS_ARCH"] == "WINNT" and not CONFIG["MOZ_GECKO_PROFILER"]:
+    DEFINES["HWY_DISABLE_FUTEX"] = True
+    # build/moz.configure/toolchain.configure
+    if CONFIG["CC_TYPE"] == "clang-cl":
+        CXXFLAGS += ["-std:c++20"]
+    else:
+        CXXFLAGS += ["-std=gnu++20"]
+
 # CMake has check_include_file() but for now we disable this.
 # See bug 1839363 and bug 1903190.
 if CONFIG["TARGET_CPU"] in ("ppc64", "s390x") and CONFIG["OS_TARGET"] == "Linux":
