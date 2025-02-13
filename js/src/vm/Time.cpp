@@ -64,7 +64,13 @@ static int64_t FileTimeToUnixMicroseconds(const FILETIME& ft) {
 
 int64_t PRMJ_Now() {
   FILETIME ft;
+#  ifdef MOZ_GECKO_PROFILER
+  // * kernel32.dll
+  // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemtimepreciseasfiletime
   GetSystemTimePreciseAsFileTime(&ft);
+#  else
+  GetSystemTimeAsFileTime(&ft);
+#  endif
   return FileTimeToUnixMicroseconds(ft);
 }
 #endif
