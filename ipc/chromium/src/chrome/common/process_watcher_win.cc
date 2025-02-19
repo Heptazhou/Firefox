@@ -8,7 +8,9 @@
 
 #include <algorithm>
 #include <processthreadsapi.h>
-#include <synchapi.h>
+#ifdef MOZ_GECKO_PROFILER
+#  include <synchapi.h>
+#endif
 #include "base/message_loop.h"
 #include "base/object_watcher.h"
 #include "prenv.h"

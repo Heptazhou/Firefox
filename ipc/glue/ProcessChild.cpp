@@ -11,7 +11,9 @@
 
 #ifdef XP_WIN
 #  include <stdlib.h>  // for _exit()
-#  include <synchapi.h>
+#  ifdef MOZ_GECKO_PROFILER
+#    include <synchapi.h>
+#  endif
 #else
 #  include <unistd.h>  // for _exit()
 #  include <time.h>
