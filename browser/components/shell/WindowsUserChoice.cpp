@@ -20,7 +20,9 @@
  */
 
 #include <windows.h>
-#include <appmodel.h>  // for GetPackageFamilyName
+#if 0
+#  include <appmodel.h>  // for GetPackageFamilyName
+#endif
 #include <sddl.h>      // for ConvertSidToStringSidW
 #include <wincrypt.h>  // for CryptoAPI base64
 #include <bcrypt.h>    // for CNG MD5
@@ -437,12 +439,15 @@ bool CheckProgIDExists(const wchar_t* aProgID) {
 }
 
 nsresult GetMsixProgId(const wchar_t* assoc, UniquePtr<wchar_t[]>& aProgId) {
+#if 0
   // Retrieve the registry path to the package from registry path:
   // clang-format off
   // HKEY_CLASSES_ROOT\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages\[Package Full Name]\App\Capabilities\[FileAssociations | URLAssociations]\[File | URL]
   // clang-format on
 
   UINT32 pfnLen = 0;
+  // * kernel32.dll
+  // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackagefullname
   LONG rv = GetCurrentPackageFullName(&pfnLen, nullptr);
   NS_ENSURE_TRUE(rv != APPMODEL_ERROR_NO_PACKAGE, NS_ERROR_FAILURE);
 
@@ -484,4 +489,7 @@ nsresult GetMsixProgId(const wchar_t* assoc, UniquePtr<wchar_t[]>& aProgId) {
   aProgId.swap(progId);
 
   return NS_OK;
+#else
+  return NS_ERROR_WDBA_NO_PROGID;
+#endif
 }

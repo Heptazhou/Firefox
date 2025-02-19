@@ -4,7 +4,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #include <windows.h>
-#include <appmodel.h>
+#if 0
+#  include <appmodel.h>
+#endif
 #include <shlobj.h>  // for SHChangeNotify and IApplicationAssociationRegistration
 #include <timeapi.h>
 
@@ -764,9 +766,15 @@ function Set-DefaultHandlerRegistry($Association, $Path, $ProgID, $Hash, $RegRen
 nsresult SetDefaultExtensionHandlersUserChoiceImpl(
     const wchar_t* aAumi, const wchar_t* const aSid, const bool aRegRename,
     const nsTArray<nsString>& aFileExtensions) {
+#if 0
   UINT32 pfnLen = 0;
+  // * kernel32.dll
+  // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackagefullname
   bool inMsix =
       GetCurrentPackageFullName(&pfnLen, nullptr) != APPMODEL_ERROR_NO_PACKAGE;
+#else
+  bool inMsix = false;
+#endif
 
   if (inMsix) {
     return SetDefaultExtensionHandlersUserChoiceImplMsix(
