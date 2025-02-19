@@ -248,7 +248,7 @@ class WinUtils {
    */
   static gfx::MarginDouble GetUnwriteableMarginsForDeviceInInches(HDC aHdc);
 
-  static bool HasPackageIdentity() { return sHasPackageIdentity; }
+  static bool HasPackageIdentity() { return false; }
 
   /*
    * The "family name" of a Windows app package is the full name without any of
