@@ -84,7 +84,9 @@
 #include "nsWindowTaskbarConcealer.h"
 #include "nsAppRunner.h"
 
-#include <appmodel.h>
+#if 0
+#  include <appmodel.h>
+#endif
 #include <shellapi.h>
 #include <windows.h>
 #include <wtsapi32.h>
@@ -1025,14 +1027,18 @@ nsresult nsWindow::Create(nsIWidget* aParent, const LayoutDeviceIntRect& aRect,
       // grouping works properly
       Unused << NS_WARN_IF(!mozilla::widget::WinTaskbar::GenerateAppUserModelID(
           aumid, usePrivateAumid));
+#if 0
       if (!usePrivateAumid && widget::WinUtils::HasPackageIdentity()) {
         // On MSIX we should always have a provided process AUMID
         // that we can explicitly assign to a regular window.
         UINT32 maxLength = MAX_PATH;
         aumid.SetLength(maxLength);
+        // * kernel32.dll
+        // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentapplicationusermodelid
         Unused << NS_WARN_IF(
             GetCurrentApplicationUserModelId(&maxLength, aumid.get()));
       }
+#endif
       if (!FAILED(InitPropVariantFromString(aumid.get(), &pv))) {
         if (!FAILED(pPropStore->SetValue(PKEY_AppUserModel_ID, pv))) {
           pPropStore->Commit();
