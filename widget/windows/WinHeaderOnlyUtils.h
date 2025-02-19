@@ -737,6 +737,9 @@ inline LauncherResult<TOKEN_ELEVATION_TYPE> GetElevationType(
   return elevationType;
 }
 
+#if 1
+inline bool HasPackageIdentity() { return false; }
+#else
 inline bool HasPackageIdentity() {
   HMODULE kernel32Dll = ::GetModuleHandleW(L"kernel32");
   if (!kernel32Dll) {
@@ -756,6 +759,7 @@ inline bool HasPackageIdentity() {
          (pGetCurrentPackageId(&packageNameSize, nullptr) ==
           ERROR_INSUFFICIENT_BUFFER);
 }
+#endif
 
 inline UniquePtr<wchar_t[]> GetPackageFamilyName() {
   HMODULE kernel32Dll = ::GetModuleHandleW(L"kernel32");
