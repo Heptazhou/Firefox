@@ -7,7 +7,9 @@
 #include "ToastNotification.h"
 
 #include <windows.h>
-#include <appmodel.h>
+#if 0
+#  include <appmodel.h>
+#endif
 #include <ktmw32.h>
 #include <windows.foundation.h>
 #include <wrl/client.h>
@@ -133,9 +135,12 @@ bool ToastNotification::EnsureAumidRegistered() {
 }
 
 bool ToastNotification::AssignIfMsixAumid(Maybe<nsAutoString>& aAumid) {
+#if 0
   UINT32 len = 0;
   // ERROR_INSUFFICIENT_BUFFER signals that we're in an MSIX package, and
   // therefore should use the package's AUMID.
+  // * kernel32.dll
+  // https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentapplicationusermodelid
   if (GetCurrentApplicationUserModelId(&len, nullptr) !=
       ERROR_INSUFFICIENT_BUFFER) {
     MOZ_LOG(sWASLog, LogLevel::Debug, ("Not an MSIX package"));
@@ -147,6 +152,9 @@ bool ToastNotification::AssignIfMsixAumid(Maybe<nsAutoString>& aAumid) {
 
   aAumid.emplace(buffer.Elements());
   return true;
+#else
+  return false;
+#endif
 }
 
 bool ToastNotification::AssignIfNsisAumid(nsAutoString& aInstallHash,
