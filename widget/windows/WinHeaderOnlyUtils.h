@@ -738,6 +738,8 @@ inline LauncherResult<TOKEN_ELEVATION_TYPE> GetElevationType(
 }
 
 inline bool HasPackageIdentity() {
+  return false;
+
   HMODULE kernel32Dll = ::GetModuleHandleW(L"kernel32");
   if (!kernel32Dll) {
     return false;
