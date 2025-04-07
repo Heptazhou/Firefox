@@ -150,5 +150,5 @@ end
 # https://github.com/mozilla/gecko-dev/blob/master/.hgtags
 branch = sort!((f = "branch.toml") |> ODict ∘ TOML.parsefile)
 write(f, sprint(TOML.print, branch))
-make_vs(branch["FIREFOX_NIGHTLY_135_END"], :v135)
+make_vs(branch["FIREFOX_NIGHTLY_136_END"], :v136)
 
