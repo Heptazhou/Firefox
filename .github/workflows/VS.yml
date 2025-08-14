@@ -46,7 +46,7 @@ jobs:
         with:
           persist-credentials: false
           path: firefox
-          ref: 7ccb68f5e0f4657561fddf5af6a0bad64d2e4bdc
+          ref: 84b138956f2e5307b38ed8be1396c113bd7a043b
       - run: |-
           cd firefox && git log --show-signature
           sed -r 's|^#(!/usr/bin/env python).*|#\13.11|' -i mach
@@ -63,8 +63,8 @@ jobs:
           gh version
           gh release delete $GH_TAG --cleanup-tag -y || true
           gh release create $GH_TAG *.tar.zst --target \
-            7ccb68f5e0f4657561fddf5af6a0bad64d2e4bdc --title $GH_TAG
+            84b138956f2e5307b38ed8be1396c113bd7a043b --title $GH_TAG
         env:
-          GH_TAG: v138
+          GH_TAG: v139
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.PAT }}
